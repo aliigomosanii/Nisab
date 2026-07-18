@@ -7,7 +7,12 @@ struct SettingsView: View {
     @State private var pendingLanguage = ""
     @State private var showingRestartAlert = false
     @AppStorage("profileName") private var profileName = ""
+    @AppStorage("profileEmail") private var profileEmail = ""
     @AppStorage("profilePhone") private var profilePhone = ""
+    @State private var currentPassword = ""
+    @State private var newPassword = ""
+    @State private var passwordMessage: LocalizedStringKey?
+    @State private var passwordChangeSucceeded = false
     // Shared with the gold price section so one currency drives the app.
     @AppStorage("goldPriceCurrency") private var currencyCode = "SAR"
     @AppStorage("defaultKarat") private var defaultKarat = 24
@@ -28,13 +33,46 @@ struct SettingsView: View {
         }
     }
 
+    private func changePassword() {
+        passwordChangeSucceeded = false
+        guard currentPassword == Keychain.password() else {
+            passwordMessage = "Current password is incorrect."
+            return
+        }
+        guard newPassword.count >= 4 else {
+            passwordMessage = "Password must be at least 4 characters."
+            return
+        }
+        Keychain.setPassword(newPassword)
+        passwordChangeSucceeded = true
+        passwordMessage = "Password updated."
+        currentPassword = ""
+        newPassword = ""
+    }
+
     var body: some View {
         NavigationStack {
             Form {
                 Section("Profile") {
                     TextField("Name", text: $profileName)
+                    TextField("Email", text: $profileEmail)
+                        .keyboardType(.emailAddress)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
                     TextField("Phone", text: $profilePhone)
                         .keyboardType(.phonePad)
+                }
+
+                Section("Change Password") {
+                    SecureField("Current Password", text: $currentPassword)
+                    SecureField("New Password", text: $newPassword)
+                    if let passwordMessage {
+                        Text(passwordMessage)
+                            .font(.caption)
+                            .foregroundStyle(passwordChangeSucceeded ? .green : .red)
+                    }
+                    Button("Change Password") { changePassword() }
+                        .disabled(currentPassword.isEmpty || newPassword.isEmpty)
                 }
 
                 Section("Preferences") {
