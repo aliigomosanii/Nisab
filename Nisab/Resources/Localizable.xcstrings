@@ -1553,6 +1553,70 @@
           }
         }
       }
+    },
+    "Total purchase price": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إجمالي سعر الشراء"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل خریداری قیمت"
+          }
+        }
+      }
+    },
+    "Approximate loss": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخسارة التقريبية"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تخمینی نقصان"
+          }
+        }
+      }
+    },
+    "Approximate gain": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الربح التقريبي"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تخمینی منافع"
+          }
+        }
+      }
+    },
+    "The loss is roughly the manufacturing charge and wear compared with the metal value at today's price.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخسارة تقريبًا هي أجرة المصنعية والاستخدام مقارنةً بقيمة المعدن بسعر اليوم."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نقصان تقریباً بنوائی اور استعمال ہے، آج کی قیمت پر دھات کی مالیت کے مقابلے میں۔"
+          }
+        }
+      }
     }
   }
 }

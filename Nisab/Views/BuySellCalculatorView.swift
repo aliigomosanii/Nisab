@@ -85,6 +85,36 @@ struct BuySellCalculatorView: View {
         mode == .selling && selectedItems.contains { $0.material == .silver }
     }
 
+    // MARK: - Approximate loss (wallet items only — they carry a purchase price)
+
+    private var selectedPurchaseTotal: Decimal {
+        selectedItems.reduce(0) { $0 + $1.purchasePrice }
+    }
+
+    /// Sale value of just the selected wallet items; nil while a needed
+    /// price is missing.
+    private var selectedSaleValue: Decimal? {
+        let goldPure = selectedItems.reduce(0) { $0 + $1.pureGoldGrams }
+        let silver = selectedItems.reduce(0) { $0 + $1.silverGrams }
+        guard goldPure > 0 || silver > 0 else { return nil }
+        var total: Decimal = 0
+        if goldPure > 0 {
+            guard let goldPrice else { return nil }
+            total += goldPure * goldPrice
+        }
+        if silver > 0 {
+            guard let silverPrice else { return nil }
+            total += silver * silverPrice
+        }
+        return total
+    }
+
+    /// Positive = loss versus purchase price, negative = gain.
+    private var approximateLoss: Decimal? {
+        guard let selectedSaleValue else { return nil }
+        return selectedPurchaseTotal - selectedSaleValue
+    }
+
     var body: some View {
         Form {
             Section {
@@ -159,12 +189,33 @@ struct BuySellCalculatorView: View {
                                     .foregroundStyle(Color.accentColor)
                             }
                         }
+                        if let approximateLoss {
+                            LabeledContent("Total purchase price", value: selectedPurchaseTotal.formatted(.currency(code: currencyCode)))
+                            if approximateLoss >= 0 {
+                                LabeledContent("Approximate loss") {
+                                    Text(approximateLoss.formatted(.currency(code: currencyCode)))
+                                        .bold()
+                                        .foregroundStyle(.red)
+                                }
+                            } else {
+                                LabeledContent("Approximate gain") {
+                                    Text((-approximateLoss).formatted(.currency(code: currencyCode)))
+                                        .bold()
+                                        .foregroundStyle(.green)
+                                }
+                            }
+                        }
                     }
 
                     Section {
                         Text("Sale estimates are based on metal content at today's price; shops may pay less and manufacturing charges are not recovered.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                        if approximateLoss != nil {
+                            Text("The loss is roughly the manufacturing charge and wear compared with the metal value at today's price.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
             }
