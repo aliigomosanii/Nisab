@@ -159,6 +159,11 @@ struct BuySellCalculatorView: View {
                         } label: {
                             Text("Add from Jewelry Wallet")
                         }
+                        if selectedItems.isEmpty {
+                            Text("Select items from your wallet to see the manufacturing loss versus their purchase price.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
 

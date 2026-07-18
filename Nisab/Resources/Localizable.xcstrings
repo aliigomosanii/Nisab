@@ -1617,6 +1617,22 @@
           }
         }
       }
+    },
+    "Select items from your wallet to see the manufacturing loss versus their purchase price.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختر قطعًا من محفظتك لعرض خسارة المصنعية مقارنةً بسعر شرائها."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی کا نقصان خریداری قیمت کے مقابلے میں دیکھنے کے لیے اپنے بٹوے سے چیزیں منتخب کریں۔"
+          }
+        }
+      }
     }
   }
 }
