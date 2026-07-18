@@ -9,6 +9,16 @@ struct GoldItemDetailView: View {
     @State private var confirmDelete = false
     @State private var showingEdit = false
     @State private var purchaseMetalPriceText = ""
+    // Decoded once (and again after edits) so typing doesn't re-decode photos.
+    @State private var itemImage: UIImage?
+    @State private var invoiceImage: UIImage?
+    @State private var certificateImage: UIImage?
+
+    private func reloadImages() {
+        itemImage = item.itemImageData.flatMap(UIImage.init(data:))
+        invoiceImage = item.invoiceImageData.flatMap(UIImage.init(data:))
+        certificateImage = item.certificateImageData.flatMap(UIImage.init(data:))
+    }
 
     private var materialTitle: String {
         switch item.material {
@@ -121,27 +131,27 @@ struct GoldItemDetailView: View {
                 }
             }
 
-            if let data = item.itemImageData, let image = UIImage(data: data) {
+            if let itemImage {
                 Section("Item Photo") {
-                    Image(uiImage: image)
+                    Image(uiImage: itemImage)
                         .resizable()
                         .scaledToFit()
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             }
 
-            if let data = item.invoiceImageData, let image = UIImage(data: data) {
+            if let invoiceImage {
                 Section("Invoice") {
-                    Image(uiImage: image)
+                    Image(uiImage: invoiceImage)
                         .resizable()
                         .scaledToFit()
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             }
 
-            if let data = item.certificateImageData, let image = UIImage(data: data) {
+            if let certificateImage {
                 Section("Certificate") {
-                    Image(uiImage: image)
+                    Image(uiImage: certificateImage)
                         .resizable()
                         .scaledToFit()
                         .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -166,6 +176,10 @@ struct GoldItemDetailView: View {
         .sheet(isPresented: $showingEdit) {
             AddGoldItemView(editingItem: item)
         }
+        .onAppear { reloadImages() }
+        .onChange(of: item.itemImageData) { _, _ in reloadImages() }
+        .onChange(of: item.invoiceImageData) { _, _ in reloadImages() }
+        .onChange(of: item.certificateImageData) { _, _ in reloadImages() }
         .confirmationDialog("Delete this record?", isPresented: $confirmDelete, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
                 context.delete(item)

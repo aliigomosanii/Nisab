@@ -21,8 +21,10 @@ struct AddGoldItemView: View {
     @State private var note = ""
     @State private var itemPickerItem: PhotosPickerItem?
     @State private var itemData: Data?
+    @State private var itemImage: UIImage?
     @State private var invoicePickerItem: PhotosPickerItem?
     @State private var invoiceData: Data?
+    @State private var invoiceImage: UIImage?
 
     private static let currencies = ["SAR", "USD", "AED", "PKR", "INR", "EGP", "EUR"]
 
@@ -78,14 +80,16 @@ struct AddGoldItemView: View {
                     addLabel: "Add Item Photo",
                     icon: "photo",
                     pickerItem: $itemPickerItem,
-                    data: $itemData
+                    data: $itemData,
+                    image: $itemImage
                 )
                 photoSection(
                     title: "Invoice",
                     addLabel: "Add Invoice Photo",
                     icon: "doc.text.image",
                     pickerItem: $invoicePickerItem,
-                    data: $invoiceData
+                    data: $invoiceData,
+                    image: $invoiceImage
                 )
 
                 Section("Note") {
@@ -107,18 +111,26 @@ struct AddGoldItemView: View {
                     }
                     currencyCode = item.currencyCode
                     note = item.note ?? ""
-                    itemData = item.itemImageData
-                    invoiceData = item.invoiceImageData
+                    // Downsample once here: caps decode cost while editing and
+                    // shrinks oversized legacy photos on the next save.
+                    (itemData, itemImage) = Self.processed(item.itemImageData)
+                    (invoiceData, invoiceImage) = Self.processed(item.invoiceImageData)
                 } else {
                     karat = UserDefaults.standard.object(forKey: "defaultKarat") as? Int ?? 24
                     currencyCode = UserDefaults.standard.string(forKey: "goldPriceCurrency") ?? "SAR"
                 }
             }
-            .onChange(of: itemPickerItem) { _, item in
-                Task { itemData = try? await item?.loadTransferable(type: Data.self) }
+            .onChange(of: itemPickerItem) { _, pickerItem in
+                Task {
+                    let raw = try? await pickerItem?.loadTransferable(type: Data.self)
+                    (itemData, itemImage) = Self.processed(raw)
+                }
             }
-            .onChange(of: invoicePickerItem) { _, item in
-                Task { invoiceData = try? await item?.loadTransferable(type: Data.self) }
+            .onChange(of: invoicePickerItem) { _, pickerItem in
+                Task {
+                    let raw = try? await pickerItem?.loadTransferable(type: Data.self)
+                    (invoiceData, invoiceImage) = Self.processed(raw)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -153,25 +165,42 @@ struct AddGoldItemView: View {
         }
     }
 
+    /// Decodes once and caps resolution so form re-renders stay cheap.
+    private static func processed(_ raw: Data?) -> (Data?, UIImage?) {
+        guard let raw, let original = UIImage(data: raw) else { return (nil, nil) }
+        let maxDimension: CGFloat = 1600
+        let largest = max(original.size.width, original.size.height)
+        guard largest > maxDimension else { return (raw, original) }
+        let scale = maxDimension / largest
+        let target = CGSize(width: original.size.width * scale, height: original.size.height * scale)
+        let resized = UIGraphicsImageRenderer(size: target).image { _ in
+            original.draw(in: CGRect(origin: .zero, size: target))
+        }
+        guard let jpeg = resized.jpegData(compressionQuality: 0.8) else { return (raw, original) }
+        return (jpeg, resized)
+    }
+
     private func photoSection(
         title: LocalizedStringKey,
         addLabel: LocalizedStringKey,
         icon: String,
         pickerItem: Binding<PhotosPickerItem?>,
-        data: Binding<Data?>
+        data: Binding<Data?>,
+        image: Binding<UIImage?>
     ) -> some View {
         Section(title) {
             PhotosPicker(selection: pickerItem, matching: .images) {
                 Label(addLabel, systemImage: icon)
             }
-            if let imageData = data.wrappedValue, let image = UIImage(data: imageData) {
-                Image(uiImage: image)
+            if let uiImage = image.wrappedValue {
+                Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
                     .frame(maxHeight: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                 Button("Remove Photo", role: .destructive) {
                     data.wrappedValue = nil
+                    image.wrappedValue = nil
                     pickerItem.wrappedValue = nil
                 }
             }
