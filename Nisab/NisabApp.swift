@@ -5,7 +5,7 @@ import SwiftData
 struct NisabApp: App {
     var body: some Scene {
         WindowGroup {
-            ZakatView()
+            HomeView()
                 .languageAware()
         }
         .modelContainer(for: [GoldItem.self])
