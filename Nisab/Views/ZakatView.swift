@@ -14,6 +14,7 @@ private enum ZakatMode: String, CaseIterable, Identifiable {
 
 struct ZakatView: View {
     @State private var mode: ZakatMode = .calculator
+    @State private var showingSettings = false
 
     var body: some View {
         NavigationStack {
@@ -25,6 +26,14 @@ struct ZakatView: View {
             }
             .navigationTitle("Zakat")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        showingSettings = true
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    .accessibilityLabel("Settings")
+                }
                 ToolbarItem(placement: .principal) {
                     Picker("Mode", selection: $mode) {
                         ForEach(ZakatMode.allCases) { m in
@@ -33,6 +42,9 @@ struct ZakatView: View {
                     }
                     .pickerStyle(.segmented)
                 }
+            }
+            .sheet(isPresented: $showingSettings) {
+                SettingsView()
             }
         }
     }

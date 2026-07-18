@@ -80,6 +80,9 @@ struct GoldCalculatorView: View {
         Form {
             Section("Gold") {
                 TextField("Weight (grams)", text: $weightText)
+                    .onAppear {
+                        karat = UserDefaults.standard.object(forKey: "defaultKarat") as? Int ?? 24
+                    }
                     .keyboardType(.decimalPad)
                     .onChange(of: weightText) { _, new in
                         let s = new.sanitizedDecimal

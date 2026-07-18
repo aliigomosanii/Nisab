@@ -83,6 +83,10 @@ struct AddGoldItemView: View {
             }
             .navigationTitle("Add Gold Item")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                karat = UserDefaults.standard.object(forKey: "defaultKarat") as? Int ?? 24
+                currencyCode = UserDefaults.standard.string(forKey: "goldPriceCurrency") ?? "SAR"
+            }
             .onChange(of: pickerItem) { _, item in
                 Task {
                     invoiceData = try? await item?.loadTransferable(type: Data.self)
