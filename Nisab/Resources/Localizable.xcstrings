@@ -1633,6 +1633,70 @@
           }
         }
       }
+    },
+    "Typical for 24K (bars, liras): 0–5 SAR/g, up to 10 for small bars.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعتاد لعيار ٢٤ (سبائك وليرات): ٠–٥ ريال/غ، وقد تصل ١٠ للسبائك الصغيرة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "24 کیرٹ (سبائک، لیرے) کے لیے عام: 0–5 ریال/گرام، چھوٹی سبائک کے لیے 10 تک۔"
+          }
+        }
+      }
+    },
+    "Typical for 22K (Gulf and traditional jewelry): 5–12 SAR/g.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعتاد لعيار ٢٢ (حلي خليجي وتقليدي): ٥–١٢ ريال/غ."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "22 کیرٹ (خلیجی اور روایتی زیورات) کے لیے عام: 5–12 ریال/گرام۔"
+          }
+        }
+      }
+    },
+    "Typical for 21K (most common in Saudi): 10–20 SAR/g; 30–60+ for luxury designs and brands.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعتاد لعيار ٢١ (الأكثر انتشارًا في السعودية): ١٠–٢٠ ريال/غ، و٣٠–٦٠+ للتصاميم الفاخرة والماركات."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "21 کیرٹ (سعودیہ میں سب سے عام) کے لیے عام: 10–20 ریال/گرام؛ لگژری ڈیزائن اور برانڈز کے لیے 30–60+۔"
+          }
+        }
+      }
+    },
+    "Typical for 18K (modern jewelry and brands): 20–80+ SAR/g depending on design and brand.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعتاد لعيار ١٨ (مجوهرات حديثة وماركات): ٢٠–٨٠+ ريال/غ حسب التصميم والعلامة التجارية."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "18 کیرٹ (جدید زیورات اور برانڈز) کے لیے عام: ڈیزائن اور برانڈ کے مطابق 20–80+ ریال/گرام۔"
+          }
+        }
+      }
     }
   }
 }

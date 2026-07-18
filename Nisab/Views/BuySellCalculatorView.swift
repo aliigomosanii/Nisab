@@ -52,6 +52,26 @@ struct BuySellCalculatorView: View {
         buyGoldValue.map { $0 + manufacturingTotal }
     }
 
+    /// Typical Saudi manufacturing charge guidance per karat (SAR/gram),
+    /// from local market reference data.
+    private var chargeHintKey: LocalizedStringKey {
+        switch buyKarat {
+        case 24: "Typical for 24K (bars, liras): 0–5 SAR/g, up to 10 for small bars."
+        case 22: "Typical for 22K (Gulf and traditional jewelry): 5–12 SAR/g."
+        case 21: "Typical for 21K (most common in Saudi): 10–20 SAR/g; 30–60+ for luxury designs and brands."
+        default: "Typical for 18K (modern jewelry and brands): 20–80+ SAR/g depending on design and brand."
+        }
+    }
+
+    private var chargeSuggestions: [Int] {
+        switch buyKarat {
+        case 24: [3, 5, 10]
+        case 22: [5, 8, 12]
+        case 21: [10, 15, 20]
+        default: [20, 40, 80]
+        }
+    }
+
     // MARK: - Selling
 
     private var selectedItems: [GoldItem] { items.filter { selectedIDs.contains($0.id) } }
@@ -131,6 +151,23 @@ struct BuySellCalculatorView: View {
                     decimalField("Weight (grams)", text: $buyWeightText)
                     karatPicker("Karat", selection: $buyKarat)
                     decimalField("Manufacturing charge / gram", text: $chargeText)
+                    // Saudi market reference ranges (figures in SAR).
+                    if currencyCode == "SAR" {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(chargeHintKey)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            HStack(spacing: 8) {
+                                ForEach(chargeSuggestions, id: \.self) { value in
+                                    Button("\(value)") {
+                                        chargeText = "\(value)"
+                                    }
+                                    .buttonStyle(.bordered)
+                                    .controlSize(.small)
+                                }
+                            }
+                        }
+                    }
                 }
 
                 GoldPriceSection()
