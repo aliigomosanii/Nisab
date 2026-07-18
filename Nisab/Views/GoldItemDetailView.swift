@@ -7,6 +7,7 @@ struct GoldItemDetailView: View {
 
     let item: GoldItem
     @State private var confirmDelete = false
+    @State private var showingEdit = false
     @State private var purchaseMetalPriceText = ""
 
     private var materialTitle: String {
@@ -157,6 +158,14 @@ struct GoldItemDetailView: View {
         }
         .navigationTitle(item.name.isEmpty ? materialTitle : item.name)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button("Edit") { showingEdit = true }
+            }
+        }
+        .sheet(isPresented: $showingEdit) {
+            AddGoldItemView(editingItem: item)
+        }
         .confirmationDialog("Delete this record?", isPresented: $confirmDelete, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
                 context.delete(item)

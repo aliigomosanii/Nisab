@@ -6,6 +6,9 @@ struct AddGoldItemView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
 
+    /// When set, the form edits this item instead of creating a new one.
+    var editingItem: GoldItem?
+
     @State private var material: JewelryMaterial = .gold
     @State private var name = ""
     /// Gold/silver weight in grams; for diamond items, the gold setting weight.
@@ -89,11 +92,27 @@ struct AddGoldItemView: View {
                     TextField("Note", text: $note, axis: .vertical)
                 }
             }
-            .navigationTitle("Add Jewelry Item")
+            .navigationTitle(editingItem == nil ? "Add Jewelry Item" : "Edit Jewelry Item")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                karat = UserDefaults.standard.object(forKey: "defaultKarat") as? Int ?? 24
-                currencyCode = UserDefaults.standard.string(forKey: "goldPriceCurrency") ?? "SAR"
+                if let item = editingItem {
+                    material = item.material
+                    name = item.name
+                    weightText = "\(item.weightGrams)"
+                    karat = item.karat
+                    purchaseDate = item.purchaseDate
+                    priceText = "\(item.purchasePrice)"
+                    if let metalPrice = item.purchaseMetalPricePerGram {
+                        purchaseMetalPriceText = "\(metalPrice)"
+                    }
+                    currencyCode = item.currencyCode
+                    note = item.note ?? ""
+                    itemData = item.itemImageData
+                    invoiceData = item.invoiceImageData
+                } else {
+                    karat = UserDefaults.standard.object(forKey: "defaultKarat") as? Int ?? 24
+                    currencyCode = UserDefaults.standard.string(forKey: "goldPriceCurrency") ?? "SAR"
+                }
             }
             .onChange(of: itemPickerItem) { _, item in
                 Task { itemData = try? await item?.loadTransferable(type: Data.self) }
@@ -161,20 +180,34 @@ struct AddGoldItemView: View {
 
     private func save() {
         let trimmedNote = note.trimmingCharacters(in: .whitespacesAndNewlines)
-        let item = GoldItem(
-            name: name.trimmingCharacters(in: .whitespaces),
-            material: material,
-            weightGrams: weight ?? 0,
-            karat: karat,
-            purchaseDate: purchaseDate,
-            purchasePrice: price ?? 0,
-            purchaseMetalPricePerGram: Decimal(string: purchaseMetalPriceText),
-            currencyCode: currencyCode,
-            invoiceImageData: invoiceData,
-            itemImageData: itemData,
-            note: trimmedNote.isEmpty ? nil : trimmedNote
-        )
-        context.insert(item)
+        if let item = editingItem {
+            item.name = name.trimmingCharacters(in: .whitespaces)
+            item.material = material
+            item.weightGrams = weight ?? 0
+            item.karat = karat
+            item.purchaseDate = purchaseDate
+            item.purchasePrice = price ?? 0
+            item.purchaseMetalPricePerGram = Decimal(string: purchaseMetalPriceText)
+            item.currencyCode = currencyCode
+            item.invoiceImageData = invoiceData
+            item.itemImageData = itemData
+            item.note = trimmedNote.isEmpty ? nil : trimmedNote
+        } else {
+            let item = GoldItem(
+                name: name.trimmingCharacters(in: .whitespaces),
+                material: material,
+                weightGrams: weight ?? 0,
+                karat: karat,
+                purchaseDate: purchaseDate,
+                purchasePrice: price ?? 0,
+                purchaseMetalPricePerGram: Decimal(string: purchaseMetalPriceText),
+                currencyCode: currencyCode,
+                invoiceImageData: invoiceData,
+                itemImageData: itemData,
+                note: trimmedNote.isEmpty ? nil : trimmedNote
+            )
+            context.insert(item)
+        }
         dismiss()
     }
 }

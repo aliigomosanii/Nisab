@@ -1793,6 +1793,38 @@
           }
         }
       }
+    },
+    "Edit Jewelry Item": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعديل قطعة المجوهرات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زیورات کی چیز میں ترمیم"
+          }
+        }
+      }
+    },
+    "Edit": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعديل"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترمیم"
+          }
+        }
+      }
     }
   }
 }
