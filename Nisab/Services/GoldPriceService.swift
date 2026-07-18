@@ -7,9 +7,18 @@ import Foundation
 enum GoldPriceService {
     private static let gramsPerTroyOunce = Decimal(string: "31.1034768")!
 
-    /// Today's 24k price per gram in the given currency, rounded to 2 places.
+    /// Today's 24k gold price per gram in the given currency, rounded to 2 places.
     static func pricePerGram24k(currency: String) async -> Decimal? {
-        guard let ounceUSD = await goldOunceUSD() else { return nil }
+        await pricePerGram(symbol: "XAU", currency: currency)
+    }
+
+    /// Today's silver price per gram in the given currency, rounded to 2 places.
+    static func silverPricePerGram(currency: String) async -> Decimal? {
+        await pricePerGram(symbol: "XAG", currency: currency)
+    }
+
+    private static func pricePerGram(symbol: String, currency: String) async -> Decimal? {
+        guard let ounceUSD = await metalOunceUSD(symbol) else { return nil }
 
         let rate: Decimal
         if currency == "USD" {
@@ -39,10 +48,10 @@ enum GoldPriceService {
         return try? JSONDecoder().decode(type, from: data)
     }
 
-    /// Gold price in USD per troy ounce.
-    private static func goldOunceUSD() async -> Decimal? {
+    /// Metal price in USD per troy ounce (XAU = gold, XAG = silver).
+    private static func metalOunceUSD(_ symbol: String) async -> Decimal? {
         struct Payload: Decodable { let price: Double }
-        guard let payload = await fetchJSON(Payload.self, from: "https://api.gold-api.com/price/XAU"),
+        guard let payload = await fetchJSON(Payload.self, from: "https://api.gold-api.com/price/\(symbol)"),
               payload.price > 0 else {
             return nil
         }

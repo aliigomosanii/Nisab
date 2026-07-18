@@ -3,7 +3,11 @@ import SwiftUI
 /// Shared "Price per gram" form section: manual entry, currency picker,
 /// and a one-tap fetch of today's price (manual edits always win).
 struct GoldPriceSection: View {
+    /// Show the silver price field too (used by the wallet when it holds silver).
+    var includeSilver = false
+
     @AppStorage("goldPrice24kText") private var priceText = ""
+    @AppStorage("silverPriceText") private var silverPriceText = ""
     @AppStorage("goldPriceCurrency") private var currencyCode = "SAR"
     @AppStorage("goldPriceUpdatedAt") private var updatedAtTimestamp = 0.0
 
@@ -20,6 +24,14 @@ struct GoldPriceSection: View {
                     let s = new.sanitizedDecimal
                     if s != new { priceText = s }
                 }
+            if includeSilver {
+                TextField("Today's silver price per gram", text: $silverPriceText)
+                    .keyboardType(.decimalPad)
+                    .onChange(of: silverPriceText) { _, new in
+                        let s = new.sanitizedDecimal
+                        if s != new { silverPriceText = s }
+                    }
+            }
             Picker("Currency", selection: $currencyCode) {
                 ForEach(Self.currencies, id: \.self) { Text($0) }
             }
@@ -68,6 +80,9 @@ struct GoldPriceSection: View {
             updatedAtTimestamp = Date.now.timeIntervalSince1970
         } else {
             fetchFailed = true
+        }
+        if includeSilver, let silver = await GoldPriceService.silverPricePerGram(currency: currencyCode) {
+            silverPriceText = "\(silver)"
         }
     }
 }

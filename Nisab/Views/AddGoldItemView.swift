@@ -6,38 +6,64 @@ struct AddGoldItemView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
 
+    @State private var material: JewelryMaterial = .gold
     @State private var name = ""
+    /// Gold/silver weight in grams; for diamond items, the gold setting weight.
     @State private var weightText = ""
     @State private var karat = 24
+    @State private var diamondCaratText = ""
     @State private var purchaseDate = Date.now
     @State private var priceText = ""
     @State private var currencyCode = "SAR"
     @State private var note = ""
-    @State private var pickerItem: PhotosPickerItem?
+    @State private var itemPickerItem: PhotosPickerItem?
+    @State private var itemData: Data?
+    @State private var invoicePickerItem: PhotosPickerItem?
     @State private var invoiceData: Data?
+    @State private var certificatePickerItem: PhotosPickerItem?
+    @State private var certificateData: Data?
 
     private static let currencies = ["SAR", "USD", "AED", "PKR", "INR", "EGP", "EUR"]
 
     private var weight: Decimal? { Decimal(string: weightText) }
+    private var diamondCarat: Decimal? { Decimal(string: diamondCaratText) }
     private var price: Decimal? { Decimal(string: priceText) }
 
     private var canSave: Bool {
-        (weight ?? 0) > 0 && (price ?? 0) > 0
+        guard (price ?? 0) > 0, (weight ?? 0) > 0 else { return false }
+        if material == .diamond {
+            return (diamondCarat ?? 0) > 0
+        }
+        return true
     }
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("Gold") {
-                    TextField("Name", text: $name)
-                    TextField("Weight (grams)", text: $weightText)
-                        .keyboardType(.decimalPad)
-                        .onChange(of: weightText) { _, new in
-                            let s = new.sanitizedDecimal
-                            if s != new { weightText = s }
+                Section("Material") {
+                    Picker("Material", selection: $material) {
+                        ForEach(JewelryMaterial.allCases) { m in
+                            Text(m.title).tag(m)
                         }
-                    Picker("Karat", selection: $karat) {
-                        ForEach(Zakat.karats, id: \.self) { Text("\($0)K") }
+                    }
+                    .pickerStyle(.segmented)
+                }
+
+                Section {
+                    TextField("Name", text: $name)
+                    switch material {
+                    case .gold:
+                        weightField("Weight (grams)")
+                        karatPicker("Karat")
+                    case .silver:
+                        weightField("Weight (grams)")
+                    case .diamond:
+                        decimalField("Diamond Carat (ct)", text: $diamondCaratText)
+                        weightField("Gold Weight (grams)")
+                        karatPicker("Gold Karat")
+                        Text("Diamonds themselves are not zakatable; only the gold content counts.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
                 }
 
@@ -49,48 +75,54 @@ struct AddGoldItemView: View {
                 }
 
                 Section("Purchase Price") {
-                    TextField("Purchase Price", text: $priceText)
-                        .keyboardType(.decimalPad)
-                        .onChange(of: priceText) { _, new in
-                            let s = new.sanitizedDecimal
-                            if s != new { priceText = s }
-                        }
+                    decimalField("Purchase Price", text: $priceText)
                     Picker("Currency", selection: $currencyCode) {
                         ForEach(Self.currencies, id: \.self) { Text($0) }
                     }
                 }
 
-                Section("Invoice") {
-                    PhotosPicker(selection: $pickerItem, matching: .images) {
-                        Label("Add Invoice Photo", systemImage: "doc.text.image")
-                    }
-                    if let invoiceData, let image = UIImage(data: invoiceData) {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxHeight: 200)
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                        Button("Remove Invoice", role: .destructive) {
-                            self.invoiceData = nil
-                            pickerItem = nil
-                        }
-                    }
+                photoSection(
+                    title: "Item Photo",
+                    addLabel: "Add Item Photo",
+                    icon: "photo",
+                    pickerItem: $itemPickerItem,
+                    data: $itemData
+                )
+                photoSection(
+                    title: "Invoice",
+                    addLabel: "Add Invoice Photo",
+                    icon: "doc.text.image",
+                    pickerItem: $invoicePickerItem,
+                    data: $invoiceData
+                )
+                if material == .diamond {
+                    photoSection(
+                        title: "Certificate",
+                        addLabel: "Add Certificate Photo",
+                        icon: "checkmark.seal.text.page",
+                        pickerItem: $certificatePickerItem,
+                        data: $certificateData
+                    )
                 }
 
                 Section("Note") {
                     TextField("Note", text: $note, axis: .vertical)
                 }
             }
-            .navigationTitle("Add Gold Item")
+            .navigationTitle("Add Jewelry Item")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 karat = UserDefaults.standard.object(forKey: "defaultKarat") as? Int ?? 24
                 currencyCode = UserDefaults.standard.string(forKey: "goldPriceCurrency") ?? "SAR"
             }
-            .onChange(of: pickerItem) { _, item in
-                Task {
-                    invoiceData = try? await item?.loadTransferable(type: Data.self)
-                }
+            .onChange(of: itemPickerItem) { _, item in
+                Task { itemData = try? await item?.loadTransferable(type: Data.self) }
+            }
+            .onChange(of: invoicePickerItem) { _, item in
+                Task { invoiceData = try? await item?.loadTransferable(type: Data.self) }
+            }
+            .onChange(of: certificatePickerItem) { _, item in
+                Task { certificateData = try? await item?.loadTransferable(type: Data.self) }
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -104,16 +136,66 @@ struct AddGoldItemView: View {
         }
     }
 
+    // MARK: - Field helpers
+
+    private func decimalField(_ title: LocalizedStringKey, text: Binding<String>) -> some View {
+        TextField(title, text: text)
+            .keyboardType(.decimalPad)
+            .onChange(of: text.wrappedValue) { _, new in
+                let s = new.sanitizedDecimal
+                if s != new { text.wrappedValue = s }
+            }
+    }
+
+    private func weightField(_ title: LocalizedStringKey) -> some View {
+        decimalField(title, text: $weightText)
+    }
+
+    private func karatPicker(_ title: LocalizedStringKey) -> some View {
+        Picker(title, selection: $karat) {
+            ForEach(Zakat.karats, id: \.self) { Text("\($0)K") }
+        }
+    }
+
+    private func photoSection(
+        title: LocalizedStringKey,
+        addLabel: LocalizedStringKey,
+        icon: String,
+        pickerItem: Binding<PhotosPickerItem?>,
+        data: Binding<Data?>
+    ) -> some View {
+        Section(title) {
+            PhotosPicker(selection: pickerItem, matching: .images) {
+                Label(addLabel, systemImage: icon)
+            }
+            if let imageData = data.wrappedValue, let image = UIImage(data: imageData) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxHeight: 200)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                Button("Remove Photo", role: .destructive) {
+                    data.wrappedValue = nil
+                    pickerItem.wrappedValue = nil
+                }
+            }
+        }
+    }
+
     private func save() {
         let trimmedNote = note.trimmingCharacters(in: .whitespacesAndNewlines)
         let item = GoldItem(
             name: name.trimmingCharacters(in: .whitespaces),
+            material: material,
             weightGrams: weight ?? 0,
             karat: karat,
+            diamondCarat: material == .diamond ? diamondCarat : nil,
             purchaseDate: purchaseDate,
             purchasePrice: price ?? 0,
             currencyCode: currencyCode,
             invoiceImageData: invoiceData,
+            certificateImageData: material == .diamond ? certificateData : nil,
+            itemImageData: itemData,
             note: trimmedNote.isEmpty ? nil : trimmedNote
         )
         context.insert(item)

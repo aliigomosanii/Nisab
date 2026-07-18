@@ -146,22 +146,6 @@
         }
       }
     },
-    "Gold Wallet": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "محفظة الذهب"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "گولڈ والٹ"
-          }
-        }
-      }
-    },
     "Gold": {
       "localizations": {
         "ar": {
@@ -386,22 +370,6 @@
         }
       }
     },
-    "Add Gold Item": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إضافة عنصر ذهب"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سونے کی چیز شامل کریں"
-          }
-        }
-      }
-    },
     "Purchase Date": {
       "localizations": {
         "ar": {
@@ -462,22 +430,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "رسید کی تصویر شامل کریں"
-          }
-        }
-      }
-    },
-    "Remove Invoice": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إزالة الفاتورة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "رسید ہٹائیں"
           }
         }
       }
@@ -718,38 +670,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "خارج (زکوٰۃ ادا شدہ)"
-          }
-        }
-      }
-    },
-    "No gold yet": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا يوجد ذهب بعد"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ابھی کوئی سونا نہیں"
-          }
-        }
-      }
-    },
-    "Tap + to add your gold": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اضغط + لإضافة ذهبك"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اپنا سونا شامل کرنے کے لیے + دبائیں"
           }
         }
       }
@@ -1022,6 +942,342 @@
           "stringUnit": {
             "state": "translated",
             "value": "نئی زبان لاگو کرنے کے لیے ایپ بند ہو جائے گی۔ جاری رکھنے کے لیے دوبارہ کھولیں۔"
+          }
+        }
+      }
+    },
+    "Jewelry Wallet": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "محفظة المجوهرات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زیورات کا بٹوہ"
+          }
+        }
+      }
+    },
+    "Jewelry": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المجوهرات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زیورات"
+          }
+        }
+      }
+    },
+    "Add Jewelry Item": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة قطعة مجوهرات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زیورات کی چیز شامل کریں"
+          }
+        }
+      }
+    },
+    "Material": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المادة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مواد"
+          }
+        }
+      }
+    },
+    "Silver": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفضة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چاندی"
+          }
+        }
+      }
+    },
+    "Diamond": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الألماس"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ہیرا"
+          }
+        }
+      }
+    },
+    "Gold Karat": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عيار الذهب"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونے کا کیرٹ"
+          }
+        }
+      }
+    },
+    "Gold Weight (grams)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وزن الذهب (غرام)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونے کا وزن (گرام)"
+          }
+        }
+      }
+    },
+    "Diamond Carat (ct)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيراط الألماس"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ہیرے کا قیراط"
+          }
+        }
+      }
+    },
+    "Diamonds themselves are not zakatable; only the gold content counts.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الألماس بحد ذاته لا زكاة عليه؛ تُحسب الزكاة على الذهب فقط."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ہیرے پر بذاتِ خود زکوٰۃ نہیں؛ صرف سونے پر شمار ہوتی ہے۔"
+          }
+        }
+      }
+    },
+    "Item Photo": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صورة القطعة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چیز کی تصویر"
+          }
+        }
+      }
+    },
+    "Add Item Photo": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة صورة القطعة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چیز کی تصویر شامل کریں"
+          }
+        }
+      }
+    },
+    "Certificate": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشهادة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سرٹیفکیٹ"
+          }
+        }
+      }
+    },
+    "Add Certificate Photo": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة صورة الشهادة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سرٹیفکیٹ کی تصویر شامل کریں"
+          }
+        }
+      }
+    },
+    "Remove Photo": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة الصورة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصویر ہٹائیں"
+          }
+        }
+      }
+    },
+    "Total silver": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إجمالي الفضة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل چاندی"
+          }
+        }
+      }
+    },
+    "Silver nisab (595g)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نصاب الفضة (٥٩٥ غ)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چاندی کا نصاب (595 گرام)"
+          }
+        }
+      }
+    },
+    "Silver zakat due (2.5%)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زكاة الفضة المستحقة (٢٫٥٪)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چاندی کی واجب زکوٰۃ (2.5%)"
+          }
+        }
+      }
+    },
+    "Today's silver price per gram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر غرام الفضة اليوم"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آج کی چاندی کی فی گرام قیمت"
+          }
+        }
+      }
+    },
+    "No jewelry yet": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد مجوهرات بعد"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ابھی کوئی زیورات نہیں"
+          }
+        }
+      }
+    },
+    "Tap + to add your jewelry": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اضغط + لإضافة مجوهراتك"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اپنے زیورات شامل کرنے کے لیے + دبائیں"
           }
         }
       }

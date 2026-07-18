@@ -8,18 +8,44 @@ struct GoldItemDetailView: View {
     let item: GoldItem
     @State private var confirmDelete = false
 
+    private var materialTitle: String {
+        switch item.material {
+        case .gold: String(localized: "Gold", bundle: L10n.bundle)
+        case .silver: String(localized: "Silver", bundle: L10n.bundle)
+        case .diamond: String(localized: "Diamond", bundle: L10n.bundle)
+        }
+    }
+
     var body: some View {
         List {
             Section("Details") {
                 if !item.name.isEmpty {
                     LabeledContent("Name", value: item.name)
                 }
-                LabeledContent("Weight (grams)") {
-                    Text("\(item.weightGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                LabeledContent("Material") { Text(item.material.title) }
+                switch item.material {
+                case .gold:
+                    LabeledContent("Weight (grams)") {
+                        Text("\(item.weightGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                    }
+                    LabeledContent("Karat", value: "\(item.karat)K")
+                case .silver:
+                    LabeledContent("Weight (grams)") {
+                        Text("\(item.weightGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                    }
+                case .diamond:
+                    LabeledContent("Diamond Carat (ct)") {
+                        Text((item.diamondCarat ?? 0).formatted(.number.precision(.fractionLength(0...2))))
+                    }
+                    LabeledContent("Gold Weight (grams)") {
+                        Text("\(item.weightGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                    }
+                    LabeledContent("Gold Karat", value: "\(item.karat)K")
                 }
-                LabeledContent("Karat", value: "\(item.karat)K")
-                LabeledContent("Pure gold equivalent") {
-                    Text("\(item.pureGoldGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                if item.material != .silver {
+                    LabeledContent("Pure gold equivalent") {
+                        Text("\(item.pureGoldGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                    }
                 }
                 LabeledContent("Purchase Date", value: item.purchaseDate.dualCalendarString)
                 LabeledContent("Purchase Price", value: item.purchasePrice.formatted(.currency(code: item.currencyCode)))
@@ -66,8 +92,26 @@ struct GoldItemDetailView: View {
                 }
             }
 
+            if let data = item.itemImageData, let image = UIImage(data: data) {
+                Section("Item Photo") {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+            }
+
             if let data = item.invoiceImageData, let image = UIImage(data: data) {
                 Section("Invoice") {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+            }
+
+            if let data = item.certificateImageData, let image = UIImage(data: data) {
+                Section("Certificate") {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
@@ -83,7 +127,7 @@ struct GoldItemDetailView: View {
                 }
             }
         }
-        .navigationTitle(item.name.isEmpty ? String(localized: "Gold", bundle: L10n.bundle) : item.name)
+        .navigationTitle(item.name.isEmpty ? materialTitle : item.name)
         .navigationBarTitleDisplayMode(.inline)
         .confirmationDialog("Delete this record?", isPresented: $confirmDelete, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {

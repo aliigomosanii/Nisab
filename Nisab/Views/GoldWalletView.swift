@@ -18,6 +18,20 @@ struct GoldWalletView: View {
     private var totalWeight: Decimal { items.reduce(0) { $0 + $1.weightGrams } }
     private var pureGrams: Decimal { eligible.reduce(0) { $0 + $1.pureGoldGrams } }
     private var exemptPureGrams: Decimal { exempt.reduce(0) { $0 + $1.pureGoldGrams } }
+
+    // Silver runs on its own nisab and price.
+    @AppStorage("silverPriceText") private var silverPriceText = ""
+    private var hasSilver: Bool { items.contains { $0.material == .silver } }
+    private var silverGrams: Decimal { eligible.reduce(0) { $0 + $1.silverGrams } }
+    private var silverPrice: Decimal? { Decimal(string: silverPriceText) }
+    private var silverAboveNisab: Bool { silverGrams >= Zakat.silverNisabGrams }
+    private var silverZakatGrams: Decimal? {
+        silverAboveNisab ? silverGrams * Zakat.rate : nil
+    }
+    private var silverZakatValue: Decimal? {
+        guard silverAboveNisab else { return nil }
+        return silverPrice.map { silverGrams * $0 * Zakat.rate }
+    }
     private var price24k: Decimal? { Decimal(string: priceText) }
     private var totalValue: Decimal? { price24k.map { pureGrams * $0 } }
     private var aboveNisab: Bool { pureGrams >= Zakat.nisabGrams }
@@ -35,13 +49,13 @@ struct GoldWalletView: View {
         Group {
             if items.isEmpty {
                 ContentUnavailableView(
-                    "No gold yet",
+                    "No jewelry yet",
                     systemImage: "circle.hexagongrid.fill",
-                    description: Text("Tap + to add your gold")
+                    description: Text("Tap + to add your jewelry")
                 )
             } else {
                 List {
-                    GoldPriceSection()
+                    GoldPriceSection(includeSilver: hasSilver)
                     Section("Zakat") {
                         LabeledContent("Total weight") {
                             Text("\(totalWeight.formatted(.number.precision(.fractionLength(0...2)))) g")
@@ -78,6 +92,29 @@ struct GoldWalletView: View {
                             Text("No zakat due")
                                 .foregroundStyle(.secondary)
                         }
+                        if hasSilver {
+                            LabeledContent("Total silver") {
+                                Text("\(silverGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                            }
+                            LabeledContent("Silver nisab (595g)") {
+                                Text(silverAboveNisab ? "Above nisab" : "Below nisab")
+                                    .foregroundStyle(silverAboveNisab ? Color.green : .red)
+                            }
+                            if let silverZakatGrams {
+                                LabeledContent("Silver zakat due (2.5%)") {
+                                    VStack(alignment: .trailing, spacing: 2) {
+                                        Text("\(silverZakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                                            .bold()
+                                            .foregroundStyle(.orange)
+                                        if let silverZakatValue {
+                                            Text(silverZakatValue.formatted(.currency(code: currencyCode)))
+                                                .bold()
+                                                .foregroundStyle(.orange)
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         if !exempt.isEmpty {
                             LabeledContent("Excluded (zakat paid)") {
                                 Text("\(exemptPureGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
@@ -85,7 +122,7 @@ struct GoldWalletView: View {
                         }
                     }
 
-                    Section("Gold") {
+                    Section("Jewelry") {
                         ForEach(items) { item in
                             NavigationLink(value: item.id) {
                                 GoldRow(item: item)
@@ -112,7 +149,7 @@ struct GoldWalletView: View {
                     Button {
                         showingAdd = true
                     } label: {
-                        Label("Add Gold Item", systemImage: "plus.circle")
+                        Label("Add Jewelry Item", systemImage: "plus.circle")
                     }
                     if !eligible.isEmpty {
                         Button {
@@ -124,7 +161,7 @@ struct GoldWalletView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
-                .accessibilityLabel("Add Gold Item")
+                .accessibilityLabel("Add Jewelry Item")
             }
         }
         .sheet(isPresented: $showingAdd) {
@@ -140,10 +177,24 @@ private struct GoldRow: View {
     let item: GoldItem
 
     var body: some View {
-        HStack {
+        HStack(spacing: 10) {
+            if let data = item.itemImageData, let image = UIImage(data: data) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 44, height: 44)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(item.weightGrams.formatted(.number.precision(.fractionLength(0...2)))) g · \(item.karat)K")
-                    .font(.headline)
+                HStack(spacing: 6) {
+                    Text(item.summaryLine)
+                        .font(.headline)
+                    Text(item.material.title)
+                        .font(.caption2.bold())
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 2)
+                        .background(Color.accentColor.opacity(0.15), in: Capsule())
+                }
                 Text(item.purchaseDate.dualCalendarString)
                     .font(.caption)
                     .foregroundStyle(.secondary)

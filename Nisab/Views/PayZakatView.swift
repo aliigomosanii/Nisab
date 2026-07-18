@@ -27,10 +27,19 @@ struct PayZakatView: View {
         selectedItems.reduce(0) { $0 + $1.pureGoldGrams }
     }
 
-    private var zakatGrams: Decimal { selectedPureGrams * Zakat.rate }
+    private var selectedSilverGrams: Decimal {
+        selectedItems.reduce(0) { $0 + $1.silverGrams }
+    }
 
-    /// Zakat is only due (and thus recordable) at or above nisab.
-    private var aboveNisab: Bool { selectedPureGrams >= Zakat.nisabGrams }
+    private var zakatGrams: Decimal { selectedPureGrams * Zakat.rate }
+    private var silverZakatGrams: Decimal { selectedSilverGrams * Zakat.rate }
+
+    private var goldAboveNisab: Bool { selectedPureGrams >= Zakat.nisabGrams }
+    private var silverAboveNisab: Bool { selectedSilverGrams >= Zakat.silverNisabGrams }
+
+    /// Zakat is only due (and thus recordable) when either metal reaches
+    /// its own nisab.
+    private var aboveNisab: Bool { goldAboveNisab || silverAboveNisab }
 
     private var zakatValue: Decimal? {
         Decimal(string: priceText).map { selectedPureGrams * $0 * Zakat.rate }
@@ -50,12 +59,10 @@ struct PayZakatView: View {
                         } label: {
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text(item.name.isEmpty
-                                         ? "\(item.weightGrams.formatted(.number.precision(.fractionLength(0...2)))) g · \(item.karat)K"
-                                         : item.name)
+                                    Text(item.name.isEmpty ? item.summaryLine : item.name)
                                         .foregroundStyle(.primary)
                                     if !item.name.isEmpty {
-                                        Text("\(item.weightGrams.formatted(.number.precision(.fractionLength(0...2)))) g · \(item.karat)K")
+                                        Text(item.summaryLine)
                                             .font(.caption)
                                             .foregroundStyle(.secondary)
                                     }
@@ -78,19 +85,38 @@ struct PayZakatView: View {
 
                 if !selectedItems.isEmpty {
                     Section("Result") {
-                        LabeledContent("Pure gold equivalent") {
-                            Text("\(selectedPureGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                        if selectedPureGrams > 0 {
+                            LabeledContent("Pure gold equivalent") {
+                                Text("\(selectedPureGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                            }
+                            LabeledContent("Nisab (85g pure gold)") {
+                                Text(goldAboveNisab ? "Above nisab" : "Below nisab")
+                                    .foregroundStyle(goldAboveNisab ? Color.green : .red)
+                            }
+                            if goldAboveNisab {
+                                LabeledContent("Zakat due (2.5%)") {
+                                    VStack(alignment: .trailing, spacing: 2) {
+                                        Text("\(zakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                                            .bold()
+                                        if let zakatValue {
+                                            Text(zakatValue.formatted(.currency(code: currencyCode)))
+                                                .bold()
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        LabeledContent("Nisab (85g pure gold)") {
-                            Text(aboveNisab ? "Above nisab" : "Below nisab")
-                                .foregroundStyle(aboveNisab ? Color.green : .red)
-                        }
-                        LabeledContent("Zakat due (2.5%)") {
-                            VStack(alignment: .trailing, spacing: 2) {
-                                Text("\(zakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
-                                    .bold()
-                                if let zakatValue {
-                                    Text(zakatValue.formatted(.currency(code: currencyCode)))
+                        if selectedSilverGrams > 0 {
+                            LabeledContent("Total silver") {
+                                Text("\(selectedSilverGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                            }
+                            LabeledContent("Silver nisab (595g)") {
+                                Text(silverAboveNisab ? "Above nisab" : "Below nisab")
+                                    .foregroundStyle(silverAboveNisab ? Color.green : .red)
+                            }
+                            if silverAboveNisab {
+                                LabeledContent("Silver zakat due (2.5%)") {
+                                    Text("\(silverZakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
                                         .bold()
                                 }
                             }

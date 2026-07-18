@@ -7,8 +7,11 @@ import SwiftData
 struct GoldCalculatorView: View {
     @Query(sort: \GoldItem.purchaseDate, order: .reverse) private var allItems: [GoldItem]
 
-    /// Paid items are ignored until their Hijri year passes.
-    private var items: [GoldItem] { allItems.filter { !$0.isZakatExempt } }
+    /// Paid items are ignored until their Hijri year passes; the gold
+    /// calculator only offers gold-bearing items (gold and diamond settings).
+    private var items: [GoldItem] {
+        allItems.filter { !$0.isZakatExempt && $0.material != .silver }
+    }
 
     @State private var weightText = ""
     @State private var karat = 24
@@ -57,12 +60,10 @@ struct GoldCalculatorView: View {
             } label: {
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(item.name.isEmpty
-                             ? "\(item.weightGrams.formatted(.number.precision(.fractionLength(0...2)))) g · \(item.karat)K"
-                             : item.name)
+                        Text(item.name.isEmpty ? item.summaryLine : item.name)
                             .foregroundStyle(.primary)
                         if !item.name.isEmpty {
-                            Text("\(item.weightGrams.formatted(.number.precision(.fractionLength(0...2)))) g · \(item.karat)K")
+                            Text(item.summaryLine)
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }

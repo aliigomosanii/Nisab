@@ -1,20 +1,45 @@
 import Foundation
 import SwiftData
+import SwiftUI
 
-/// A piece of owned gold tracked in the Gold Wallet for zakat.
+/// Kind of jewelry tracked in the wallet.
+enum JewelryMaterial: String, CaseIterable, Identifiable {
+    case gold, silver, diamond
+    var id: String { rawValue }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .gold: "Gold"
+        case .silver: "Silver"
+        case .diamond: "Diamond"
+        }
+    }
+}
+
+/// A piece of jewelry tracked in the Jewelry Wallet for zakat.
+/// (Class name kept as GoldItem for SwiftData store compatibility.)
 @Model
 final class GoldItem {
     @Attribute(.unique) var id: UUID
     /// Optional label, e.g. "Wedding ring".
     var name: String = ""
+    private var materialRaw: String = "gold"
+    /// Gold/silver weight in grams. For diamond items this is the weight
+    /// of the gold setting.
     var weightGrams: Decimal
-    /// Purity in karat (24 = pure).
+    /// Gold purity in karat (24 = pure). Unused for silver.
     var karat: Int
+    /// Diamond stone weight in carats (diamond items only).
+    var diamondCarat: Decimal?
     var purchaseDate: Date
     var purchasePrice: Decimal
     var currencyCode: String
     /// Invoice photo; stored outside the database file.
     @Attribute(.externalStorage) var invoiceImageData: Data?
+    /// Certificate photo (diamond items), stored outside the database file.
+    @Attribute(.externalStorage) var certificateImageData: Data?
+    /// Photo of the item itself; stored outside the database file.
+    @Attribute(.externalStorage) var itemImageData: Data?
     var note: String?
     var createdAt: Date
     /// When zakat was last paid on this item; exempts it for one Hijri year.
@@ -22,9 +47,32 @@ final class GoldItem {
     /// Full history of zakat payments recorded for this item.
     var zakatPaymentDates: [Date] = []
 
-    /// Pure (24k-equivalent) gold content in grams.
+    var material: JewelryMaterial {
+        get { JewelryMaterial(rawValue: materialRaw) ?? .gold }
+        set { materialRaw = newValue.rawValue }
+    }
+
+    /// Pure (24k-equivalent) gold content in grams. Diamonds themselves are
+    /// not zakatable — only the gold setting counts. Silver contributes none.
     var pureGoldGrams: Decimal {
-        weightGrams * Decimal(karat) / 24
+        material == .silver ? 0 : weightGrams * Decimal(karat) / 24
+    }
+
+    /// Silver content in grams (silver items only).
+    var silverGrams: Decimal {
+        material == .silver ? weightGrams : 0
+    }
+
+    /// One-line physical description, e.g. "15 g · 21K" or "1.2 ct · 5 g 18K".
+    var summaryLine: String {
+        let weight = weightGrams.formatted(.number.precision(.fractionLength(0...2)))
+        switch material {
+        case .gold: return "\(weight) g · \(karat)K"
+        case .silver: return "\(weight) g"
+        case .diamond:
+            let carat = (diamondCarat ?? 0).formatted(.number.precision(.fractionLength(0...2)))
+            return "\(carat) ct · \(weight) g \(karat)K"
+        }
     }
 
     /// End of the exemption: the hawl anniversary is anchored to the
@@ -74,32 +122,42 @@ final class GoldItem {
     init(
         id: UUID = UUID(),
         name: String = "",
+        material: JewelryMaterial = .gold,
         weightGrams: Decimal,
         karat: Int,
+        diamondCarat: Decimal? = nil,
         purchaseDate: Date,
         purchasePrice: Decimal,
         currencyCode: String = "SAR",
         invoiceImageData: Data? = nil,
+        certificateImageData: Data? = nil,
+        itemImageData: Data? = nil,
         note: String? = nil,
         createdAt: Date = .now
     ) {
         self.id = id
         self.name = name
+        self.materialRaw = material.rawValue
         self.weightGrams = weightGrams
         self.karat = karat
+        self.diamondCarat = diamondCarat
         self.purchaseDate = purchaseDate
         self.purchasePrice = purchasePrice
         self.currencyCode = currencyCode
         self.invoiceImageData = invoiceImageData
+        self.certificateImageData = certificateImageData
+        self.itemImageData = itemImageData
         self.note = note
         self.createdAt = createdAt
     }
 }
 
-/// Gold zakat rules (standard fiqh values).
+/// Zakat rules (standard fiqh values).
 enum Zakat {
-    /// Nisab threshold: 85 grams of pure gold.
+    /// Gold nisab threshold: 85 grams of pure gold.
     static let nisabGrams: Decimal = 85
+    /// Silver nisab threshold: 595 grams.
+    static let silverNisabGrams: Decimal = 595
     /// Zakat rate: 2.5%.
     static let rate: Decimal = 0.025
 

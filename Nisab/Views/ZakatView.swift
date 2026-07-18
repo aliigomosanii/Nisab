@@ -1,27 +1,27 @@
 import SwiftUI
 
 private enum ZakatMode: String, CaseIterable, Identifiable {
-    case calculator, wallet
+    case wallet, calculator
     var id: String { rawValue }
 
     var title: LocalizedStringKey {
         switch self {
+        case .wallet: "Jewelry Wallet"
         case .calculator: "Calculator"
-        case .wallet: "Gold Wallet"
         }
     }
 }
 
 struct ZakatView: View {
-    @State private var mode: ZakatMode = .calculator
+    @State private var mode: ZakatMode = .wallet
     @State private var showingSettings = false
 
     var body: some View {
         NavigationStack {
             Group {
                 switch mode {
-                case .calculator: GoldCalculatorView()
                 case .wallet: GoldWalletView()
+                case .calculator: GoldCalculatorView()
                 }
             }
             .navigationTitle("Zakat")
