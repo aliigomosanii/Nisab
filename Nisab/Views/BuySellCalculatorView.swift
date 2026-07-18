@@ -249,7 +249,7 @@ struct BuySellCalculatorView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         if approximateLoss != nil {
-                            Text("The loss is roughly the manufacturing charge and wear compared with the metal value at today's price.")
+                            Text("The loss is roughly the manufacturing charge compared with the metal value at today's price.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }

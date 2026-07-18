@@ -1586,22 +1586,6 @@
         }
       }
     },
-    "The loss is roughly the manufacturing charge and wear compared with the metal value at today's price.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الخسارة تقريبًا هي أجرة المصنعية والاستخدام مقارنةً بقيمة المعدن بسعر اليوم."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نقصان تقریباً بنوائی اور استعمال ہے، آج کی قیمت پر دھات کی مالیت کے مقابلے میں۔"
-          }
-        }
-      }
-    },
     "Manufacturing loss": {
       "localizations": {
         "ar": {
@@ -1694,6 +1678,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "18 کیرٹ (جدید زیورات اور برانڈز) کے لیے عام: ڈیزائن اور برانڈ کے مطابق 20–80+ ریال/گرام۔"
+          }
+        }
+      }
+    },
+    "The loss is roughly the manufacturing charge compared with the metal value at today's price.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخسارة تقريبًا هي أجرة المصنعية مقارنةً بقيمة المعدن بسعر اليوم."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نقصان تقریباً بنوائی ہے، آج کی قیمت پر دھات کی مالیت کے مقابلے میں۔"
           }
         }
       }
