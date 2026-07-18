@@ -2,8 +2,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openURL) private var openURL
 
+    @AppStorage(L10n.storageKey) private var appLanguage = "system"
     @AppStorage("profileName") private var profileName = ""
     @AppStorage("profilePhone") private var profilePhone = ""
     // Shared with the gold price section so one currency drives the app.
@@ -35,12 +35,11 @@ struct SettingsView: View {
                 }
 
                 Section("Language") {
-                    Button {
-                        if let url = URL(string: UIApplication.openSettingsURLString) {
-                            openURL(url)
-                        }
-                    } label: {
-                        Label("Change Language", systemImage: "globe")
+                    Picker("Language", selection: $appLanguage) {
+                        Text("System").tag("system")
+                        Text(verbatim: "English").tag("en")
+                        Text(verbatim: "العربية").tag("ar")
+                        Text(verbatim: "اردو").tag("ur")
                     }
                 }
 

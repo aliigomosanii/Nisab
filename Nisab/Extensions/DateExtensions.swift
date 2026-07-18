@@ -2,16 +2,18 @@ import Foundation
 
 extension Date {
     /// This date in the Umm al-Qura Hijri calendar (the Saudi civil standard),
-    /// localized to the user's language.
+    /// localized to the app's language.
     var hijriString: String {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .islamicUmmAlQura)
         formatter.dateStyle = .medium
+        formatter.locale = L10n.locale
         return formatter.string(from: self)
     }
 
     /// Gregorian and Hijri on one line, e.g. "18 Jul 2026 (23 Muh. 1448 AH)".
     var dualCalendarString: String {
-        "\(formatted(date: .abbreviated, time: .omitted)) (\(hijriString))"
+        let gregorian = formatted(Date.FormatStyle(date: .abbreviated, time: .omitted, locale: L10n.locale))
+        return "\(gregorian) (\(hijriString))"
     }
 }

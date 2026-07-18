@@ -83,7 +83,7 @@ struct GoldItemDetailView: View {
                 }
             }
         }
-        .navigationTitle(item.name.isEmpty ? String(localized: "Gold") : item.name)
+        .navigationTitle(item.name.isEmpty ? String(localized: "Gold", bundle: L10n.bundle) : item.name)
         .navigationBarTitleDisplayMode(.inline)
         .confirmationDialog("Delete this record?", isPresented: $confirmDelete, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
