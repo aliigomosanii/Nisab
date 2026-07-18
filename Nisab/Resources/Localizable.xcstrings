@@ -977,6 +977,54 @@
           }
         }
       }
+    },
+    "Restart Required": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة التشغيل مطلوبة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دوبارہ شروع کرنا ضروری ہے"
+          }
+        }
+      }
+    },
+    "Restart": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة التشغيل"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دوبارہ شروع کریں"
+          }
+        }
+      }
+    },
+    "The app will close to apply the new language. Reopen it to continue.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيتم إغلاق التطبيق لتطبيق اللغة الجديدة. أعد فتحه للمتابعة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نئی زبان لاگو کرنے کے لیے ایپ بند ہو جائے گی۔ جاری رکھنے کے لیے دوبارہ کھولیں۔"
+          }
+        }
+      }
     }
   }
 }
