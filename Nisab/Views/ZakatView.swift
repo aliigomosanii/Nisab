@@ -24,7 +24,8 @@ struct ZakatView: View {
                 case .calculator: GoldCalculatorView()
                 }
             }
-            .navigationTitle("Zakat")
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
