@@ -7,6 +7,10 @@ enum JewelryMaterial: String, CaseIterable, Identifiable {
     case gold, silver, diamond
     var id: String { rawValue }
 
+    /// Materials offered in the UI (diamond kept in the enum only for
+    /// compatibility with previously saved items).
+    static let selectable: [JewelryMaterial] = [.gold, .silver]
+
     var title: LocalizedStringKey {
         switch self {
         case .gold: "Gold"

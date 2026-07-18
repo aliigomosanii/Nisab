@@ -11,7 +11,6 @@ struct AddGoldItemView: View {
     /// Gold/silver weight in grams; for diamond items, the gold setting weight.
     @State private var weightText = ""
     @State private var karat = 24
-    @State private var diamondCaratText = ""
     @State private var purchaseDate = Date.now
     @State private var priceText = ""
     @State private var currencyCode = "SAR"
@@ -20,21 +19,14 @@ struct AddGoldItemView: View {
     @State private var itemData: Data?
     @State private var invoicePickerItem: PhotosPickerItem?
     @State private var invoiceData: Data?
-    @State private var certificatePickerItem: PhotosPickerItem?
-    @State private var certificateData: Data?
 
     private static let currencies = ["SAR", "USD", "AED", "PKR", "INR", "EGP", "EUR"]
 
     private var weight: Decimal? { Decimal(string: weightText) }
-    private var diamondCarat: Decimal? { Decimal(string: diamondCaratText) }
     private var price: Decimal? { Decimal(string: priceText) }
 
     private var canSave: Bool {
-        guard (price ?? 0) > 0, (weight ?? 0) > 0 else { return false }
-        if material == .diamond {
-            return (diamondCarat ?? 0) > 0
-        }
-        return true
+        (price ?? 0) > 0 && (weight ?? 0) > 0
     }
 
     var body: some View {
@@ -42,7 +34,7 @@ struct AddGoldItemView: View {
             Form {
                 Section("Material") {
                     Picker("Material", selection: $material) {
-                        ForEach(JewelryMaterial.allCases) { m in
+                        ForEach(JewelryMaterial.selectable) { m in
                             Text(m.title).tag(m)
                         }
                     }
@@ -51,19 +43,9 @@ struct AddGoldItemView: View {
 
                 Section {
                     TextField("Name", text: $name)
-                    switch material {
-                    case .gold:
-                        weightField("Weight (grams)")
+                    weightField("Weight (grams)")
+                    if material == .gold {
                         karatPicker("Karat")
-                    case .silver:
-                        weightField("Weight (grams)")
-                    case .diamond:
-                        decimalField("Diamond Carat (ct)", text: $diamondCaratText)
-                        weightField("Gold Weight (grams)")
-                        karatPicker("Gold Karat")
-                        Text("Diamonds themselves are not zakatable; only the gold content counts.")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
                     }
                 }
 
@@ -95,15 +77,6 @@ struct AddGoldItemView: View {
                     pickerItem: $invoicePickerItem,
                     data: $invoiceData
                 )
-                if material == .diamond {
-                    photoSection(
-                        title: "Certificate",
-                        addLabel: "Add Certificate Photo",
-                        icon: "checkmark.seal.text.page",
-                        pickerItem: $certificatePickerItem,
-                        data: $certificateData
-                    )
-                }
 
                 Section("Note") {
                     TextField("Note", text: $note, axis: .vertical)
@@ -120,9 +93,6 @@ struct AddGoldItemView: View {
             }
             .onChange(of: invoicePickerItem) { _, item in
                 Task { invoiceData = try? await item?.loadTransferable(type: Data.self) }
-            }
-            .onChange(of: certificatePickerItem) { _, item in
-                Task { certificateData = try? await item?.loadTransferable(type: Data.self) }
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -189,12 +159,10 @@ struct AddGoldItemView: View {
             material: material,
             weightGrams: weight ?? 0,
             karat: karat,
-            diamondCarat: material == .diamond ? diamondCarat : nil,
             purchaseDate: purchaseDate,
             purchasePrice: price ?? 0,
             currencyCode: currencyCode,
             invoiceImageData: invoiceData,
-            certificateImageData: material == .diamond ? certificateData : nil,
             itemImageData: itemData,
             note: trimmedNote.isEmpty ? nil : trimmedNote
         )

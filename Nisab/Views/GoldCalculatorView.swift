@@ -10,7 +10,6 @@ struct GoldCalculatorView: View {
     @State private var material: JewelryMaterial = .gold
     @State private var weightText = ""
     @State private var karat = 24
-    @State private var diamondCaratText = ""
     @State private var selectedIDs: Set<UUID> = []
     @State private var walletListExpanded = false
     @State private var showingPayZakat = false
@@ -72,7 +71,7 @@ struct GoldCalculatorView: View {
         Form {
             Section("Material") {
                 Picker("Material", selection: $material) {
-                    ForEach(JewelryMaterial.allCases) { m in
+                    ForEach(JewelryMaterial.selectable) { m in
                         Text(m.title).tag(m)
                     }
                 }
@@ -80,19 +79,9 @@ struct GoldCalculatorView: View {
             }
 
             Section {
-                switch material {
-                case .gold:
-                    decimalField("Weight (grams)", text: $weightText)
+                decimalField("Weight (grams)", text: $weightText)
+                if material == .gold {
                     karatPicker("Karat")
-                case .silver:
-                    decimalField("Weight (grams)", text: $weightText)
-                case .diamond:
-                    decimalField("Diamond Carat (ct)", text: $diamondCaratText)
-                    decimalField("Gold Weight (grams)", text: $weightText)
-                    karatPicker("Gold Karat")
-                    Text("Diamonds themselves are not zakatable; only the gold content counts.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
                 }
             }
 
