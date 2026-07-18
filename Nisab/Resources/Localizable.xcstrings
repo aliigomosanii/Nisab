@@ -1841,6 +1841,38 @@
           }
         }
       }
+    },
+    "Upcoming zakat dates": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مواعيد الزكاة القادمة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ کی آئندہ تاریخیں"
+          }
+        }
+      }
+    },
+    "Shows dues until the end of next Hijri year.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعرض الاستحقاقات حتى نهاية السنة الهجرية القادمة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اگلے ہجری سال کے آخر تک واجبات دکھاتا ہے۔"
+          }
+        }
+      }
     }
   }
 }

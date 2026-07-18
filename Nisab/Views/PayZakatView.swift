@@ -9,6 +9,9 @@ struct PayZakatView: View {
     /// Items eligible for payment (not currently exempt).
     let items: [GoldItem]
 
+    /// All items (paid ones included) for the upcoming-dates schedule.
+    @Query(sort: \GoldItem.purchaseDate) private var allItems: [GoldItem]
+
     @State private var selectedIDs: Set<UUID>
     @State private var paymentDate = Date.now
     @AppStorage("goldPrice24kText") private var priceText = ""
@@ -40,6 +43,27 @@ struct PayZakatView: View {
     /// Zakat is only due (and thus recordable) when either metal reaches
     /// its own nisab.
     private var aboveNisab: Bool { goldAboveNisab || silverAboveNisab }
+
+    /// First day of the Hijri year after next — the schedule shows dues
+    /// up to the end of next year.
+    private var scheduleCutoff: Date {
+        let calendar = Calendar(identifier: .islamicUmmAlQura)
+        let year = calendar.component(.year, from: .now)
+        var comps = DateComponents()
+        comps.year = year + 2
+        comps.month = 1
+        comps.day = 1
+        return calendar.date(from: comps) ?? .distantFuture
+    }
+
+    /// Items with their next due date (nil = due now), soonest first,
+    /// limited to the end of next Hijri year.
+    private var upcomingDues: [(item: GoldItem, due: Date?)] {
+        allItems
+            .map { (item: $0, due: $0.nextZakatDue) }
+            .filter { $0.due == nil || $0.due! < scheduleCutoff }
+            .sorted { ($0.due ?? .distantPast) < ($1.due ?? .distantPast) }
+    }
 
     private var zakatValue: Decimal? {
         Decimal(string: priceText).map { selectedPureGrams * $0 * Zakat.rate }
@@ -121,6 +145,37 @@ struct PayZakatView: View {
                                 }
                             }
                         }
+                    }
+                }
+
+                if !upcomingDues.isEmpty {
+                    Section("Upcoming zakat dates") {
+                        ForEach(upcomingDues, id: \.item.id) { entry in
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(entry.item.name.isEmpty ? entry.item.summaryLine : entry.item.name)
+                                    if !entry.item.name.isEmpty {
+                                        Text(entry.item.summaryLine)
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
+                                Spacer()
+                                if let due = entry.due {
+                                    Text(due.dualCalendarString)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                        .multilineTextAlignment(.trailing)
+                                } else {
+                                    Text("Due now")
+                                        .bold()
+                                        .foregroundStyle(.orange)
+                                }
+                            }
+                        }
+                        Text("Shows dues until the end of next Hijri year.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
                 }
             }
