@@ -59,8 +59,13 @@ struct GoldCalculatorView: View {
         return silverPrice.map { silverGrams * $0 * Zakat.rate }
     }
 
+    /// A metal's price field only appears when that metal is actually in
+    /// the calculation (manual entry or a selected wallet item).
+    private var goldRelevant: Bool {
+        material != .silver || selectedItems.contains { $0.material != .silver }
+    }
     private var silverRelevant: Bool {
-        material == .silver || allItems.contains { $0.material == .silver }
+        material == .silver || selectedItems.contains { $0.material == .silver }
     }
 
     var body: some View {
@@ -101,7 +106,7 @@ struct GoldCalculatorView: View {
                 }
             }
 
-            GoldPriceSection(includeSilver: silverRelevant)
+            GoldPriceSection(includeGold: goldRelevant, includeSilver: silverRelevant)
 
             if goldPureGrams > 0 {
                 Section("Gold") {

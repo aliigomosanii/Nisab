@@ -3,7 +3,9 @@ import SwiftUI
 /// Shared "Price per gram" form section: manual entry, currency picker,
 /// and a one-tap fetch of today's price (manual edits always win).
 struct GoldPriceSection: View {
-    /// Show the silver price field too (used by the wallet when it holds silver).
+    /// Show the gold price field (hidden for silver-only calculations).
+    var includeGold = true
+    /// Show the silver price field too.
     var includeSilver = false
 
     @AppStorage("goldPrice24kText") private var priceText = ""
@@ -18,12 +20,14 @@ struct GoldPriceSection: View {
 
     var body: some View {
         Section("Price per gram") {
-            TextField("Today's 24k price per gram", text: $priceText)
-                .keyboardType(.decimalPad)
-                .onChange(of: priceText) { _, new in
-                    let s = new.sanitizedDecimal
-                    if s != new { priceText = s }
-                }
+            if includeGold {
+                TextField("Today's 24k price per gram", text: $priceText)
+                    .keyboardType(.decimalPad)
+                    .onChange(of: priceText) { _, new in
+                        let s = new.sanitizedDecimal
+                        if s != new { priceText = s }
+                    }
+            }
             if includeSilver {
                 TextField("Today's silver price per gram", text: $silverPriceText)
                     .keyboardType(.decimalPad)
@@ -75,14 +79,21 @@ struct GoldPriceSection: View {
         fetchFailed = false
         defer { fetching = false }
 
-        if let price = await GoldPriceService.pricePerGram24k(currency: currencyCode) {
-            priceText = "\(price)"
-            updatedAtTimestamp = Date.now.timeIntervalSince1970
-        } else {
-            fetchFailed = true
+        if includeGold {
+            if let price = await GoldPriceService.pricePerGram24k(currency: currencyCode) {
+                priceText = "\(price)"
+                updatedAtTimestamp = Date.now.timeIntervalSince1970
+            } else {
+                fetchFailed = true
+            }
         }
-        if includeSilver, let silver = await GoldPriceService.silverPricePerGram(currency: currencyCode) {
-            silverPriceText = "\(silver)"
+        if includeSilver {
+            if let silver = await GoldPriceService.silverPricePerGram(currency: currencyCode) {
+                silverPriceText = "\(silver)"
+                updatedAtTimestamp = Date.now.timeIntervalSince1970
+            } else if !includeGold {
+                fetchFailed = true
+            }
         }
     }
 }
