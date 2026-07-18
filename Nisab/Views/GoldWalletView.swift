@@ -20,7 +20,9 @@ struct GoldWalletView: View {
                 List {
                     Section("Jewelry") {
                         ForEach(items) { item in
-                            NavigationLink(value: item.id) {
+                            NavigationLink {
+                                GoldItemDetailView(item: item)
+                            } label: {
                                 JewelryRow(item: item)
                             }
                             .swipeActions(edge: .leading) {
@@ -34,11 +36,6 @@ struct GoldWalletView: View {
                         }
                     }
                 }
-            }
-        }
-        .navigationDestination(for: UUID.self) { id in
-            if let item = items.first(where: { $0.id == id }) {
-                GoldItemDetailView(item: item)
             }
         }
         .toolbar {
