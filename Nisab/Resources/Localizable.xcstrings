@@ -1570,22 +1570,6 @@
         }
       }
     },
-    "Approximate loss": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الخسارة التقريبية"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تخمینی نقصان"
-          }
-        }
-      }
-    },
     "Approximate gain": {
       "localizations": {
         "ar": {
@@ -1614,6 +1598,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "نقصان تقریباً بنوائی اور استعمال ہے، آج کی قیمت پر دھات کی مالیت کے مقابلے میں۔"
+          }
+        }
+      }
+    },
+    "Manufacturing loss": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خسارة المصنعية"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی کا نقصان"
           }
         }
       }

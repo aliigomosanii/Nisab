@@ -166,13 +166,8 @@ struct BuySellCalculatorView: View {
 
                 if sellGoldPure > 0 || sellSilverGrams > 0 {
                     Section("Result") {
-                        if sellGoldPure > 0 {
-                            LabeledContent("Pure gold equivalent") {
-                                Text("\(sellGoldPure.formatted(.number.precision(.fractionLength(0...2)))) g")
-                            }
-                            if let sellGoldValue {
-                                LabeledContent("Gold value", value: sellGoldValue.formatted(.currency(code: currencyCode)))
-                            }
+                        if sellGoldPure > 0, let sellGoldValue {
+                            LabeledContent("Gold value", value: sellGoldValue.formatted(.currency(code: currencyCode)))
                         }
                         if sellSilverGrams > 0 {
                             LabeledContent("Total silver") {
@@ -192,7 +187,7 @@ struct BuySellCalculatorView: View {
                         if let approximateLoss {
                             LabeledContent("Total purchase price", value: selectedPurchaseTotal.formatted(.currency(code: currencyCode)))
                             if approximateLoss >= 0 {
-                                LabeledContent("Approximate loss") {
+                                LabeledContent("Manufacturing loss") {
                                     Text(approximateLoss.formatted(.currency(code: currencyCode)))
                                         .bold()
                                         .foregroundStyle(.red)
