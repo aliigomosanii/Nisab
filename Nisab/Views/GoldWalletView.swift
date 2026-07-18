@@ -6,6 +6,7 @@ import SwiftData
 struct GoldWalletView: View {
     @Query(sort: \GoldItem.purchaseDate, order: .reverse) private var items: [GoldItem]
     @State private var showingAdd = false
+    @State private var editingItem: GoldItem?
 
     var body: some View {
         Group {
@@ -21,6 +22,21 @@ struct GoldWalletView: View {
                         ForEach(items) { item in
                             NavigationLink(value: item.id) {
                                 JewelryRow(item: item)
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    editingItem = item
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+                                .tint(.blue)
+                            }
+                            .contextMenu {
+                                Button {
+                                    editingItem = item
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }
                             }
                         }
                     }
@@ -44,6 +60,9 @@ struct GoldWalletView: View {
         }
         .sheet(isPresented: $showingAdd) {
             AddGoldItemView()
+        }
+        .sheet(item: $editingItem) { item in
+            AddGoldItemView(editingItem: item)
         }
     }
 }
