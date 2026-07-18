@@ -46,6 +46,15 @@ struct HomeView: View {
                         }
                         .buttonStyle(.plain)
 
+                        NavigationLink {
+                            BuySellCalculatorView()
+                                .navigationTitle("Buy & Sell Calculator")
+                                .navigationBarTitleDisplayMode(.inline)
+                        } label: {
+                            card("Buy & Sell Calculator", caption: "Estimate buying and selling prices", icon: "arrow.left.arrow.right.circle.fill")
+                        }
+                        .buttonStyle(.plain)
+
                         Button {
                             showingPayZakat = true
                         } label: {

@@ -1409,6 +1409,150 @@
           }
         }
       }
+    },
+    "Buy & Sell Calculator": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حاسبة الشراء والبيع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خرید و فروخت کیلکولیٹر"
+          }
+        }
+      }
+    },
+    "Estimate buying and selling prices": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قدّر أسعار الشراء والبيع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خرید و فروخت کی قیمتوں کا اندازہ"
+          }
+        }
+      }
+    },
+    "Buying": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شراء"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خریداری"
+          }
+        }
+      }
+    },
+    "Selling": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بيع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فروخت"
+          }
+        }
+      }
+    },
+    "Manufacturing charge / gram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أجرة المصنعية / غرام"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی فی گرام"
+          }
+        }
+      }
+    },
+    "Manufacturing total": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إجمالي المصنعية"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل بنوائی"
+          }
+        }
+      }
+    },
+    "Total price": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السعر الإجمالي"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل قیمت"
+          }
+        }
+      }
+    },
+    "Estimated sale value": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيمة البيع التقديرية"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقع فروخت قیمت"
+          }
+        }
+      }
+    },
+    "Sale estimates are based on metal content at today's price; shops may pay less and manufacturing charges are not recovered.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تقديرات البيع مبنية على قيمة المعدن بسعر اليوم؛ قد تدفع المحلات أقل ولا تُسترد أجرة المصنعية."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فروخت کا اندازہ آج کی قیمت پر دھات کی مالیت پر مبنی ہے؛ دکانیں کم دے سکتی ہیں اور بنوائی واپس نہیں ملتی۔"
+          }
+        }
+      }
     }
   }
 }
