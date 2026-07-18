@@ -610,22 +610,6 @@
         }
       }
     },
-    "Remove Zakat Payment": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إزالة دفع الزكاة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زکوٰۃ کی ادائیگی ہٹائیں"
-          }
-        }
-      }
-    },
     "Excluded (zakat paid)": {
       "localizations": {
         "ar": {

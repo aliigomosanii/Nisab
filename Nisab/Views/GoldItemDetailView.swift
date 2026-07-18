@@ -93,16 +93,6 @@ struct GoldItemDetailView: View {
                 }
             }
 
-            if item.isZakatExempt {
-                Section {
-                    Button("Remove Zakat Payment", role: .destructive) {
-                        if let last = item.lastZakatPaidAt {
-                            item.zakatPaymentDates.removeAll { $0 == last }
-                        }
-                        item.lastZakatPaidAt = item.zakatPaymentDates.max()
-                    }
-                }
-            }
 
             // Editable so older items can be backfilled for selling estimates.
             Section {
