@@ -1,56 +1,206 @@
 import SwiftUI
 import SwiftData
 
-/// Gold zakat calculator. Combines an optional manual entry with any
-/// selected Gold Wallet items — everything is converted to pure-gold
-/// grams, so mixed karats add up correctly against one 24k price.
+/// The Zakat Calculator: manual entry (gold, silver, or diamond) plus any
+/// selected Jewelry Wallet items, computed on separate gold and silver
+/// tracks with their own nisab thresholds and prices.
 struct GoldCalculatorView: View {
     @Query(sort: \GoldItem.purchaseDate, order: .reverse) private var allItems: [GoldItem]
 
-    /// Paid items are ignored until their Hijri year passes; the gold
-    /// calculator only offers gold-bearing items (gold and diamond settings).
-    private var items: [GoldItem] {
-        allItems.filter { !$0.isZakatExempt && $0.material != .silver }
-    }
-
+    @State private var material: JewelryMaterial = .gold
     @State private var weightText = ""
     @State private var karat = 24
+    @State private var diamondCaratText = ""
     @State private var selectedIDs: Set<UUID> = []
     @State private var walletListExpanded = false
-    // Shared with the Gold Wallet so the price is entered once.
+    @State private var showingPayZakat = false
     @AppStorage("goldPrice24kText") private var priceText = ""
+    @AppStorage("silverPriceText") private var silverPriceText = ""
     @AppStorage("goldPriceCurrency") private var currencyCode = "SAR"
 
-    private static let currencies = ["SAR", "USD", "AED", "PKR", "INR", "EGP", "EUR"]
+    /// Paid items are ignored until their Hijri year passes.
+    private var walletItems: [GoldItem] { allItems.filter { !$0.isZakatExempt } }
+    private var exemptItems: [GoldItem] { allItems.filter(\.isZakatExempt) }
+    private var selectedItems: [GoldItem] { walletItems.filter { selectedIDs.contains($0.id) } }
 
-    private var manualPureGrams: Decimal {
-        (Decimal(string: weightText) ?? 0) * Decimal(karat) / 24
+    // MARK: - Manual entry
+
+    private var weight: Decimal { Decimal(string: weightText) ?? 0 }
+    private var manualGoldPure: Decimal {
+        material == .silver ? 0 : weight * Decimal(karat) / 24
+    }
+    private var manualSilver: Decimal {
+        material == .silver ? weight : 0
     }
 
-    private var selectedPureGrams: Decimal {
-        items.filter { selectedIDs.contains($0.id) }
-            .reduce(0) { $0 + $1.pureGoldGrams }
+    // MARK: - Totals (manual + selected wallet items)
+
+    private var goldPureGrams: Decimal {
+        manualGoldPure + selectedItems.reduce(0) { $0 + $1.pureGoldGrams }
+    }
+    private var silverGrams: Decimal {
+        manualSilver + selectedItems.reduce(0) { $0 + $1.silverGrams }
     }
 
-    private var totalPureGrams: Decimal { manualPureGrams + selectedPureGrams }
+    private var goldPrice: Decimal? { Decimal(string: priceText) }
+    private var silverPrice: Decimal? { Decimal(string: silverPriceText) }
 
-    /// Raw (actual) weight: manual entry + selected wallet items.
-    private var totalWeightGrams: Decimal {
-        (Decimal(string: weightText) ?? 0)
-            + items.filter { selectedIDs.contains($0.id) }.reduce(0) { $0 + $1.weightGrams }
+    private var goldAboveNisab: Bool { goldPureGrams >= Zakat.nisabGrams }
+    private var silverAboveNisab: Bool { silverGrams >= Zakat.silverNisabGrams }
+
+    private var goldZakatGrams: Decimal? { goldAboveNisab ? goldPureGrams * Zakat.rate : nil }
+    private var goldZakatValue: Decimal? {
+        guard goldAboveNisab else { return nil }
+        return goldPrice.map { goldPureGrams * $0 * Zakat.rate }
     }
-    private var price24k: Decimal? { Decimal(string: priceText) }
-    private var totalValue: Decimal? { price24k.map { totalPureGrams * $0 } }
-    private var aboveNisab: Bool { totalPureGrams >= Zakat.nisabGrams }
-    private var zakatGrams: Decimal? { aboveNisab ? totalPureGrams * Zakat.rate : nil }
-    private var zakatDue: Decimal? {
-        guard aboveNisab else { return nil }
-        return totalValue.map { $0 * Zakat.rate }
+    private var silverZakatGrams: Decimal? { silverAboveNisab ? silverGrams * Zakat.rate : nil }
+    private var silverZakatValue: Decimal? {
+        guard silverAboveNisab else { return nil }
+        return silverPrice.map { silverGrams * $0 * Zakat.rate }
     }
 
-    /// Selectable wallet items shown inside the disclosure group.
+    private var silverRelevant: Bool {
+        material == .silver || allItems.contains { $0.material == .silver }
+    }
+
+    var body: some View {
+        Form {
+            Section("Material") {
+                Picker("Material", selection: $material) {
+                    ForEach(JewelryMaterial.allCases) { m in
+                        Text(m.title).tag(m)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+
+            Section {
+                switch material {
+                case .gold:
+                    decimalField("Weight (grams)", text: $weightText)
+                    karatPicker("Karat")
+                case .silver:
+                    decimalField("Weight (grams)", text: $weightText)
+                case .diamond:
+                    decimalField("Diamond Carat (ct)", text: $diamondCaratText)
+                    decimalField("Gold Weight (grams)", text: $weightText)
+                    karatPicker("Gold Karat")
+                    Text("Diamonds themselves are not zakatable; only the gold content counts.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            if !walletItems.isEmpty {
+                Section {
+                    DisclosureGroup(isExpanded: $walletListExpanded) {
+                        walletRows
+                    } label: {
+                        Text("Add from Jewelry Wallet")
+                    }
+                }
+            }
+
+            GoldPriceSection(includeSilver: silverRelevant)
+
+            if goldPureGrams > 0 {
+                Section("Gold") {
+                    LabeledContent("Pure gold equivalent") {
+                        Text("\(goldPureGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                    }
+                    if let goldPrice {
+                        LabeledContent("Gold value", value: (goldPureGrams * goldPrice).formatted(.currency(code: currencyCode)))
+                    }
+                    LabeledContent("Nisab (85g pure gold)") {
+                        Text(goldAboveNisab ? "Above nisab" : "Below nisab")
+                            .foregroundStyle(goldAboveNisab ? Color.green : .red)
+                    }
+                    if let goldZakatGrams {
+                        LabeledContent("Zakat due (2.5%)") {
+                            VStack(alignment: .trailing, spacing: 2) {
+                                Text("\(goldZakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                                    .bold()
+                                    .foregroundStyle(.orange)
+                                if let goldZakatValue {
+                                    Text(goldZakatValue.formatted(.currency(code: currencyCode)))
+                                        .bold()
+                                        .foregroundStyle(.orange)
+                                }
+                            }
+                        }
+                    } else {
+                        Text("No zakat due")
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+
+            if silverGrams > 0 {
+                Section("Silver") {
+                    LabeledContent("Total silver") {
+                        Text("\(silverGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                    }
+                    if let silverPrice {
+                        LabeledContent("Silver value", value: (silverGrams * silverPrice).formatted(.currency(code: currencyCode)))
+                    }
+                    LabeledContent("Silver nisab (595g)") {
+                        Text(silverAboveNisab ? "Above nisab" : "Below nisab")
+                            .foregroundStyle(silverAboveNisab ? Color.green : .red)
+                    }
+                    if let silverZakatGrams {
+                        LabeledContent("Silver zakat due (2.5%)") {
+                            VStack(alignment: .trailing, spacing: 2) {
+                                Text("\(silverZakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                                    .bold()
+                                    .foregroundStyle(.orange)
+                                if let silverZakatValue {
+                                    Text(silverZakatValue.formatted(.currency(code: currencyCode)))
+                                        .bold()
+                                        .foregroundStyle(.orange)
+                                }
+                            }
+                        }
+                    } else {
+                        Text("No zakat due")
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+
+            if !walletItems.isEmpty || !exemptItems.isEmpty {
+                Section {
+                    if !exemptItems.isEmpty {
+                        LabeledContent("Excluded (zakat paid)") {
+                            Text("\(exemptItems.reduce(0) { $0 + $1.pureGoldGrams }.formatted(.number.precision(.fractionLength(0...2)))) g")
+                        }
+                    }
+                    if !walletItems.isEmpty {
+                        Button {
+                            showingPayZakat = true
+                        } label: {
+                            Label("Record Zakat Payment", systemImage: "checkmark.seal")
+                        }
+                    }
+                }
+            }
+
+            if goldPureGrams > 0 || silverGrams > 0 {
+                Section {
+                    Text("Zakat is due when your pure gold reaches the nisab (85g) and has been held for one lunar year (hawl).")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .sheet(isPresented: $showingPayZakat) {
+            PayZakatView(items: walletItems)
+        }
+    }
+
+    // MARK: - Pieces
+
     private var walletRows: some View {
-        ForEach(items) { item in
+        ForEach(walletItems) { item in
             Button {
                 if selectedIDs.contains(item.id) {
                     selectedIDs.remove(item.id)
@@ -77,80 +227,18 @@ struct GoldCalculatorView: View {
         }
     }
 
-    var body: some View {
-        Form {
-            Section("Gold") {
-                TextField("Weight (grams)", text: $weightText)
-                    .onAppear {
-                        karat = UserDefaults.standard.object(forKey: "defaultKarat") as? Int ?? 24
-                    }
-                    .keyboardType(.decimalPad)
-                    .onChange(of: weightText) { _, new in
-                        let s = new.sanitizedDecimal
-                        if s != new { weightText = s }
-                    }
-                Picker("Karat", selection: $karat) {
-                    ForEach(Zakat.karats, id: \.self) { Text("\($0)K") }
-                }
+    private func decimalField(_ title: LocalizedStringKey, text: Binding<String>) -> some View {
+        TextField(title, text: text)
+            .keyboardType(.decimalPad)
+            .onChange(of: text.wrappedValue) { _, new in
+                let s = new.sanitizedDecimal
+                if s != new { text.wrappedValue = s }
             }
+    }
 
-            if !items.isEmpty {
-                Section {
-                    DisclosureGroup(isExpanded: $walletListExpanded) {
-                        walletRows
-                    } label: {
-                        Text("Add from Gold Wallet")
-                    }
-                }
-            }
-
-            GoldPriceSection()
-
-            if totalPureGrams > 0 {
-                Section("Result") {
-                    LabeledContent("Total weight") {
-                        Text("\(totalWeightGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
-                    }
-                    LabeledContent("Pure gold equivalent") {
-                        Text("\(totalPureGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
-                    }
-                    if let totalValue {
-                        LabeledContent("Gold value", value: totalValue.formatted(.currency(code: currencyCode)))
-                    }
-                    LabeledContent("Nisab (85g pure gold)") {
-                        Text(aboveNisab ? "Above nisab" : "Below nisab")
-                            .foregroundStyle(aboveNisab ? Color.green : .red)
-                    }
-                    if let zakatGrams {
-                        LabeledContent("Zakat due (2.5%)") {
-                            VStack(alignment: .trailing, spacing: 2) {
-                                Text("\(zakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
-                                    .bold()
-                                    .foregroundStyle(.orange)
-                                if let zakatDue {
-                                    Text(zakatDue.formatted(.currency(code: currencyCode)))
-                                        .bold()
-                                        .foregroundStyle(.orange)
-                                }
-                            }
-                        }
-                        if price24k == nil {
-                            Text("Enter today's gold price to value your zakat in currency.")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                    } else {
-                        Text("No zakat due")
-                            .foregroundStyle(.secondary)
-                    }
-                }
-
-                Section {
-                    Text("Zakat is due when your pure gold reaches the nisab (85g) and has been held for one lunar year (hawl).")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
+    private func karatPicker(_ title: LocalizedStringKey) -> some View {
+        Picker(title, selection: $karat) {
+            ForEach(Zakat.karats, id: \.self) { Text("\($0)K") }
         }
     }
 }

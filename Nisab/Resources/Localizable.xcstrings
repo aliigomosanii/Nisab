@@ -130,22 +130,6 @@
         }
       }
     },
-    "Calculator": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الحاسبة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کیلکولیٹر"
-          }
-        }
-      }
-    },
     "Gold": {
       "localizations": {
         "ar": {
@@ -222,22 +206,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "نتیجہ"
-          }
-        }
-      }
-    },
-    "Add from Gold Wallet": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الإضافة من محفظة الذهب"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "گولڈ والٹ سے شامل کریں"
           }
         }
       }
@@ -1278,6 +1246,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "اپنے زیورات شامل کرنے کے لیے + دبائیں"
+          }
+        }
+      }
+    },
+    "Zakat Calculator": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حاسبة الزكاة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ کیلکولیٹر"
+          }
+        }
+      }
+    },
+    "Add from Jewelry Wallet": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإضافة من محفظة المجوهرات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زیورات کے بٹوے سے شامل کریں"
+          }
+        }
+      }
+    },
+    "Silver value": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيمة الفضة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چاندی کی مالیت"
           }
         }
       }

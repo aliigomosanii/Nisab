@@ -7,7 +7,7 @@ private enum ZakatMode: String, CaseIterable, Identifiable {
     var title: LocalizedStringKey {
         switch self {
         case .wallet: "Jewelry Wallet"
-        case .calculator: "Calculator"
+        case .calculator: "Zakat Calculator"
         }
     }
 }
