@@ -5,9 +5,9 @@
     "CFBundleDisplayName" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Nisab" } },
-        "ar" : { "stringUnit" : { "state" : "translated", "value" : "نصاب" } },
-        "ur" : { "stringUnit" : { "state" : "translated", "value" : "نصاب" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tejoury" } },
+        "ar" : { "stringUnit" : { "state" : "translated", "value" : "تجوري" } },
+        "ur" : { "stringUnit" : { "state" : "translated", "value" : "تجوري" } }
       }
     }
   }

@@ -642,22 +642,6 @@
         }
       }
     },
-    "Nisab": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نصاب"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نصاب"
-          }
-        }
-      }
-    },
     "Settings": {
       "localizations": {
         "ar": {
@@ -1870,6 +1854,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "زکوٰۃ ادا ہو چکی — فی الحال کچھ واجب نہیں۔"
+          }
+        }
+      }
+    },
+    "Tejoury": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجوري"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجوري"
           }
         }
       }

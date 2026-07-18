@@ -73,7 +73,7 @@ struct HomeView: View {
                 .padding()
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("Nisab")
+            .navigationTitle("Tejoury")
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
             }

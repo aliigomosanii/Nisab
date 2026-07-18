@@ -15,7 +15,7 @@ targets:
     info:
       path: Nisab/Info.plist
       properties:
-        CFBundleDisplayName: Nisab
+        CFBundleDisplayName: Tejoury
         CFBundleShortVersionString: "0.1.0"
         CFBundleVersion: "1"
         CFBundleLocalizations: [en, ar, ur]

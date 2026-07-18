@@ -1,4 +1,4 @@
-# Nisab (نصاب)
+# Tejoury (تجوري)
 
 An iOS app for calculating gold zakat — a quick calculator plus a Gold
 Wallet that tracks your owned gold (weight, karat, purchase date and
