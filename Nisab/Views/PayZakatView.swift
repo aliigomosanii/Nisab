@@ -56,6 +56,13 @@ struct PayZakatView: View {
         return calendar.date(from: comps) ?? .distantFuture
     }
 
+    /// Every recorded payment across all items, newest first.
+    private var pastPayments: [(item: GoldItem, date: Date)] {
+        allItems
+            .flatMap { item in item.paymentHistory.map { (item: item, date: $0) } }
+            .sorted { $0.date > $1.date }
+    }
+
     /// Items with their next due date (nil = due now), soonest first,
     /// limited to the end of next Hijri year.
     private var upcomingDues: [(item: GoldItem, due: Date?)] {
@@ -176,6 +183,26 @@ struct PayZakatView: View {
                         Text("Shows dues until the end of next Hijri year.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                    }
+                }
+
+                if !pastPayments.isEmpty {
+                    Section("Zakat Payments") {
+                        ForEach(Array(pastPayments.enumerated()), id: \.offset) { _, entry in
+                            HStack {
+                                Label {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(entry.date.dualCalendarString)
+                                        Text(entry.item.name.isEmpty ? entry.item.summaryLine : entry.item.name)
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                } icon: {
+                                    Image(systemName: "checkmark.seal.fill")
+                                        .foregroundStyle(.green)
+                                }
+                            }
+                        }
                     }
                 }
             }
