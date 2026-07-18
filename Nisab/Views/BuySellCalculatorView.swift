@@ -135,6 +135,31 @@ struct BuySellCalculatorView: View {
         return selectedPurchaseTotal - selectedSaleValue
     }
 
+    /// Metal value on the purchase day — only when every selected item
+    /// recorded its purchase-day metal price.
+    private var metalValueAtPurchase: Decimal? {
+        guard !selectedItems.isEmpty,
+              selectedItems.allSatisfy({ $0.purchaseMetalPricePerGram != nil }) else {
+            return nil
+        }
+        return selectedItems.reduce(0) { sum, item in
+            let grams = item.material == .silver ? item.silverGrams : item.pureGoldGrams
+            return sum + grams * (item.purchaseMetalPricePerGram ?? 0)
+        }
+    }
+
+    /// What was paid above the metal value at purchase: manufacturing,
+    /// VAT, and brand markup.
+    private var manufacturingComponent: Decimal? {
+        metalValueAtPurchase.map { selectedPurchaseTotal - $0 }
+    }
+
+    /// Positive = the metal price dropped since purchase.
+    private var marketChange: Decimal? {
+        guard let metalValueAtPurchase, let selectedSaleValue else { return nil }
+        return metalValueAtPurchase - selectedSaleValue
+    }
+
     var body: some View {
         Form {
             Section {
@@ -228,8 +253,18 @@ struct BuySellCalculatorView: View {
                         }
                         if let approximateLoss {
                             LabeledContent("Total purchase price", value: selectedPurchaseTotal.formatted(.currency(code: currencyCode)))
+                            if let manufacturingComponent, let marketChange {
+                                LabeledContent("Manufacturing & markup") {
+                                    Text(manufacturingComponent.formatted(.currency(code: currencyCode)))
+                                        .foregroundStyle(manufacturingComponent > 0 ? .red : .secondary)
+                                }
+                                LabeledContent("Market change") {
+                                    Text((-marketChange).formatted(.currency(code: currencyCode)))
+                                        .foregroundStyle(marketChange > 0 ? .red : (marketChange < 0 ? .green : .secondary))
+                                }
+                            }
                             if approximateLoss >= 0 {
-                                LabeledContent("Manufacturing loss") {
+                                LabeledContent("Loss vs. metal value") {
                                     Text(approximateLoss.formatted(.currency(code: currencyCode)))
                                         .bold()
                                         .foregroundStyle(.red)
@@ -249,9 +284,15 @@ struct BuySellCalculatorView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         if approximateLoss != nil {
-                            Text("The loss is roughly the manufacturing charge compared with the metal value at today's price.")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                            if manufacturingComponent != nil {
+                                Text("Manufacturing & markup includes making charges, VAT, and any brand margin paid at purchase.")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            } else {
+                                Text("Add the metal price at purchase on each item to split this loss into manufacturing and market change.")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
                         }
                     }
                 }

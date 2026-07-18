@@ -37,6 +37,10 @@ final class GoldItem {
     var diamondCarat: Decimal?
     var purchaseDate: Date
     var purchasePrice: Decimal
+    /// Pure-metal price per gram on the purchase day (24k for gold items,
+    /// silver spot for silver). Lets selling estimates split the loss into
+    /// manufacturing/markup vs. market movement.
+    var purchaseMetalPricePerGram: Decimal?
     var currencyCode: String
     /// Invoice photo; stored outside the database file.
     @Attribute(.externalStorage) var invoiceImageData: Data?
@@ -132,6 +136,7 @@ final class GoldItem {
         diamondCarat: Decimal? = nil,
         purchaseDate: Date,
         purchasePrice: Decimal,
+        purchaseMetalPricePerGram: Decimal? = nil,
         currencyCode: String = "SAR",
         invoiceImageData: Data? = nil,
         certificateImageData: Data? = nil,
@@ -147,6 +152,7 @@ final class GoldItem {
         self.diamondCarat = diamondCarat
         self.purchaseDate = purchaseDate
         self.purchasePrice = purchasePrice
+        self.purchaseMetalPricePerGram = purchaseMetalPricePerGram
         self.currencyCode = currencyCode
         self.invoiceImageData = invoiceImageData
         self.certificateImageData = certificateImageData

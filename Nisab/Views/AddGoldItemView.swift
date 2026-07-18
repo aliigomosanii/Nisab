@@ -13,6 +13,7 @@ struct AddGoldItemView: View {
     @State private var karat = 24
     @State private var purchaseDate = Date.now
     @State private var priceText = ""
+    @State private var purchaseMetalPriceText = ""
     @State private var currencyCode = "SAR"
     @State private var note = ""
     @State private var itemPickerItem: PhotosPickerItem?
@@ -58,6 +59,12 @@ struct AddGoldItemView: View {
 
                 Section("Purchase Price") {
                     decimalField("Purchase Price", text: $priceText)
+                    decimalField(
+                        material == .silver
+                            ? "Silver price at purchase (per gram)"
+                            : "Gold price at purchase (24k, per gram)",
+                        text: $purchaseMetalPriceText
+                    )
                     Picker("Currency", selection: $currencyCode) {
                         ForEach(Self.currencies, id: \.self) { Text($0) }
                     }
@@ -161,6 +168,7 @@ struct AddGoldItemView: View {
             karat: karat,
             purchaseDate: purchaseDate,
             purchasePrice: price ?? 0,
+            purchaseMetalPricePerGram: Decimal(string: purchaseMetalPriceText),
             currencyCode: currencyCode,
             invoiceImageData: invoiceData,
             itemImageData: itemData,

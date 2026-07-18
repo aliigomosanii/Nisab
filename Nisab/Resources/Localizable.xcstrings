@@ -1586,22 +1586,6 @@
         }
       }
     },
-    "Manufacturing loss": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خسارة المصنعية"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "بنوائی کا نقصان"
-          }
-        }
-      }
-    },
     "Select items from your wallet to see the manufacturing loss versus their purchase price.": {
       "localizations": {
         "ar": {
@@ -1682,18 +1666,130 @@
         }
       }
     },
-    "The loss is roughly the manufacturing charge compared with the metal value at today's price.": {
+    "Gold price at purchase (24k, per gram)": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الخسارة تقريبًا هي أجرة المصنعية مقارنةً بقيمة المعدن بسعر اليوم."
+            "value": "سعر الذهب عند الشراء (عيار ٢٤، للغرام)"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "نقصان تقریباً بنوائی ہے، آج کی قیمت پر دھات کی مالیت کے مقابلے میں۔"
+            "value": "خریداری کے وقت سونے کی قیمت (24 کیرٹ، فی گرام)"
+          }
+        }
+      }
+    },
+    "Silver price at purchase (per gram)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر الفضة عند الشراء (للغرام)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خریداری کے وقت چاندی کی قیمت (فی گرام)"
+          }
+        }
+      }
+    },
+    "Used to split selling losses into manufacturing and market change.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُستخدم لتقسيم خسارة البيع إلى مصنعية وتغيّر سعر."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فروخت کے نقصان کو بنوائی اور قیمت کی تبدیلی میں تقسیم کرنے کے لیے۔"
+          }
+        }
+      }
+    },
+    "Manufacturing & markup": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المصنعية والهامش"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی اور مارک اپ"
+          }
+        }
+      }
+    },
+    "Market change": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تغيّر سعر المعدن"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دھات کی قیمت میں تبدیلی"
+          }
+        }
+      }
+    },
+    "Loss vs. metal value": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخسارة مقابل قيمة المعدن"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دھات کی مالیت کے مقابلے نقصان"
+          }
+        }
+      }
+    },
+    "Manufacturing & markup includes making charges, VAT, and any brand margin paid at purchase.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تشمل المصنعية والهامش أجرة الصياغة والضريبة وأي هامش للعلامة دُفع عند الشراء."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی اور مارک اپ میں بنوائی، ویٹ اور برانڈ مارجن شامل ہیں جو خریداری کے وقت ادا کیے گئے۔"
+          }
+        }
+      }
+    },
+    "Add the metal price at purchase on each item to split this loss into manufacturing and market change.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أضف سعر المعدن عند الشراء لكل قطعة لتقسيم الخسارة إلى مصنعية وتغيّر سعر."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اس نقصان کو بنوائی اور قیمت کی تبدیلی میں تقسیم کرنے کے لیے ہر چیز میں خریداری کے وقت دھات کی قیمت شامل کریں۔"
           }
         }
       }

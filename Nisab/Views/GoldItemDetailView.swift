@@ -7,6 +7,7 @@ struct GoldItemDetailView: View {
 
     let item: GoldItem
     @State private var confirmDelete = false
+    @State private var purchaseMetalPriceText = ""
 
     private var materialTitle: String {
         switch item.material {
@@ -89,6 +90,33 @@ struct GoldItemDetailView: View {
                         }
                         item.lastZakatPaidAt = item.zakatPaymentDates.max()
                     }
+                }
+            }
+
+            // Editable so older items can be backfilled for selling estimates.
+            Section {
+                TextField(
+                    item.material == .silver
+                        ? "Silver price at purchase (per gram)"
+                        : "Gold price at purchase (24k, per gram)",
+                    text: $purchaseMetalPriceText
+                )
+                .keyboardType(.decimalPad)
+                .onChange(of: purchaseMetalPriceText) { _, new in
+                    let s = new.sanitizedDecimal
+                    if s != new {
+                        purchaseMetalPriceText = s
+                    } else {
+                        item.purchaseMetalPricePerGram = Decimal(string: s)
+                    }
+                }
+                Text("Used to split selling losses into manufacturing and market change.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .onAppear {
+                if let price = item.purchaseMetalPricePerGram {
+                    purchaseMetalPriceText = "\(price)"
                 }
             }
 
