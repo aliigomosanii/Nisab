@@ -1,17 +1,31 @@
 import SwiftUI
 import SwiftData
 
-/// Records a zakat payment for selected gold items, exempting them
-/// from zakat until one Hijri year after the payment date.
+private enum ZakatSheetTab: String, CaseIterable, Identifiable {
+    case pay, schedule, history
+    var id: String { rawValue }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .pay: "Pay"
+        case .schedule: "Schedule"
+        case .history: "History"
+        }
+    }
+}
+
+/// Records a zakat payment for selected jewelry items, and doubles as the
+/// zakat dashboard: upcoming dues and full payment history.
 struct PayZakatView: View {
     @Environment(\.dismiss) private var dismiss
 
     /// Items eligible for payment (not currently exempt).
     let items: [GoldItem]
 
-    /// All items (paid ones included) for the upcoming-dates schedule.
+    /// All items (paid ones included) for the schedule and history.
     @Query(sort: \GoldItem.purchaseDate) private var allItems: [GoldItem]
 
+    @State private var tab: ZakatSheetTab = .pay
     @State private var selectedIDs: Set<UUID>
     @State private var paymentDate = Date.now
     @AppStorage("goldPrice24kText") private var priceText = ""
@@ -21,6 +35,8 @@ struct PayZakatView: View {
         self.items = items
         _selectedIDs = State(initialValue: Set(items.map(\.id)))
     }
+
+    // MARK: - Pay computation
 
     private var selectedItems: [GoldItem] {
         items.filter { selectedIDs.contains($0.id) }
@@ -44,6 +60,12 @@ struct PayZakatView: View {
     /// its own nisab.
     private var aboveNisab: Bool { goldAboveNisab || silverAboveNisab }
 
+    private var zakatValue: Decimal? {
+        Decimal(string: priceText).map { selectedPureGrams * $0 * Zakat.rate }
+    }
+
+    // MARK: - Schedule & history
+
     /// First day of the Hijri year after next — the schedule shows dues
     /// up to the end of next year.
     private var scheduleCutoff: Date {
@@ -56,13 +78,6 @@ struct PayZakatView: View {
         return calendar.date(from: comps) ?? .distantFuture
     }
 
-    /// Every recorded payment across all items, newest first.
-    private var pastPayments: [(item: GoldItem, date: Date)] {
-        allItems
-            .flatMap { item in item.paymentHistory.map { (item: item, date: $0) } }
-            .sorted { $0.date > $1.date }
-    }
-
     /// Items with their next due date (nil = due now), soonest first,
     /// limited to the end of next Hijri year.
     private var upcomingDues: [(item: GoldItem, due: Date?)] {
@@ -72,142 +87,29 @@ struct PayZakatView: View {
             .sorted { ($0.due ?? .distantPast) < ($1.due ?? .distantPast) }
     }
 
-    private var zakatValue: Decimal? {
-        Decimal(string: priceText).map { selectedPureGrams * $0 * Zakat.rate }
+    /// Every recorded payment across all items, newest first.
+    private var pastPayments: [(item: GoldItem, date: Date)] {
+        allItems
+            .flatMap { item in item.paymentHistory.map { (item: item, date: $0) } }
+            .sorted { $0.date > $1.date }
     }
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("Gold") {
-                    if items.isEmpty {
-                        Text("All zakat is paid — nothing is currently due.")
-                            .foregroundStyle(.secondary)
-                    }
-                    ForEach(items) { item in
-                        Button {
-                            if selectedIDs.contains(item.id) {
-                                selectedIDs.remove(item.id)
-                            } else {
-                                selectedIDs.insert(item.id)
-                            }
-                        } label: {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(item.name.isEmpty ? item.summaryLine : item.name)
-                                        .foregroundStyle(.primary)
-                                    if !item.name.isEmpty {
-                                        Text(item.summaryLine)
-                                            .font(.caption)
-                                            .foregroundStyle(.secondary)
-                                    }
-                                }
-                                Spacer()
-                                Image(systemName: selectedIDs.contains(item.id)
-                                      ? "checkmark.circle.fill" : "circle")
-                                    .foregroundStyle(selectedIDs.contains(item.id) ? Color.accentColor : .secondary)
-                            }
+                Section {
+                    Picker("Mode", selection: $tab) {
+                        ForEach(ZakatSheetTab.allCases) { t in
+                            Text(t.title).tag(t)
                         }
                     }
+                    .pickerStyle(.segmented)
                 }
 
-                Section("Payment Date") {
-                    DatePicker("Payment Date", selection: $paymentDate, in: ...Date.now, displayedComponents: .date)
-                    Text(paymentDate.dualCalendarString)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-
-                if !selectedItems.isEmpty {
-                    Section("Result") {
-                        if selectedPureGrams > 0 {
-                            LabeledContent("Pure gold equivalent") {
-                                Text("\(selectedPureGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
-                            }
-                            LabeledContent("Nisab (85g pure gold)") {
-                                Text(goldAboveNisab ? "Above nisab" : "Below nisab")
-                                    .foregroundStyle(goldAboveNisab ? Color.green : .red)
-                            }
-                            if goldAboveNisab {
-                                LabeledContent("Zakat due (2.5%)") {
-                                    VStack(alignment: .trailing, spacing: 2) {
-                                        Text("\(zakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
-                                            .bold()
-                                        if let zakatValue {
-                                            Text(zakatValue.formatted(.currency(code: currencyCode)))
-                                                .bold()
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if selectedSilverGrams > 0 {
-                            LabeledContent("Total silver") {
-                                Text("\(selectedSilverGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
-                            }
-                            LabeledContent("Silver nisab (595g)") {
-                                Text(silverAboveNisab ? "Above nisab" : "Below nisab")
-                                    .foregroundStyle(silverAboveNisab ? Color.green : .red)
-                            }
-                            if silverAboveNisab {
-                                LabeledContent("Silver zakat due (2.5%)") {
-                                    Text("\(silverZakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
-                                        .bold()
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if !upcomingDues.isEmpty {
-                    Section("Upcoming zakat dates") {
-                        ForEach(upcomingDues, id: \.item.id) { entry in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(entry.item.name.isEmpty ? entry.item.summaryLine : entry.item.name)
-                                    if !entry.item.name.isEmpty {
-                                        Text(entry.item.summaryLine)
-                                            .font(.caption)
-                                            .foregroundStyle(.secondary)
-                                    }
-                                }
-                                Spacer()
-                                if let due = entry.due {
-                                    Text(due.dualCalendarString)
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                        .multilineTextAlignment(.trailing)
-                                } else {
-                                    Text("Due now")
-                                        .bold()
-                                        .foregroundStyle(.orange)
-                                }
-                            }
-                        }
-                        Text("Shows dues until the end of next Hijri year.")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-
-                if !pastPayments.isEmpty {
-                    Section("Zakat Payments") {
-                        ForEach(Array(pastPayments.enumerated()), id: \.offset) { _, entry in
-                            HStack {
-                                Label {
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text(entry.date.dualCalendarString)
-                                        Text(entry.item.name.isEmpty ? entry.item.summaryLine : entry.item.name)
-                                            .font(.caption)
-                                            .foregroundStyle(.secondary)
-                                    }
-                                } icon: {
-                                    Image(systemName: "checkmark.seal.fill")
-                                        .foregroundStyle(.green)
-                                }
-                            }
-                        }
-                    }
+                switch tab {
+                case .pay: paySections
+                case .schedule: scheduleSection
+                case .history: historySection
                 }
             }
             .navigationTitle("Record Zakat Payment")
@@ -216,9 +118,163 @@ struct PayZakatView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
                 }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") { save() }
-                        .disabled(!aboveNisab)
+                if tab == .pay {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Save") { save() }
+                            .disabled(!aboveNisab)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Sections
+
+    @ViewBuilder
+    private var paySections: some View {
+        Section("Jewelry") {
+            if items.isEmpty {
+                Text("All zakat is paid — nothing is currently due.")
+                    .foregroundStyle(.secondary)
+            }
+            ForEach(items) { item in
+                Button {
+                    if selectedIDs.contains(item.id) {
+                        selectedIDs.remove(item.id)
+                    } else {
+                        selectedIDs.insert(item.id)
+                    }
+                } label: {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(item.name.isEmpty ? item.summaryLine : item.name)
+                                .foregroundStyle(.primary)
+                            if !item.name.isEmpty {
+                                Text(item.summaryLine)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        Spacer()
+                        Image(systemName: selectedIDs.contains(item.id)
+                              ? "checkmark.circle.fill" : "circle")
+                            .foregroundStyle(selectedIDs.contains(item.id) ? Color.accentColor : .secondary)
+                    }
+                }
+            }
+        }
+
+        if !items.isEmpty {
+            Section("Payment Date") {
+                DatePicker("Payment Date", selection: $paymentDate, in: ...Date.now, displayedComponents: .date)
+                Text(paymentDate.dualCalendarString)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+
+        if !selectedItems.isEmpty {
+            Section("Result") {
+                if selectedPureGrams > 0 {
+                    LabeledContent("Pure gold equivalent") {
+                        Text("\(selectedPureGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                    }
+                    LabeledContent("Nisab (85g pure gold)") {
+                        Text(goldAboveNisab ? "Above nisab" : "Below nisab")
+                            .foregroundStyle(goldAboveNisab ? Color.green : .red)
+                    }
+                    if goldAboveNisab {
+                        LabeledContent("Zakat due (2.5%)") {
+                            VStack(alignment: .trailing, spacing: 2) {
+                                Text("\(zakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                                    .bold()
+                                if let zakatValue {
+                                    Text(zakatValue.formatted(.currency(code: currencyCode)))
+                                        .bold()
+                                }
+                            }
+                        }
+                    }
+                }
+                if selectedSilverGrams > 0 {
+                    LabeledContent("Total silver") {
+                        Text("\(selectedSilverGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                    }
+                    LabeledContent("Silver nisab (595g)") {
+                        Text(silverAboveNisab ? "Above nisab" : "Below nisab")
+                            .foregroundStyle(silverAboveNisab ? Color.green : .red)
+                    }
+                    if silverAboveNisab {
+                        LabeledContent("Silver zakat due (2.5%)") {
+                            Text("\(silverZakatGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                                .bold()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var scheduleSection: some View {
+        if upcomingDues.isEmpty {
+            Section {
+                Text("All zakat is paid — nothing is currently due.")
+                    .foregroundStyle(.secondary)
+            }
+        } else {
+            Section("Upcoming zakat dates") {
+                ForEach(upcomingDues, id: \.item.id) { entry in
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(entry.item.name.isEmpty ? entry.item.summaryLine : entry.item.name)
+                            if !entry.item.name.isEmpty {
+                                Text(entry.item.summaryLine)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        Spacer()
+                        if let due = entry.due {
+                            Text(due.dualCalendarString)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.trailing)
+                        } else {
+                            Text("Due now")
+                                .bold()
+                                .foregroundStyle(.orange)
+                        }
+                    }
+                }
+                Text("Shows dues until the end of next Hijri year.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var historySection: some View {
+        if pastPayments.isEmpty {
+            Section {
+                Text("No payments yet")
+                    .foregroundStyle(.secondary)
+            }
+        } else {
+            Section("Zakat Payments") {
+                ForEach(Array(pastPayments.enumerated()), id: \.offset) { _, entry in
+                    Label {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(entry.date.dualCalendarString)
+                            Text(entry.item.name.isEmpty ? entry.item.summaryLine : entry.item.name)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "checkmark.seal.fill")
+                            .foregroundStyle(.green)
+                    }
                 }
             }
         }

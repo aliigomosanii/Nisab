@@ -178,7 +178,7 @@ struct GoldCalculatorView: View {
 
             if goldPureGrams > 0 || silverGrams > 0 {
                 Section {
-                    Text("Zakat is due when your pure gold reaches the nisab (85g) and has been held for one lunar year (hawl).")
+                    Text("Zakat is due when your gold reaches its nisab (85g pure) or your silver reaches its nisab (595g), and has been held for one lunar year (hawl).")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

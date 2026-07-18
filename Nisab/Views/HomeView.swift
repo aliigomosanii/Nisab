@@ -1,7 +1,8 @@
 import SwiftUI
 import SwiftData
 
-/// Nisab home: personalized greeting plus a card for every feature.
+/// Tejoury home: personalized greeting plus a live dashboard card
+/// for every feature.
 struct HomeView: View {
     @Query(sort: \GoldItem.purchaseDate, order: .reverse) private var items: [GoldItem]
     @AppStorage("profileName") private var profileName = ""
@@ -9,6 +10,9 @@ struct HomeView: View {
     @State private var showingPayZakat = false
 
     private var eligible: [GoldItem] { items.filter { !$0.isZakatExempt } }
+    private var totalWeight: Decimal { items.reduce(0) { $0 + $1.weightGrams } }
+    private var anyDueNow: Bool { items.contains { $0.nextZakatDue == nil } }
+    private var nextDue: Date? { items.compactMap(\.nextZakatDue).min() }
 
     private var initials: String {
         profileName
@@ -33,7 +37,12 @@ struct HomeView: View {
                                 .navigationTitle("Jewelry Wallet")
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
-                            card("Jewelry Wallet", caption: "Your jewelry items", icon: "circle.hexagongrid.fill")
+                            card("Jewelry Wallet", caption: "Your jewelry items", icon: "circle.hexagongrid.fill") {
+                                if !items.isEmpty {
+                                    Text("\(items.count) items · \(totalWeight.formatted(.number.precision(.fractionLength(0...2)))) g")
+                                        .foregroundStyle(Color.accentColor)
+                                }
+                            }
                         }
                         .buttonStyle(.plain)
 
@@ -42,7 +51,12 @@ struct HomeView: View {
                                 .navigationTitle("Zakat Calculator")
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
-                            card("Zakat Calculator", caption: "Calculate what's due", icon: "moon.stars.fill")
+                            card("Zakat Calculator", caption: "Calculate what's due", icon: "moon.stars.fill") {
+                                if anyDueNow {
+                                    Text("Due now")
+                                        .foregroundStyle(.red)
+                                }
+                            }
                         }
                         .buttonStyle(.plain)
 
@@ -51,21 +65,24 @@ struct HomeView: View {
                                 .navigationTitle("Buy & Sell Calculator")
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
-                            card("Buy & Sell Calculator", caption: "Estimate buying and selling prices", icon: "arrow.left.arrow.right.circle.fill")
+                            card("Buy & Sell Calculator", caption: "Estimate buying and selling prices", icon: "arrow.left.arrow.right.circle.fill") {
+                                EmptyView()
+                            }
                         }
                         .buttonStyle(.plain)
 
                         Button {
                             showingPayZakat = true
                         } label: {
-                            card("Record Zakat Payment", caption: "Record a payment", icon: "checkmark.seal.fill")
-                        }
-                        .buttonStyle(.plain)
-
-                        Button {
-                            showingSettings = true
-                        } label: {
-                            card("Settings", caption: "App settings", icon: "gearshape.fill")
+                            card("Record Zakat Payment", caption: "Record a payment", icon: "checkmark.seal.fill") {
+                                if anyDueNow {
+                                    Text("Due now")
+                                        .foregroundStyle(.orange)
+                                } else if let nextDue {
+                                    Text("Next: \(nextDue.hijriString)")
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
                         }
                         .buttonStyle(.plain)
                     }
@@ -74,6 +91,16 @@ struct HomeView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Tejoury")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showingSettings = true
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    .accessibilityLabel("Settings")
+                }
+            }
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
             }
@@ -122,7 +149,12 @@ struct HomeView: View {
         }
     }
 
-    private func card(_ title: LocalizedStringKey, caption: LocalizedStringKey, icon: String) -> some View {
+    private func card(
+        _ title: LocalizedStringKey,
+        caption: LocalizedStringKey,
+        icon: String,
+        @ViewBuilder status: () -> some View
+    ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Image(systemName: icon)
                 .font(.title2)
@@ -134,9 +166,10 @@ struct HomeView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.leading)
-            Spacer(minLength: 0)
+            status()
+                .font(.caption.bold())
         }
-        .frame(maxWidth: .infinity, minHeight: 120, alignment: .topLeading)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(14)
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
     }

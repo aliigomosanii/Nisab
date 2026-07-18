@@ -18,7 +18,7 @@ struct GoldWalletView: View {
                 )
             } else {
                 List {
-                    Section("Jewelry") {
+                    Section {
                         ForEach(items) { item in
                             NavigationLink {
                                 GoldItemDetailView(item: item)
@@ -34,6 +34,10 @@ struct GoldWalletView: View {
                                 .tint(.blue)
                             }
                         }
+                    } header: {
+                        Text("Jewelry")
+                    } footer: {
+                        inventorySummary
                     }
                 }
             }
@@ -55,6 +59,22 @@ struct GoldWalletView: View {
             AddGoldItemView(editingItem: item)
         }
     }
+
+    /// Inventory totals (weights, not zakat) shown under the list.
+    private var inventorySummary: some View {
+        let gold = items.filter { $0.material != .silver }
+            .reduce(Decimal(0)) { $0 + $1.weightGrams }
+            .formatted(.number.precision(.fractionLength(0...2)))
+        let silverGrams = items.filter { $0.material == .silver }
+            .reduce(Decimal(0)) { $0 + $1.weightGrams }
+        return Group {
+            if silverGrams > 0 {
+                Text("Gold: \(gold) g · Silver: \(silverGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+            } else {
+                Text("Gold: \(gold) g")
+            }
+        }
+    }
 }
 
 private struct JewelryRow: View {
@@ -70,6 +90,15 @@ private struct JewelryRow: View {
                     .scaledToFill()
                     .frame(width: 44, height: 44)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
+            } else {
+                // Placeholder keeps row geometry consistent without a photo.
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.accentColor.opacity(0.15))
+                    .frame(width: 44, height: 44)
+                    .overlay {
+                        Image(systemName: "circle.hexagongrid.fill")
+                            .foregroundStyle(Color.accentColor)
+                    }
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.name.isEmpty ? item.summaryLine : item.name)
@@ -89,9 +118,9 @@ private struct JewelryRow: View {
             VStack(alignment: .trailing, spacing: 2) {
                 Text(item.material.title)
                     .font(.caption2.bold())
-                    .padding(.horizontal, 5)
+                    .padding(.horizontal, 6)
                     .padding(.vertical, 2)
-                    .background(Color.accentColor.opacity(0.15), in: Capsule())
+                    .background(Color.accentColor.opacity(0.2), in: Capsule())
                 Text(item.purchasePrice.formatted(.currency(code: item.currencyCode)))
                     .font(.subheadline)
                     .lineLimit(1)

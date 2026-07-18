@@ -626,22 +626,6 @@
         }
       }
     },
-    "Zakat is due when your pure gold reaches the nisab (85g) and has been held for one lunar year (hawl).": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تجب الزكاة إذا بلغ الذهب الخالص النصاب (٨٥ غرامًا) ومرّ عليه عام هجري كامل (الحول)."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زکوٰۃ اس وقت واجب ہوتی ہے جب خالص سونا نصاب (85 گرام) تک پہنچ جائے اور اس پر ایک قمری سال (حول) گزر جائے۔"
-          }
-        }
-      }
-    },
     "Settings": {
       "localizations": {
         "ar": {
@@ -1870,6 +1854,134 @@
           "stringUnit": {
             "state": "translated",
             "value": "تجوري"
+          }
+        }
+      }
+    },
+    "Pay": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دفع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ادائیگی"
+          }
+        }
+      }
+    },
+    "Schedule": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المواعيد"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شیڈول"
+          }
+        }
+      }
+    },
+    "History": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السجل"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تاریخچہ"
+          }
+        }
+      }
+    },
+    "%lld items · %@ g": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld قطعة · %@ غ"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld اشیاء · %@ گرام"
+          }
+        }
+      }
+    },
+    "Next: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التالي: %@"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اگلا: %@"
+          }
+        }
+      }
+    },
+    "Gold: %@ g": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الذهب: %@ غ"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونا: %@ گرام"
+          }
+        }
+      }
+    },
+    "Gold: %@ g · Silver: %@ g": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الذهب: %@ غ · الفضة: %@ غ"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونا: %@ گرام · چاندی: %@ گرام"
+          }
+        }
+      }
+    },
+    "Zakat is due when your gold reaches its nisab (85g pure) or your silver reaches its nisab (595g), and has been held for one lunar year (hawl).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجب الزكاة إذا بلغ الذهب الخالص نصابه (٨٥ غ) أو الفضة نصابها (٥٩٥ غ) ومرّ عليه عام هجري كامل (الحول)."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ واجب ہوتی ہے جب خالص سونا اپنے نصاب (85 گرام) یا چاندی اپنے نصاب (595 گرام) تک پہنچے اور اس پر ایک قمری سال (حول) گزر جائے۔"
           }
         }
       }
