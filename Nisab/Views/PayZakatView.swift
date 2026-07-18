@@ -80,6 +80,10 @@ struct PayZakatView: View {
         NavigationStack {
             Form {
                 Section("Gold") {
+                    if items.isEmpty {
+                        Text("All zakat is paid — nothing is currently due.")
+                            .foregroundStyle(.secondary)
+                    }
                     ForEach(items) { item in
                         Button {
                             if selectedIDs.contains(item.id) {

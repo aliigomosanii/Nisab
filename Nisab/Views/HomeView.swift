@@ -61,8 +61,6 @@ struct HomeView: View {
                             card("Record Zakat Payment", caption: "Record a payment", icon: "checkmark.seal.fill")
                         }
                         .buttonStyle(.plain)
-                        .disabled(eligible.isEmpty)
-                        .opacity(eligible.isEmpty ? 0.5 : 1)
 
                         Button {
                             showingSettings = true

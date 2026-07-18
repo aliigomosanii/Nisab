@@ -1857,6 +1857,22 @@
           }
         }
       }
+    },
+    "All zakat is paid — nothing is currently due.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم دفع الزكاة — لا يوجد مستحق حاليًا."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ ادا ہو چکی — فی الحال کچھ واجب نہیں۔"
+          }
+        }
+      }
     }
   }
 }

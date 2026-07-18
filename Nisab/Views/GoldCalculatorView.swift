@@ -168,12 +168,10 @@ struct GoldCalculatorView: View {
                             Text("\(exemptItems.reduce(0) { $0 + $1.pureGoldGrams }.formatted(.number.precision(.fractionLength(0...2)))) g")
                         }
                     }
-                    if !walletItems.isEmpty {
-                        Button {
-                            showingPayZakat = true
-                        } label: {
-                            Label("Record Zakat Payment", systemImage: "checkmark.seal")
-                        }
+                    Button {
+                        showingPayZakat = true
+                    } label: {
+                        Label("Record Zakat Payment", systemImage: "checkmark.seal")
                     }
                 }
             }
