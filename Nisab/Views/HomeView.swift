@@ -11,7 +11,17 @@ struct HomeView: View {
 
     private var eligible: [GoldItem] { items.filter { !$0.isZakatExempt } }
     private var totalWeight: Decimal { items.reduce(0) { $0 + $1.weightGrams } }
-    private var anyDueNow: Bool { items.contains { $0.nextZakatDue == nil } }
+
+    /// Zakat is only ever due once holdings reach a nisab.
+    private var nisabReached: Bool {
+        let goldPure = eligible.reduce(Decimal(0)) { $0 + $1.pureGoldGrams }
+        let silver = eligible.reduce(Decimal(0)) { $0 + $1.silverGrams }
+        return goldPure >= Zakat.nisabGrams || silver >= Zakat.silverNisabGrams
+    }
+
+    private var anyDueNow: Bool {
+        nisabReached && items.contains { $0.nextZakatDue == nil }
+    }
     private var nextDue: Date? { items.compactMap(\.nextZakatDue).min() }
 
     private var initials: String {
@@ -54,7 +64,7 @@ struct HomeView: View {
                             card("Zakat Calculator", caption: "Calculate what's due", icon: "moon.stars.fill") {
                                 if anyDueNow {
                                     Text("Due now")
-                                        .foregroundStyle(.red)
+                                        .foregroundStyle(.orange)
                                 }
                             }
                         }

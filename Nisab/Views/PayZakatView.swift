@@ -87,6 +87,14 @@ struct PayZakatView: View {
             .sorted { ($0.due ?? .distantPast) < ($1.due ?? .distantPast) }
     }
 
+    /// Zakat is only ever due once unpaid holdings reach a nisab.
+    private var nisabReached: Bool {
+        let eligibleItems = allItems.filter { !$0.isZakatExempt }
+        let goldPure = eligibleItems.reduce(Decimal(0)) { $0 + $1.pureGoldGrams }
+        let silver = eligibleItems.reduce(Decimal(0)) { $0 + $1.silverGrams }
+        return goldPure >= Zakat.nisabGrams || silver >= Zakat.silverNisabGrams
+    }
+
     /// Every recorded payment across all items, newest first.
     private var pastPayments: [(item: GoldItem, date: Date)] {
         allItems
@@ -240,10 +248,14 @@ struct PayZakatView: View {
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                                 .multilineTextAlignment(.trailing)
-                        } else {
+                        } else if nisabReached {
                             Text("Due now")
                                 .bold()
                                 .foregroundStyle(.orange)
+                        } else {
+                            Text("Below nisab")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }
