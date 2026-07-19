@@ -2289,6 +2289,54 @@
           }
         }
       }
+    },
+    "Take Photo": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التقاط صورة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصویر لیں"
+          }
+        }
+      }
+    },
+    "Choose from Library": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختيار من الصور"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لائبریری سے منتخب کریں"
+          }
+        }
+      }
+    },
+    "Choose File (photo or PDF)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختيار ملف (صورة أو PDF)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فائل منتخب کریں (تصویر یا PDF)"
+          }
+        }
+      }
     }
   }
 }

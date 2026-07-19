@@ -28,6 +28,8 @@
 	<string>1</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Take photos of your jewelry and invoices.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Unlock Tejoury with Face ID.</string>
 	<key>UILaunchScreen</key>

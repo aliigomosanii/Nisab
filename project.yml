@@ -23,6 +23,7 @@ targets:
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         ITSAppUsesNonExemptEncryption: false
         NSFaceIDUsageDescription: Unlock Tejoury with Face ID.
+        NSCameraUsageDescription: Take photos of your jewelry and invoices.
     settings:
       base:
         SWIFT_VERSION: "5.9"
