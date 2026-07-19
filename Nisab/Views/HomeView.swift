@@ -201,11 +201,15 @@ struct HomeView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.leading)
+            Spacer(minLength: 0)
             status()
                 .font(.caption.bold())
         }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(14)
+        // Fixed height keeps all four cards identical; the spacer pins
+        // the live status line to the bottom edge.
+        .frame(height: 160)
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
     }
 }
