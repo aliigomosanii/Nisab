@@ -12,7 +12,6 @@ struct GoldCalculatorView: View {
     @State private var karat = 24
     @State private var selectedIDs: Set<UUID> = []
     @State private var walletListExpanded = false
-    @State private var showingPayZakat = false
     @AppStorage("goldPrice24kText") private var priceText = ""
     @AppStorage("silverPriceText") private var silverPriceText = ""
     @AppStorage("goldPriceCurrency") private var currencyCode = "SAR"
@@ -161,17 +160,10 @@ struct GoldCalculatorView: View {
                 }
             }
 
-            if !walletItems.isEmpty || !exemptItems.isEmpty {
+            if !exemptItems.isEmpty {
                 Section {
-                    if !exemptItems.isEmpty {
-                        LabeledContent("Excluded (zakat paid)") {
-                            Text("\(exemptItems.reduce(0) { $0 + $1.pureGoldGrams }.formatted(.number.precision(.fractionLength(0...2)))) g")
-                        }
-                    }
-                    Button {
-                        showingPayZakat = true
-                    } label: {
-                        Label("Record Zakat Payment", systemImage: "checkmark.seal")
+                    LabeledContent("Excluded (zakat paid)") {
+                        Text("\(exemptItems.reduce(0) { $0 + $1.pureGoldGrams }.formatted(.number.precision(.fractionLength(0...2)))) g")
                     }
                 }
             }
@@ -183,9 +175,6 @@ struct GoldCalculatorView: View {
                         .foregroundStyle(.secondary)
                 }
             }
-        }
-        .sheet(isPresented: $showingPayZakat) {
-            PayZakatView(items: walletItems)
         }
     }
 
