@@ -1,7 +1,8 @@
 import Foundation
 
-/// Fetches the current gold spot price from keyless public feeds:
-/// gold-api.com for XAU/USD, converted via open.er-api.com FX rates.
+/// Fetches the current gold price. Primary source for SAR is the Saudi
+/// market feed at ounce.com.sa; fallback (and other currencies) uses
+/// gold-api.com XAU/USD converted via open.er-api.com FX rates.
 /// Read-only; the manual price field remains the fallback and source
 /// of truth — a fetch only pre-fills it.
 enum GoldPriceService {
@@ -9,7 +10,30 @@ enum GoldPriceService {
 
     /// Today's 24k gold price per gram in the given currency, rounded to 2 places.
     static func pricePerGram24k(currency: String) async -> Decimal? {
-        await pricePerGram(symbol: "XAU", currency: currency)
+        if currency == "SAR", let saudi = await ouncePrice24kSAR() {
+            return saudi
+        }
+        return await pricePerGram(symbol: "XAU", currency: currency)
+    }
+
+    /// Saudi 24k price per gram in SAR from ounce.com.sa.
+    private static func ouncePrice24kSAR() async -> Decimal? {
+        struct Payload: Decodable {
+            struct Prices: Decodable {
+                let k24: Double
+                enum CodingKeys: String, CodingKey { case k24 = "24k" }
+            }
+            let success: Bool
+            let prices: Prices
+        }
+        guard let payload = await fetchJSON(Payload.self, from: "https://ounce.com.sa/wp-json/sagold/v1/prices"),
+              payload.success, payload.prices.k24 > 0 else {
+            return nil
+        }
+        var value = Decimal(payload.prices.k24)
+        var rounded = Decimal()
+        NSDecimalRound(&rounded, &value, 2, .plain)
+        return rounded
     }
 
     /// Today's silver price per gram in the given currency, rounded to 2 places.
