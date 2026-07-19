@@ -12,9 +12,15 @@ struct GoldPriceSection: View {
     @AppStorage("silverPriceText") private var silverPriceText = ""
     @AppStorage("goldPriceCurrency") private var currencyCode = "SAR"
     @AppStorage("goldPriceUpdatedAt") private var updatedAtTimestamp = 0.0
+    /// True while the stored price came from a fetch (safe to auto-refresh).
+    @AppStorage("goldPriceWasFetched") private var wasFetched = false
 
     @State private var fetching = false
     @State private var fetchFailed = false
+    @State private var settingProgrammatically = false
+
+    /// Fetched prices go stale after this long and refresh on appear.
+    private let staleAfter: TimeInterval = 15 * 60
 
     private static let currencies = ["SAR", "USD", "AED", "PKR", "INR", "EGP", "EUR"]
 
@@ -26,6 +32,8 @@ struct GoldPriceSection: View {
                     .onChange(of: priceText) { _, new in
                         let s = new.sanitizedDecimal
                         if s != new { priceText = s }
+                        // A hand-typed price must never be auto-overwritten.
+                        if !settingProgrammatically { wasFetched = false }
                     }
             }
             if includeSilver {
@@ -66,8 +74,10 @@ struct GoldPriceSection: View {
             }
         }
         .task {
-            // Pre-fill only when empty so a manual price is never clobbered.
-            if priceText.isEmpty {
+            // Fetch when empty, or refresh a fetched price that's gone stale.
+            // Hand-typed prices (wasFetched == false) are never clobbered.
+            let stale = Date.now.timeIntervalSince1970 - updatedAtTimestamp > staleAfter
+            if priceText.isEmpty || (wasFetched && stale) {
                 await fetch()
             }
         }
@@ -79,10 +89,13 @@ struct GoldPriceSection: View {
         fetchFailed = false
         defer { fetching = false }
 
+        settingProgrammatically = true
+        defer { settingProgrammatically = false }
         if includeGold {
             if let price = await GoldPriceService.pricePerGram24k(currency: currencyCode) {
                 priceText = "\(price)"
                 updatedAtTimestamp = Date.now.timeIntervalSince1970
+                wasFetched = true
             } else {
                 fetchFailed = true
             }
