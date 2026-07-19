@@ -28,6 +28,8 @@ struct PayZakatView: View {
     @State private var tab: ZakatSheetTab = .pay
     @State private var selectedIDs: Set<UUID>
     @State private var paymentDate = Date.now
+    /// Payment date pending delete confirmation in the History tab.
+    @State private var deleteCandidate: Date?
     @AppStorage("goldPrice24kText") private var priceText = ""
     @AppStorage("goldPriceCurrency") private var currencyCode = "SAR"
 
@@ -95,10 +97,17 @@ struct PayZakatView: View {
             .sorted { ($0.due ?? .distantFuture) < ($1.due ?? .distantFuture) }
     }
 
-    /// Every recorded payment across all items, newest first.
-    private var pastPayments: [(item: GoldItem, date: Date)] {
-        allItems
-            .flatMap { item in item.paymentHistory.map { (item: item, date: $0) } }
+    /// Recorded payments grouped by date (items paid together share one
+    /// exact date), newest first.
+    private var pastPayments: [(date: Date, items: [GoldItem])] {
+        var groups: [Date: [GoldItem]] = [:]
+        for item in allItems {
+            for date in item.paymentHistory {
+                groups[date, default: []].append(item)
+            }
+        }
+        return groups
+            .map { (date: $0.key, items: $0.value) }
             .sorted { $0.date > $1.date }
     }
 
@@ -276,20 +285,62 @@ struct PayZakatView: View {
                     .foregroundStyle(.secondary)
             }
         } else {
-            Section("Zakat Payments") {
-                ForEach(Array(pastPayments.enumerated()), id: \.offset) { _, entry in
+            Section {
+                ForEach(pastPayments, id: \.date) { entry in
                     Label {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(entry.date.dualCalendarString)
-                            Text(entry.item.name.isEmpty ? entry.item.summaryLine : entry.item.name)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                            ForEach(entry.items) { item in
+                                Text(item.name.isEmpty ? item.summaryLine : item.name)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
                         }
                     } icon: {
                         Image(systemName: "checkmark.seal.fill")
                             .foregroundStyle(.green)
                     }
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            deleteCandidate = entry.date
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
                 }
+            } header: {
+                Text("Zakat Payments")
+            } footer: {
+                Text("Swipe a payment to remove it. The payment is removed from every item it covered.")
+            }
+            .confirmationDialog(
+                "Remove this zakat payment?",
+                isPresented: Binding(
+                    get: { deleteCandidate != nil },
+                    set: { if !$0 { deleteCandidate = nil } }
+                ),
+                titleVisibility: .visible
+            ) {
+                Button("Remove Payment", role: .destructive) {
+                    if let date = deleteCandidate {
+                        deletePayment(on: date)
+                    }
+                    deleteCandidate = nil
+                }
+                Button("Cancel", role: .cancel) { deleteCandidate = nil }
+            } message: {
+                Text("The payment will be removed from every item it covered, and their zakat becomes due again.")
+            }
+        }
+    }
+
+    /// Removes the payment from every item that shares this exact date and
+    /// restores each item's previous payment state.
+    private func deletePayment(on date: Date) {
+        for item in allItems {
+            item.zakatPaymentDates.removeAll { $0 == date }
+            if item.lastZakatPaidAt == date {
+                item.lastZakatPaidAt = item.zakatPaymentDates.max()
             }
         }
     }

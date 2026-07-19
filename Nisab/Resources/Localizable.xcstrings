@@ -1521,6 +1521,22 @@
         }
       }
     },
+    "Remove Payment": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة الدفعة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ادائیگی ہٹائیں"
+          }
+        }
+      }
+    },
     "Remove Photo": {
       "localizations": {
         "ar": {
@@ -1533,6 +1549,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "تصویر ہٹائیں"
+          }
+        }
+      }
+    },
+    "Remove this zakat payment?": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هل تريد إزالة دفعة الزكاة هذه؟"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کیا آپ یہ زکوٰۃ کی ادائیگی ہٹانا چاہتے ہیں؟"
           }
         }
       }
@@ -1857,6 +1889,22 @@
         }
       }
     },
+    "Swipe a payment to remove it. The payment is removed from every item it covered.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسحب دفعة لإزالتها. تتم إزالة الدفعة من جميع القطع التي شملتها."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کسی ادائیگی کو ہٹانے کے لیے اسے سوائپ کریں۔ ادائیگی اس میں شامل تمام اشیاء سے ہٹا دی جاتی ہے۔"
+          }
+        }
+      }
+    },
     "System": {
       "localizations": {
         "ar": {
@@ -1933,6 +1981,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "نئی زبان لاگو کرنے کے لیے ایپ بند ہو جائے گی۔ جاری رکھنے کے لیے دوبارہ کھولیں۔"
+          }
+        }
+      }
+    },
+    "The payment will be removed from every item it covered, and their zakat becomes due again.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستتم إزالة الدفعة من جميع القطع التي شملتها، وتعود زكاتها مستحقة من جديد."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یہ ادائیگی اس میں شامل تمام اشیاء سے ہٹا دی جائے گی اور ان کی زکوٰۃ دوبارہ واجب ہو جائے گی۔"
           }
         }
       }
