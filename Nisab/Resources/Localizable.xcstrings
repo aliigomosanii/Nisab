@@ -2273,6 +2273,22 @@
           }
         }
       }
+    },
+    "Seller": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البائع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بیچنے والا"
+          }
+        }
+      }
     }
   }
 }

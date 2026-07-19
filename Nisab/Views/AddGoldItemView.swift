@@ -14,6 +14,7 @@ struct AddGoldItemView: View {
     /// Gold/silver weight in grams; for diamond items, the gold setting weight.
     @State private var weightText = ""
     @State private var karat = 24
+    @State private var sellerName = ""
     @State private var purchaseDate = Date.now
     @State private var priceText = ""
     @State private var purchaseMetalPriceText = ""
@@ -63,6 +64,7 @@ struct AddGoldItemView: View {
                 }
 
                 Section("Purchase Price") {
+                    TextField("Seller", text: $sellerName)
                     decimalField("Purchase Price", text: $priceText)
                     decimalField(
                         material == .silver
@@ -102,6 +104,7 @@ struct AddGoldItemView: View {
                 if let item = editingItem {
                     material = item.material
                     name = item.name
+                    sellerName = item.sellerName
                     weightText = "\(item.weightGrams)"
                     karat = item.karat
                     purchaseDate = item.purchaseDate
@@ -211,6 +214,7 @@ struct AddGoldItemView: View {
         let trimmedNote = note.trimmingCharacters(in: .whitespacesAndNewlines)
         if let item = editingItem {
             item.name = name.trimmingCharacters(in: .whitespaces)
+            item.sellerName = sellerName.trimmingCharacters(in: .whitespaces)
             item.material = material
             item.weightGrams = weight ?? 0
             item.karat = karat
@@ -227,6 +231,7 @@ struct AddGoldItemView: View {
                 material: material,
                 weightGrams: weight ?? 0,
                 karat: karat,
+                sellerName: sellerName.trimmingCharacters(in: .whitespaces),
                 purchaseDate: purchaseDate,
                 purchasePrice: price ?? 0,
                 purchaseMetalPricePerGram: Decimal(string: purchaseMetalPriceText),

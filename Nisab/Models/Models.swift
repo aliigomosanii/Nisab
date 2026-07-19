@@ -35,6 +35,8 @@ final class GoldItem {
     var karat: Int
     /// Diamond stone weight in carats (diamond items only).
     var diamondCarat: Decimal?
+    /// Where/from whom the item was bought.
+    var sellerName: String = ""
     var purchaseDate: Date
     var purchasePrice: Decimal
     /// Pure-metal price per gram on the purchase day (24k for gold items,
@@ -134,6 +136,7 @@ final class GoldItem {
         weightGrams: Decimal,
         karat: Int,
         diamondCarat: Decimal? = nil,
+        sellerName: String = "",
         purchaseDate: Date,
         purchasePrice: Decimal,
         purchaseMetalPricePerGram: Decimal? = nil,
@@ -150,6 +153,7 @@ final class GoldItem {
         self.weightGrams = weightGrams
         self.karat = karat
         self.diamondCarat = diamondCarat
+        self.sellerName = sellerName
         self.purchaseDate = purchaseDate
         self.purchasePrice = purchasePrice
         self.purchaseMetalPricePerGram = purchaseMetalPricePerGram

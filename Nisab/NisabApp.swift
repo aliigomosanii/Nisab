@@ -38,6 +38,7 @@ private struct RootGateView: View {
                 }
             }
         }
+        .onAppear { KeyboardDismisser.install() }
         .onChange(of: scenePhase) { _, phase in
             switch phase {
             case .background:

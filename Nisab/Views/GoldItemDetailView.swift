@@ -59,37 +59,13 @@ struct GoldItemDetailView: View {
                         Text("\(item.pureGoldGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
                     }
                 }
+                if !item.sellerName.isEmpty {
+                    LabeledContent("Seller", value: item.sellerName)
+                }
                 LabeledContent("Purchase Date", value: item.purchaseDate.dualCalendarString)
                 LabeledContent("Purchase Price", value: item.purchasePrice.formatted(.currency(code: item.currencyCode)))
                 if let note = item.note, !note.isEmpty {
                     LabeledContent("Note", value: note)
-                }
-            }
-
-            Section("Zakat Payments") {
-                LabeledContent("Next payment") {
-                    if let next = item.nextZakatDue {
-                        Text(next.dualCalendarString)
-                            .foregroundStyle(item.isZakatExempt ? .green : .primary)
-                            .multilineTextAlignment(.trailing)
-                    } else {
-                        Text("Due now")
-                            .foregroundStyle(.orange)
-                            .bold()
-                    }
-                }
-                if item.paymentHistory.isEmpty {
-                    Text("No payments yet")
-                        .foregroundStyle(.secondary)
-                } else {
-                    ForEach(item.paymentHistory, id: \.self) { date in
-                        Label {
-                            Text(date.dualCalendarString)
-                        } icon: {
-                            Image(systemName: "checkmark.seal.fill")
-                                .foregroundStyle(.green)
-                        }
-                    }
                 }
             }
 
