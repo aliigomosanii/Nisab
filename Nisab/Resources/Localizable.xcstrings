@@ -897,6 +897,22 @@
         }
       }
     },
+    "Gold price (%lldK)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر الذهب (عيار %lld)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونے کی قیمت (%lld قیراط)"
+          }
+        }
+      }
+    },
     "Gold price at purchase (24k, per gram)": {
       "localizations": {
         "ar": {

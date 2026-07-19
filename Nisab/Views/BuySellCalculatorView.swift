@@ -195,7 +195,7 @@ struct BuySellCalculatorView: View {
                     }
                 }
 
-                GoldPriceSection()
+                GoldPriceSection(goldKarat: buyKarat)
 
                 if let buyGoldValue, let buyTotal {
                     Section("Result") {
@@ -229,7 +229,7 @@ struct BuySellCalculatorView: View {
                     }
                 }
 
-                GoldPriceSection(includeSilver: silverRelevant)
+                GoldPriceSection(includeSilver: silverRelevant, goldKarat: sellKarat)
 
                 if sellGoldPure > 0 || sellSilverGrams > 0 {
                     Section("Result") {

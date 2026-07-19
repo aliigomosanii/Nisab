@@ -7,6 +7,9 @@ struct GoldPriceSection: View {
     var includeGold = true
     /// Show the silver price field too.
     var includeSilver = false
+    /// When set, the gold field shows and edits the price for this karat
+    /// (the stored price stays 24k so calculations are unaffected).
+    var goldKarat: Int? = nil
 
     @AppStorage("goldPrice24kText") private var priceText = ""
     @AppStorage("silverPriceText") private var silverPriceText = ""
@@ -18,6 +21,8 @@ struct GoldPriceSection: View {
     @State private var fetching = false
     @State private var fetchFailed = false
     @State private var settingProgrammatically = false
+    /// Karat-mode display text, kept in sync with the stored 24k price.
+    @State private var goldDisplayText = ""
 
     /// Fetched prices go stale after this long and refresh on appear.
     private let staleAfter: TimeInterval = 15 * 60
@@ -27,16 +32,50 @@ struct GoldPriceSection: View {
     var body: some View {
         Section("Price per gram") {
             if includeGold {
-                LabeledContent("Gold price") {
-                    TextField("Price", text: $priceText)
-                        .keyboardType(.decimalPad)
-                        .multilineTextAlignment(.trailing)
-                        .onChange(of: priceText) { _, new in
-                            let s = new.sanitizedDecimal
-                            if s != new { priceText = s }
-                            // A hand-typed price must never be auto-overwritten.
-                            if !settingProgrammatically { wasFetched = false }
+                if let goldKarat {
+                    LabeledContent {
+                        TextField("Price", text: $goldDisplayText)
+                            .keyboardType(.decimalPad)
+                            .multilineTextAlignment(.trailing)
+                    } label: {
+                        Text("Gold price (\(goldKarat)K)")
+                    }
+                    .onChange(of: goldDisplayText) { _, new in
+                        let s = new.sanitizedDecimal
+                        if s != new {
+                            goldDisplayText = s
+                            return
                         }
+                        guard !settingProgrammatically else { return }
+                        if let karatPrice = Decimal(string: s) {
+                            // Echoes of our own display refresh are no-ops;
+                            // only a genuinely new value counts as manual.
+                            if let stored = Decimal(string: priceText),
+                               rounded2(stored * Decimal(goldKarat) / 24) == rounded2(karatPrice) {
+                                return
+                            }
+                            priceText = "\(karatPrice * 24 / Decimal(goldKarat))"
+                            wasFetched = false
+                        } else if s.isEmpty, !priceText.isEmpty {
+                            priceText = ""
+                            wasFetched = false
+                        }
+                    }
+                    .onChange(of: priceText) { _, _ in refreshGoldDisplay() }
+                    .onChange(of: goldKarat) { _, _ in refreshGoldDisplay() }
+                    .onAppear { refreshGoldDisplay() }
+                } else {
+                    LabeledContent("Gold price") {
+                        TextField("Price", text: $priceText)
+                            .keyboardType(.decimalPad)
+                            .multilineTextAlignment(.trailing)
+                            .onChange(of: priceText) { _, new in
+                                let s = new.sanitizedDecimal
+                                if s != new { priceText = s }
+                                // A hand-typed price must never be auto-overwritten.
+                                if !settingProgrammatically { wasFetched = false }
+                            }
+                    }
                 }
             }
             if includeSilver {
@@ -91,6 +130,28 @@ struct GoldPriceSection: View {
                 await fetch()
             }
         }
+    }
+
+    private func rounded2(_ value: Decimal) -> Decimal {
+        var input = value
+        var result = Decimal()
+        NSDecimalRound(&result, &input, 2, .plain)
+        return result
+    }
+
+    /// Mirrors the stored 24k price into the karat-price display.
+    private func refreshGoldDisplay() {
+        guard let goldKarat else { return }
+        guard let price24 = Decimal(string: priceText) else {
+            if !goldDisplayText.isEmpty { goldDisplayText = "" }
+            return
+        }
+        let karatPrice = rounded2(price24 * Decimal(goldKarat) / 24)
+        // Leave mid-typing text ("423.") alone when the value already matches.
+        if let current = Decimal(string: goldDisplayText), rounded2(current) == karatPrice {
+            return
+        }
+        goldDisplayText = "\(karatPrice)"
     }
 
     private func fetch() async {
