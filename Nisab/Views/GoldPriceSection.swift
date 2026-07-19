@@ -27,22 +27,28 @@ struct GoldPriceSection: View {
     var body: some View {
         Section("Price per gram") {
             if includeGold {
-                TextField("Today's 24k price per gram", text: $priceText)
-                    .keyboardType(.decimalPad)
-                    .onChange(of: priceText) { _, new in
-                        let s = new.sanitizedDecimal
-                        if s != new { priceText = s }
-                        // A hand-typed price must never be auto-overwritten.
-                        if !settingProgrammatically { wasFetched = false }
-                    }
+                LabeledContent("24k gold") {
+                    TextField("Price", text: $priceText)
+                        .keyboardType(.decimalPad)
+                        .multilineTextAlignment(.trailing)
+                        .onChange(of: priceText) { _, new in
+                            let s = new.sanitizedDecimal
+                            if s != new { priceText = s }
+                            // A hand-typed price must never be auto-overwritten.
+                            if !settingProgrammatically { wasFetched = false }
+                        }
+                }
             }
             if includeSilver {
-                TextField("Today's silver price per gram", text: $silverPriceText)
-                    .keyboardType(.decimalPad)
-                    .onChange(of: silverPriceText) { _, new in
-                        let s = new.sanitizedDecimal
-                        if s != new { silverPriceText = s }
-                    }
+                LabeledContent("Silver") {
+                    TextField("Price", text: $silverPriceText)
+                        .keyboardType(.decimalPad)
+                        .multilineTextAlignment(.trailing)
+                        .onChange(of: silverPriceText) { _, new in
+                            let s = new.sanitizedDecimal
+                            if s != new { silverPriceText = s }
+                        }
+                }
             }
             Picker("Currency", selection: $currencyCode) {
                 ForEach(Self.currencies, id: \.self) { Text($0) }

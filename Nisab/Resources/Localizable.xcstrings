@@ -17,6 +17,22 @@
         }
       }
     },
+    "24k gold": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ذهب عيار 24"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "24 قیراط سونا"
+          }
+        }
+      }
+    },
     "About": {
       "localizations": {
         "ar": {
@@ -1517,6 +1533,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "ترجیحات"
+          }
+        }
+      }
+    },
+    "Price": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السعر"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قیمت"
           }
         }
       }
