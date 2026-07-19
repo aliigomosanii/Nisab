@@ -47,7 +47,8 @@ struct LockView: View {
             Spacer()
         }
         .padding()
-        .background(Color(.systemGroupedBackground))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .onAppear { tryBiometrics() }
     }
 

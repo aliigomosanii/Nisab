@@ -16,22 +16,40 @@ struct NisabApp: App {
 private struct RootGateView: View {
     @AppStorage("profileRegistered") private var registered = false
     @State private var unlocked = false
+    @State private var backgroundedAt: Date?
     @Environment(\.scenePhase) private var scenePhase
+
+    /// Quick app switches within this window don't relock.
+    private let graceSeconds: TimeInterval = 30
 
     var body: some View {
         Group {
             if !registered {
                 RegistrationView { unlocked = true }
-            } else if !unlocked {
-                LockView { unlocked = true }
             } else {
-                HomeView()
+                // The app stays alive under the lock overlay so navigation
+                // state survives unlocking.
+                ZStack {
+                    HomeView()
+                    if !unlocked {
+                        LockView { unlocked = true }
+                            .zIndex(1)
+                    }
+                }
             }
         }
         .onChange(of: scenePhase) { _, phase in
-            // Relock whenever the app leaves the foreground.
-            if phase == .background {
-                unlocked = false
+            switch phase {
+            case .background:
+                backgroundedAt = .now
+            case .active:
+                if unlocked, let at = backgroundedAt,
+                   Date.now.timeIntervalSince(at) > graceSeconds {
+                    unlocked = false
+                }
+                backgroundedAt = nil
+            default:
+                break
             }
         }
     }
