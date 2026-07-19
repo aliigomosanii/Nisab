@@ -154,6 +154,8 @@ struct GoldItemDetailView: View {
         .confirmationDialog("Delete this record?", isPresented: $confirmDelete, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
                 context.delete(item)
+                let all = (try? context.fetch(FetchDescriptor<GoldItem>())) ?? []
+                Task { await NotificationService.reschedule(items: all) }
                 dismiss()
             }
             Button("Cancel", role: .cancel) {}

@@ -2545,6 +2545,38 @@
         }
       }
     },
+    "Your gold zakat is due in 7 days.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زكاة الذهب مستحقة خلال 7 أيام."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آپ کے سونے کی زکوٰۃ 7 دن میں واجب ہو گی۔"
+          }
+        }
+      }
+    },
+    "Your gold zakat is due today.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زكاة الذهب مستحقة اليوم."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آپ کے سونے کی زکوٰۃ آج واجب ہے۔"
+          }
+        }
+      }
+    },
     "Your information stays on this device only.": {
       "localizations": {
         "ar": {
@@ -2573,6 +2605,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "آپ کے زیورات"
+          }
+        }
+      }
+    },
+    "Your silver zakat is due in 7 days.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زكاة الفضة مستحقة خلال 7 أيام."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آپ کی چاندی کی زکوٰۃ 7 دن میں واجب ہو گی۔"
+          }
+        }
+      }
+    },
+    "Your silver zakat is due today.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زكاة الفضة مستحقة اليوم."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آپ کی چاندی کی زکوٰۃ آج واجب ہے۔"
           }
         }
       }
@@ -2637,6 +2701,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "واجب زکوٰۃ (2.5%)"
+          }
+        }
+      }
+    },
+    "Zakat is due": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الزكاة مستحقة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ واجب ہے"
           }
         }
       }

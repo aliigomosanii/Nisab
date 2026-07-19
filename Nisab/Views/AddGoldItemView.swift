@@ -336,6 +336,8 @@ struct AddGoldItemView: View {
             )
             context.insert(item)
         }
+        let all = (try? context.fetch(FetchDescriptor<GoldItem>())) ?? []
+        Task { await NotificationService.reschedule(items: all) }
         dismiss()
     }
 }

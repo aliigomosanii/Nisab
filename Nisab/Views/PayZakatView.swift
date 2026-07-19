@@ -361,6 +361,8 @@ struct PayZakatView: View {
                 item.lastZakatPaidAt = item.zakatPaymentDates.max()
             }
         }
+        let all = allItems
+        Task { await NotificationService.reschedule(items: all) }
     }
 
     private func save() {
@@ -368,6 +370,8 @@ struct PayZakatView: View {
             item.lastZakatPaidAt = paymentDate
             item.zakatPaymentDates.append(paymentDate)
         }
+        let all = allItems
+        Task { await NotificationService.reschedule(items: all) }
         dismiss()
     }
 }

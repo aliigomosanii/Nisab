@@ -142,6 +142,11 @@ struct HomeView: View {
             .sheet(isPresented: $showingPayZakat) {
                 PayZakatView(items: eligible)
             }
+            // Keep pending reminders in sync with today's holdings; the
+            // count re-runs this after inserts and deletes.
+            .task(id: items.count) {
+                await NotificationService.reschedule(items: items)
+            }
         }
     }
 
