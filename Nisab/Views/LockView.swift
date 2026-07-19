@@ -7,6 +7,8 @@ struct LockView: View {
 
     @State private var passwordText = ""
     @State private var wrongPassword = false
+    /// Settings toggle; when off, unlocking is password-only.
+    @AppStorage("faceIDEnabled") private var faceIDEnabled = true
 
     var body: some View {
         VStack(spacing: 20) {
@@ -38,10 +40,12 @@ struct LockView: View {
             .buttonStyle(.borderedProminent)
             .disabled(passwordText.isEmpty)
 
-            Button {
-                tryBiometrics()
-            } label: {
-                Label("Unlock with Face ID", systemImage: "faceid")
+            if faceIDEnabled {
+                Button {
+                    tryBiometrics()
+                } label: {
+                    Label("Unlock with Face ID", systemImage: "faceid")
+                }
             }
             Spacer()
             Spacer()
@@ -62,6 +66,7 @@ struct LockView: View {
     }
 
     private func tryBiometrics() {
+        guard faceIDEnabled else { return }
         let context = LAContext()
         var error: NSError?
         guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {

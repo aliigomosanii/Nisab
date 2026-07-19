@@ -1,723 +1,18 @@
 {
   "sourceLanguage": "en",
-  "version": "1.0",
   "strings": {
-    "Name": {
+    "%lld items · %@ g": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الاسم"
+            "value": "%lld قطعة · %@ غ"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "نام"
-          }
-        }
-      }
-    },
-    "Currency": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "العملة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کرنسی"
-          }
-        }
-      }
-    },
-    "Note": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ملاحظة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نوٹ"
-          }
-        }
-      }
-    },
-    "Save": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "حفظ"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "محفوظ کریں"
-          }
-        }
-      }
-    },
-    "Cancel": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إلغاء"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "منسوخ کریں"
-          }
-        }
-      }
-    },
-    "Delete": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "حذف"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "حذف کریں"
-          }
-        }
-      }
-    },
-    "Delete this record?": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "حذف هذا السجل؟"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "یہ اندراج حذف کریں؟"
-          }
-        }
-      }
-    },
-    "Zakat": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الزكاة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زکوٰۃ"
-          }
-        }
-      }
-    },
-    "Gold": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الذهب"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سونا"
-          }
-        }
-      }
-    },
-    "Weight (grams)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الوزن (غرام)"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "وزن (گرام)"
-          }
-        }
-      }
-    },
-    "Karat": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "العيار"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کیرٹ"
-          }
-        }
-      }
-    },
-    "Price per gram": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سعر الغرام"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فی گرام قیمت"
-          }
-        }
-      }
-    },
-    "Result": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "النتيجة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نتیجہ"
-          }
-        }
-      }
-    },
-    "Gold value": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "قيمة الذهب"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سونے کی مالیت"
-          }
-        }
-      }
-    },
-    "Pure gold equivalent": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ما يعادل الذهب الخالص"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خالص سونے کے مساوی"
-          }
-        }
-      }
-    },
-    "Nisab (85g pure gold)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "النصاب (٨٥ غ ذهب خالص)"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نصاب (85 گرام خالص سونا)"
-          }
-        }
-      }
-    },
-    "Above nisab": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فوق النصاب"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نصاب سے زیادہ"
-          }
-        }
-      }
-    },
-    "Below nisab": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "دون النصاب"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نصاب سے کم"
-          }
-        }
-      }
-    },
-    "Zakat due (2.5%)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الزكاة المستحقة (٢٫٥٪)"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "واجب زکوٰۃ (2.5%)"
-          }
-        }
-      }
-    },
-    "Enter today's gold price to value your zakat in currency.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "أدخل سعر الذهب اليوم لمعرفة قيمة الزكاة بالعملة."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کرنسی میں زکوٰۃ کی قیمت دیکھنے کے لیے آج کے سونے کی قیمت درج کریں۔"
-          }
-        }
-      }
-    },
-    "No zakat due": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا زكاة مستحقة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کوئی زکوٰۃ واجب نہیں"
-          }
-        }
-      }
-    },
-    "Purchase Date": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تاريخ الشراء"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خریداری کی تاریخ"
-          }
-        }
-      }
-    },
-    "Purchase Price": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سعر الشراء"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خریداری کی قیمت"
-          }
-        }
-      }
-    },
-    "Invoice": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الفاتورة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "رسید"
-          }
-        }
-      }
-    },
-    "Add Invoice Photo": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إضافة صورة الفاتورة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "رسید کی تصویر شامل کریں"
-          }
-        }
-      }
-    },
-    "Today's 24k price per gram": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سعر غرام الذهب ٢٤ اليوم"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "آج کی 24 کیرٹ فی گرام قیمت"
-          }
-        }
-      }
-    },
-    "Fetch today's price": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "جلب سعر اليوم"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "آج کی قیمت حاصل کریں"
-          }
-        }
-      }
-    },
-    "Updated %@": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "محدَّث %@"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اپ ڈیٹ شدہ %@"
-          }
-        }
-      }
-    },
-    "Couldn't fetch the gold price. Enter it manually.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تعذّر جلب سعر الذهب. أدخله يدويًا."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سونے کی قیمت حاصل نہیں ہو سکی۔ دستی طور پر درج کریں۔"
-          }
-        }
-      }
-    },
-    "Total weight": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إجمالي الوزن"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کل وزن"
-          }
-        }
-      }
-    },
-    "Record Zakat Payment": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تسجيل دفع الزكاة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زکوٰۃ کی ادائیگی درج کریں"
-          }
-        }
-      }
-    },
-    "Payment Date": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تاريخ الدفع"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ادائیگی کی تاریخ"
-          }
-        }
-      }
-    },
-    "Zakat paid until %@": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الزكاة مدفوعة حتى %@"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زکوٰۃ %@ تک ادا شدہ"
-          }
-        }
-      }
-    },
-    "Zakat paid until": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الزكاة مدفوعة حتى"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زکوٰۃ ادا شدہ تک"
-          }
-        }
-      }
-    },
-    "Zakat Payments": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مدفوعات الزكاة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زکوٰۃ کی ادائیگیاں"
-          }
-        }
-      }
-    },
-    "Next payment": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الدفعة القادمة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اگلی ادائیگی"
-          }
-        }
-      }
-    },
-    "Due now": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مستحقة الآن"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ابھی واجب الادا"
-          }
-        }
-      }
-    },
-    "No payments yet": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا توجد مدفوعات بعد"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ابھی کوئی ادائیگی نہیں"
-          }
-        }
-      }
-    },
-    "Excluded (zakat paid)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مستثنى (الزكاة مدفوعة)"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خارج (زکوٰۃ ادا شدہ)"
-          }
-        }
-      }
-    },
-    "Settings": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الإعدادات"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ترتیبات"
-          }
-        }
-      }
-    },
-    "Profile": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الملف الشخصي"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "پروفائل"
-          }
-        }
-      }
-    },
-    "Preferences": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "التفضيلات"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ترجیحات"
-          }
-        }
-      }
-    },
-    "Default currency": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "العملة الافتراضية"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "طے شدہ کرنسی"
-          }
-        }
-      }
-    },
-    "Language": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اللغة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زبان"
-          }
-        }
-      }
-    },
-    "Change Language": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تغيير اللغة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زبان تبدیل کریں"
+            "value": "%lld اشیاء · %@ گرام"
           }
         }
       }
@@ -738,338 +33,18 @@
         }
       }
     },
-    "Version": {
+    "Above nisab": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الإصدار"
+            "value": "فوق النصاب"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "ورژن"
-          }
-        }
-      }
-    },
-    "Done": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تم"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ہو گیا"
-          }
-        }
-      }
-    },
-    "Default karat": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "العيار الافتراضي"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "طے شدہ کیرٹ"
-          }
-        }
-      }
-    },
-    "Phone": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "رقم الهاتف"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فون نمبر"
-          }
-        }
-      }
-    },
-    "System": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "النظام"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سسٹم"
-          }
-        }
-      }
-    },
-    "Restart Required": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إعادة التشغيل مطلوبة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "دوبارہ شروع کرنا ضروری ہے"
-          }
-        }
-      }
-    },
-    "Restart": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إعادة التشغيل"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "دوبارہ شروع کریں"
-          }
-        }
-      }
-    },
-    "The app will close to apply the new language. Reopen it to continue.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سيتم إغلاق التطبيق لتطبيق اللغة الجديدة. أعد فتحه للمتابعة."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نئی زبان لاگو کرنے کے لیے ایپ بند ہو جائے گی۔ جاری رکھنے کے لیے دوبارہ کھولیں۔"
-          }
-        }
-      }
-    },
-    "Jewelry Wallet": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "محفظة المجوهرات"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زیورات کا بٹوہ"
-          }
-        }
-      }
-    },
-    "Jewelry": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المجوهرات"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زیورات"
-          }
-        }
-      }
-    },
-    "Add Jewelry Item": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إضافة قطعة مجوهرات"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زیورات کی چیز شامل کریں"
-          }
-        }
-      }
-    },
-    "Material": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المادة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مواد"
-          }
-        }
-      }
-    },
-    "Silver": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الفضة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "چاندی"
-          }
-        }
-      }
-    },
-    "Diamond": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الألماس"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ہیرا"
-          }
-        }
-      }
-    },
-    "Gold Karat": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "عيار الذهب"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سونے کا کیرٹ"
-          }
-        }
-      }
-    },
-    "Gold Weight (grams)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "وزن الذهب (غرام)"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سونے کا وزن (گرام)"
-          }
-        }
-      }
-    },
-    "Diamond Carat (ct)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "قيراط الألماس"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ہیرے کا قیراط"
-          }
-        }
-      }
-    },
-    "Diamonds themselves are not zakatable; only the gold content counts.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الألماس بحد ذاته لا زكاة عليه؛ تُحسب الزكاة على الذهب فقط."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ہیرے پر بذاتِ خود زکوٰۃ نہیں؛ صرف سونے پر شمار ہوتی ہے۔"
-          }
-        }
-      }
-    },
-    "Item Photo": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "صورة القطعة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "چیز کی تصویر"
-          }
-        }
-      }
-    },
-    "Add Item Photo": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إضافة صورة القطعة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "چیز کی تصویر شامل کریں"
-          }
-        }
-      }
-    },
-    "Certificate": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الشهادة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سرٹیفکیٹ"
+            "value": "نصاب سے زیادہ"
           }
         }
       }
@@ -1090,130 +65,50 @@
         }
       }
     },
-    "Remove Photo": {
+    "Add Invoice Photo": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "إزالة الصورة"
+            "value": "إضافة صورة الفاتورة"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "تصویر ہٹائیں"
+            "value": "رسید کی تصویر شامل کریں"
           }
         }
       }
     },
-    "Total silver": {
+    "Add Item Photo": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "إجمالي الفضة"
+            "value": "إضافة صورة القطعة"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "کل چاندی"
+            "value": "چیز کی تصویر شامل کریں"
           }
         }
       }
     },
-    "Silver nisab (595g)": {
+    "Add Jewelry Item": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "نصاب الفضة (٥٩٥ غ)"
+            "value": "إضافة قطعة مجوهرات"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "چاندی کا نصاب (595 گرام)"
-          }
-        }
-      }
-    },
-    "Silver zakat due (2.5%)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زكاة الفضة المستحقة (٢٫٥٪)"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "چاندی کی واجب زکوٰۃ (2.5%)"
-          }
-        }
-      }
-    },
-    "Today's silver price per gram": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سعر غرام الفضة اليوم"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "آج کی چاندی کی فی گرام قیمت"
-          }
-        }
-      }
-    },
-    "No jewelry yet": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا توجد مجوهرات بعد"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ابھی کوئی زیورات نہیں"
-          }
-        }
-      }
-    },
-    "Tap + to add your jewelry": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اضغط + لإضافة مجوهراتك"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اپنے زیورات شامل کرنے کے لیے + دبائیں"
-          }
-        }
-      }
-    },
-    "Zakat Calculator": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "حاسبة الزكاة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زکوٰۃ کیلکولیٹر"
+            "value": "زیورات کی چیز شامل کریں"
           }
         }
       }
@@ -1234,502 +129,6 @@
         }
       }
     },
-    "Silver value": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "قيمة الفضة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "چاندی کی مالیت"
-          }
-        }
-      }
-    },
-    "Salam!": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "السلام عليكم!"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "السلام علیکم!"
-          }
-        }
-      }
-    },
-    "Salam, %@!": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "السلام عليكم، %@!"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "السلام علیکم، %@!"
-          }
-        }
-      }
-    },
-    "Set up your profile": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "أنشئ ملفك الشخصي"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اپنا پروفائل بنائیں"
-          }
-        }
-      }
-    },
-    "Your jewelry items": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "قطع مجوهراتك"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "آپ کے زیورات"
-          }
-        }
-      }
-    },
-    "Calculate what's due": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "احسب الزكاة المستحقة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "واجب زکوٰۃ کا حساب"
-          }
-        }
-      }
-    },
-    "Record a payment": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سجّل دفعة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ادائیگی درج کریں"
-          }
-        }
-      }
-    },
-    "App settings": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إعدادات التطبيق"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ایپ کی ترتیبات"
-          }
-        }
-      }
-    },
-    "Buy & Sell Calculator": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "حاسبة الشراء والبيع"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خرید و فروخت کیلکولیٹر"
-          }
-        }
-      }
-    },
-    "Estimate buying and selling prices": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "قدّر أسعار الشراء والبيع"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خرید و فروخت کی قیمتوں کا اندازہ"
-          }
-        }
-      }
-    },
-    "Buying": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "شراء"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خریداری"
-          }
-        }
-      }
-    },
-    "Selling": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "بيع"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فروخت"
-          }
-        }
-      }
-    },
-    "Manufacturing charge / gram": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "أجرة المصنعية / غرام"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "بنوائی فی گرام"
-          }
-        }
-      }
-    },
-    "Manufacturing total": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إجمالي المصنعية"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کل بنوائی"
-          }
-        }
-      }
-    },
-    "Total price": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "السعر الإجمالي"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کل قیمت"
-          }
-        }
-      }
-    },
-    "Estimated sale value": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "قيمة البيع التقديرية"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "متوقع فروخت قیمت"
-          }
-        }
-      }
-    },
-    "Sale estimates are based on metal content at today's price; shops may pay less and manufacturing charges are not recovered.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تقديرات البيع مبنية على قيمة المعدن بسعر اليوم؛ قد تدفع المحلات أقل ولا تُسترد أجرة المصنعية."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فروخت کا اندازہ آج کی قیمت پر دھات کی مالیت پر مبنی ہے؛ دکانیں کم دے سکتی ہیں اور بنوائی واپس نہیں ملتی۔"
-          }
-        }
-      }
-    },
-    "Total purchase price": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إجمالي سعر الشراء"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کل خریداری قیمت"
-          }
-        }
-      }
-    },
-    "Approximate gain": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الربح التقريبي"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تخمینی منافع"
-          }
-        }
-      }
-    },
-    "Select items from your wallet to see the manufacturing loss versus their purchase price.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اختر قطعًا من محفظتك لعرض خسارة المصنعية مقارنةً بسعر شرائها."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "بنوائی کا نقصان خریداری قیمت کے مقابلے میں دیکھنے کے لیے اپنے بٹوے سے چیزیں منتخب کریں۔"
-          }
-        }
-      }
-    },
-    "Typical for 24K (bars, liras): 0–5 SAR/g, up to 10 for small bars.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المعتاد لعيار ٢٤ (سبائك وليرات): ٠–٥ ريال/غ، وقد تصل ١٠ للسبائك الصغيرة."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "24 کیرٹ (سبائک، لیرے) کے لیے عام: 0–5 ریال/گرام، چھوٹی سبائک کے لیے 10 تک۔"
-          }
-        }
-      }
-    },
-    "Typical for 22K (Gulf and traditional jewelry): 5–12 SAR/g.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المعتاد لعيار ٢٢ (حلي خليجي وتقليدي): ٥–١٢ ريال/غ."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "22 کیرٹ (خلیجی اور روایتی زیورات) کے لیے عام: 5–12 ریال/گرام۔"
-          }
-        }
-      }
-    },
-    "Typical for 21K (most common in Saudi): 10–20 SAR/g; 30–60+ for luxury designs and brands.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المعتاد لعيار ٢١ (الأكثر انتشارًا في السعودية): ١٠–٢٠ ريال/غ، و٣٠–٦٠+ للتصاميم الفاخرة والماركات."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "21 کیرٹ (سعودیہ میں سب سے عام) کے لیے عام: 10–20 ریال/گرام؛ لگژری ڈیزائن اور برانڈز کے لیے 30–60+۔"
-          }
-        }
-      }
-    },
-    "Typical for 18K (modern jewelry and brands): 20–80+ SAR/g depending on design and brand.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المعتاد لعيار ١٨ (مجوهرات حديثة وماركات): ٢٠–٨٠+ ريال/غ حسب التصميم والعلامة التجارية."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "18 کیرٹ (جدید زیورات اور برانڈز) کے لیے عام: ڈیزائن اور برانڈ کے مطابق 20–80+ ریال/گرام۔"
-          }
-        }
-      }
-    },
-    "Gold price at purchase (24k, per gram)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سعر الذهب عند الشراء (عيار ٢٤، للغرام)"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خریداری کے وقت سونے کی قیمت (24 کیرٹ، فی گرام)"
-          }
-        }
-      }
-    },
-    "Silver price at purchase (per gram)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "سعر الفضة عند الشراء (للغرام)"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خریداری کے وقت چاندی کی قیمت (فی گرام)"
-          }
-        }
-      }
-    },
-    "Used to split selling losses into manufacturing and market change.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يُستخدم لتقسيم خسارة البيع إلى مصنعية وتغيّر سعر."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فروخت کے نقصان کو بنوائی اور قیمت کی تبدیلی میں تقسیم کرنے کے لیے۔"
-          }
-        }
-      }
-    },
-    "Manufacturing & markup": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المصنعية والهامش"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "بنوائی اور مارک اپ"
-          }
-        }
-      }
-    },
-    "Market change": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تغيّر سعر المعدن"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "دھات کی قیمت میں تبدیلی"
-          }
-        }
-      }
-    },
-    "Loss vs. metal value": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الخسارة مقابل قيمة المعدن"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "دھات کی مالیت کے مقابلے نقصان"
-          }
-        }
-      }
-    },
-    "Manufacturing & markup includes making charges, VAT, and any brand margin paid at purchase.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تشمل المصنعية والهامش أجرة الصياغة والضريبة وأي هامش للعلامة دُفع عند الشراء."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "بنوائی اور مارک اپ میں بنوائی، ویٹ اور برانڈ مارجن شامل ہیں جو خریداری کے وقت ادا کیے گئے۔"
-          }
-        }
-      }
-    },
     "Add the metal price at purchase on each item to split this loss into manufacturing and market change.": {
       "localizations": {
         "ar": {
@@ -1742,86 +141,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "اس نقصان کو بنوائی اور قیمت کی تبدیلی میں تقسیم کرنے کے لیے ہر چیز میں خریداری کے وقت دھات کی قیمت شامل کریں۔"
-          }
-        }
-      }
-    },
-    "Edit Jewelry Item": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تعديل قطعة المجوهرات"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زیورات کی چیز میں ترمیم"
-          }
-        }
-      }
-    },
-    "Edit": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تعديل"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ترمیم"
-          }
-        }
-      }
-    },
-    "OK": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "موافق"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ٹھیک ہے"
-          }
-        }
-      }
-    },
-    "Upcoming zakat dates": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مواعيد الزكاة القادمة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زکوٰۃ کی آئندہ تاریخیں"
-          }
-        }
-      }
-    },
-    "Shows dues until the end of next Hijri year.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تعرض الاستحقاقات حتى نهاية السنة الهجرية القادمة."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اگلے ہجری سال کے آخر تک واجبات دکھاتا ہے۔"
           }
         }
       }
@@ -1842,210 +161,194 @@
         }
       }
     },
-    "Tejoury": {
+    "App settings": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "تجوري"
+            "value": "إعدادات التطبيق"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "تجوري"
+            "value": "ایپ کی ترتیبات"
           }
         }
       }
     },
-    "Pay": {
+    "Approximate gain": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "دفع"
+            "value": "الربح التقريبي"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "ادائیگی"
+            "value": "تخمینی منافع"
           }
         }
       }
     },
-    "Schedule": {
+    "Below nisab": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "المواعيد"
+            "value": "دون النصاب"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "شیڈول"
+            "value": "نصاب سے کم"
           }
         }
       }
     },
-    "History": {
+    "Buy & Sell Calculator": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "السجل"
+            "value": "حاسبة الشراء والبيع"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "تاریخچہ"
+            "value": "خرید و فروخت کیلکولیٹر"
           }
         }
       }
     },
-    "%lld items · %@ g": {
+    "Buying": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld قطعة · %@ غ"
+            "value": "شراء"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld اشیاء · %@ گرام"
+            "value": "خریداری"
           }
         }
       }
     },
-    "Next: %@": {
+    "Calculate what's due": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "التالي: %@"
+            "value": "احسب الزكاة المستحقة"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "اگلا: %@"
+            "value": "واجب زکوٰۃ کا حساب"
           }
         }
       }
     },
-    "Gold: %@ g": {
+    "Cancel": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الذهب: %@ غ"
+            "value": "إلغاء"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "سونا: %@ گرام"
+            "value": "منسوخ کریں"
           }
         }
       }
     },
-    "Gold: %@ g · Silver: %@ g": {
+    "Certificate": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الذهب: %@ غ · الفضة: %@ غ"
+            "value": "الشهادة"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "سونا: %@ گرام · چاندی: %@ گرام"
+            "value": "سرٹیفکیٹ"
           }
         }
       }
     },
-    "Zakat is due when your gold reaches its nisab (85g pure) or your silver reaches its nisab (595g), and has been held for one lunar year (hawl).": {
+    "Change Language": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "تجب الزكاة إذا بلغ الذهب الخالص نصابه (٨٥ غ) أو الفضة نصابها (٥٩٥ غ) ومرّ عليه عام هجري كامل (الحول)."
+            "value": "تغيير اللغة"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "زکوٰۃ واجب ہوتی ہے جب خالص سونا اپنے نصاب (85 گرام) یا چاندی اپنے نصاب (595 گرام) تک پہنچے اور اس پر ایک قمری سال (حول) گزر جائے۔"
+            "value": "زبان تبدیل کریں"
           }
         }
       }
     },
-    "Welcome to Tejoury": {
+    "Change Password": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "مرحبًا بك في تجوري"
+            "value": "تغيير كلمة المرور"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "تجوري میں خوش آمدید"
+            "value": "پاس ورڈ تبدیل کریں"
           }
         }
       }
     },
-    "Your information stays on this device only.": {
+    "Choose File (photo or PDF)": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "تبقى معلوماتك على هذا الجهاز فقط."
+            "value": "اختيار ملف (صورة أو PDF)"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "آپ کی معلومات صرف اسی ڈیوائس پر رہتی ہیں۔"
+            "value": "فائل منتخب کریں (تصویر یا PDF)"
           }
         }
       }
     },
-    "Email": {
+    "Choose from Library": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "البريد الإلكتروني"
+            "value": "الاختيار من الصور"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "ای میل"
-          }
-        }
-      }
-    },
-    "Password": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "كلمة المرور"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "پاس ورڈ"
+            "value": "لائبریری سے منتخب کریں"
           }
         }
       }
@@ -2082,130 +385,34 @@
         }
       }
     },
-    "Enter a valid email.": {
+    "Couldn't fetch the gold price. Enter it manually.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "أدخل بريدًا إلكترونيًا صحيحًا."
+            "value": "تعذّر جلب سعر الذهب. أدخله يدويًا."
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "درست ای میل درج کریں۔"
+            "value": "سونے کی قیمت حاصل نہیں ہو سکی۔ دستی طور پر درج کریں۔"
           }
         }
       }
     },
-    "Password must be at least 4 characters.": {
+    "Currency": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يجب ألا تقل كلمة المرور عن ٤ أحرف."
+            "value": "العملة"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "پاس ورڈ کم از کم 4 حروف کا ہونا چاہیے۔"
-          }
-        }
-      }
-    },
-    "Passwords do not match.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "كلمتا المرور غير متطابقتين."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "پاس ورڈ مماثل نہیں۔"
-          }
-        }
-      }
-    },
-    "Enter password": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "أدخل كلمة المرور"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "پاس ورڈ درج کریں"
-          }
-        }
-      }
-    },
-    "Unlock": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فتح"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "کھولیں"
-          }
-        }
-      }
-    },
-    "Wrong password.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "كلمة المرور غير صحيحة."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "غلط پاس ورڈ۔"
-          }
-        }
-      }
-    },
-    "Unlock with Face ID": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الفتح ببصمة الوجه"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فیس آئی ڈی سے کھولیں"
-          }
-        }
-      }
-    },
-    "Change Password": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تغيير كلمة المرور"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "پاس ورڈ تبدیل کریں"
+            "value": "کرنسی"
           }
         }
       }
@@ -2226,22 +433,6 @@
         }
       }
     },
-    "New Password": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "كلمة المرور الجديدة"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نیا پاس ورڈ"
-          }
-        }
-      }
-    },
     "Current password is incorrect.": {
       "localizations": {
         "ar": {
@@ -2258,98 +449,290 @@
         }
       }
     },
-    "Password updated.": {
+    "Default currency": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "تم تحديث كلمة المرور."
+            "value": "العملة الافتراضية"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "پاس ورڈ اپ ڈیٹ ہو گیا۔"
+            "value": "طے شدہ کرنسی"
           }
         }
       }
     },
-    "Seller": {
+    "Default karat": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "البائع"
+            "value": "العيار الافتراضي"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "بیچنے والا"
+            "value": "طے شدہ کیرٹ"
           }
         }
       }
     },
-    "Take Photo": {
+    "Delete": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "التقاط صورة"
+            "value": "حذف"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "تصویر لیں"
+            "value": "حذف کریں"
           }
         }
       }
     },
-    "Choose from Library": {
+    "Delete this record?": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الاختيار من الصور"
+            "value": "حذف هذا السجل؟"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "لائبریری سے منتخب کریں"
+            "value": "یہ اندراج حذف کریں؟"
           }
         }
       }
     },
-    "Choose File (photo or PDF)": {
+    "Diamond": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "اختيار ملف (صورة أو PDF)"
+            "value": "الألماس"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "فائل منتخب کریں (تصویر یا PDF)"
+            "value": "ہیرا"
           }
         }
       }
     },
-    "Manufacturing charge": {
+    "Diamond Carat (ct)": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "أجرة المصنعية"
+            "value": "قيراط الألماس"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "بنوائی"
+            "value": "ہیرے کا قیراط"
+          }
+        }
+      }
+    },
+    "Diamonds themselves are not zakatable; only the gold content counts.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الألماس بحد ذاته لا زكاة عليه؛ تُحسب الزكاة على الذهب فقط."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ہیرے پر بذاتِ خود زکوٰۃ نہیں؛ صرف سونے پر شمار ہوتی ہے۔"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ہو گیا"
+          }
+        }
+      }
+    },
+    "Due now": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستحقة الآن"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ابھی واجب الادا"
+          }
+        }
+      }
+    },
+    "Edit": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعديل"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترمیم"
+          }
+        }
+      }
+    },
+    "Edit Jewelry Item": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعديل قطعة المجوهرات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زیورات کی چیز میں ترمیم"
+          }
+        }
+      }
+    },
+    "Email": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البريد الإلكتروني"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ای میل"
+          }
+        }
+      }
+    },
+    "Enter a valid email.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أدخل بريدًا إلكترونيًا صحيحًا."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "درست ای میل درج کریں۔"
+          }
+        }
+      }
+    },
+    "Enter password": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أدخل كلمة المرور"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاس ورڈ درج کریں"
+          }
+        }
+      }
+    },
+    "Enter today's gold price to value your zakat in currency.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أدخل سعر الذهب اليوم لمعرفة قيمة الزكاة بالعملة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کرنسی میں زکوٰۃ کی قیمت دیکھنے کے لیے آج کے سونے کی قیمت درج کریں۔"
+          }
+        }
+      }
+    },
+    "Estimate buying and selling prices": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قدّر أسعار الشراء والبيع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خرید و فروخت کی قیمتوں کا اندازہ"
+          }
+        }
+      }
+    },
+    "Estimated sale value": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيمة البيع التقديرية"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقع فروخت قیمت"
+          }
+        }
+      }
+    },
+    "Excluded (zakat paid)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستثنى (الزكاة مدفوعة)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خارج (زکوٰۃ ادا شدہ)"
           }
         }
       }
@@ -2370,6 +753,1286 @@
         }
       }
     },
+    "Fetch today's price": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلب سعر اليوم"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آج کی قیمت حاصل کریں"
+          }
+        }
+      }
+    },
+    "Gold": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الذهب"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونا"
+          }
+        }
+      }
+    },
+    "Gold Karat": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عيار الذهب"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونے کا کیرٹ"
+          }
+        }
+      }
+    },
+    "Gold Weight (grams)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وزن الذهب (غرام)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونے کا وزن (گرام)"
+          }
+        }
+      }
+    },
+    "Gold price at purchase (24k, per gram)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر الذهب عند الشراء (عيار ٢٤، للغرام)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خریداری کے وقت سونے کی قیمت (24 کیرٹ، فی گرام)"
+          }
+        }
+      }
+    },
+    "Gold value": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيمة الذهب"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونے کی مالیت"
+          }
+        }
+      }
+    },
+    "Gold: %@ g": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الذهب: %@ غ"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونا: %@ گرام"
+          }
+        }
+      }
+    },
+    "Gold: %@ g · Silver: %@ g": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الذهب: %@ غ · الفضة: %@ غ"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونا: %@ گرام · چاندی: %@ گرام"
+          }
+        }
+      }
+    },
+    "History": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السجل"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تاریخچہ"
+          }
+        }
+      }
+    },
+    "Invoice": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفاتورة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رسید"
+          }
+        }
+      }
+    },
+    "Item Photo": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صورة القطعة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چیز کی تصویر"
+          }
+        }
+      }
+    },
+    "Jewelry": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المجوهرات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زیورات"
+          }
+        }
+      }
+    },
+    "Jewelry Wallet": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "محفظة المجوهرات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زیورات کا بٹوہ"
+          }
+        }
+      }
+    },
+    "Karat": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العيار"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کیرٹ"
+          }
+        }
+      }
+    },
+    "Language": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اللغة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زبان"
+          }
+        }
+      }
+    },
+    "Loss vs. metal value": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخسارة مقابل قيمة المعدن"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دھات کی مالیت کے مقابلے نقصان"
+          }
+        }
+      }
+    },
+    "Manufacturing & markup": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المصنعية والهامش"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی اور مارک اپ"
+          }
+        }
+      }
+    },
+    "Manufacturing & markup includes making charges, VAT, and any brand margin paid at purchase.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تشمل المصنعية والهامش أجرة الصياغة والضريبة وأي هامش للعلامة دُفع عند الشراء."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی اور مارک اپ میں بنوائی، ویٹ اور برانڈ مارجن شامل ہیں جو خریداری کے وقت ادا کیے گئے۔"
+          }
+        }
+      }
+    },
+    "Manufacturing charge": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أجرة المصنعية"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی"
+          }
+        }
+      }
+    },
+    "Manufacturing charge / gram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أجرة المصنعية / غرام"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی فی گرام"
+          }
+        }
+      }
+    },
+    "Manufacturing total": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إجمالي المصنعية"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل بنوائی"
+          }
+        }
+      }
+    },
+    "Market change": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تغيّر سعر المعدن"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دھات کی قیمت میں تبدیلی"
+          }
+        }
+      }
+    },
+    "Material": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المادة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مواد"
+          }
+        }
+      }
+    },
+    "Name": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاسم"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نام"
+          }
+        }
+      }
+    },
+    "New Password": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كلمة المرور الجديدة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نیا پاس ورڈ"
+          }
+        }
+      }
+    },
+    "Next payment": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الدفعة القادمة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اگلی ادائیگی"
+          }
+        }
+      }
+    },
+    "Next: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التالي: %@"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اگلا: %@"
+          }
+        }
+      }
+    },
+    "Nisab (85g pure gold)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النصاب (٨٥ غ ذهب خالص)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نصاب (85 گرام خالص سونا)"
+          }
+        }
+      }
+    },
+    "No jewelry yet": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد مجوهرات بعد"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ابھی کوئی زیورات نہیں"
+          }
+        }
+      }
+    },
+    "No payments yet": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد مدفوعات بعد"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ابھی کوئی ادائیگی نہیں"
+          }
+        }
+      }
+    },
+    "No zakat due": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا زكاة مستحقة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کوئی زکوٰۃ واجب نہیں"
+          }
+        }
+      }
+    },
+    "Note": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملاحظة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نوٹ"
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موافق"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ٹھیک ہے"
+          }
+        }
+      }
+    },
+    "Password": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كلمة المرور"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاس ورڈ"
+          }
+        }
+      }
+    },
+    "Password must be at least 4 characters.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يجب ألا تقل كلمة المرور عن ٤ أحرف."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاس ورڈ کم از کم 4 حروف کا ہونا چاہیے۔"
+          }
+        }
+      }
+    },
+    "Password updated.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم تحديث كلمة المرور."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاس ورڈ اپ ڈیٹ ہو گیا۔"
+          }
+        }
+      }
+    },
+    "Passwords do not match.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كلمتا المرور غير متطابقتين."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاس ورڈ مماثل نہیں۔"
+          }
+        }
+      }
+    },
+    "Pay": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دفع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ادائیگی"
+          }
+        }
+      }
+    },
+    "Payment Date": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تاريخ الدفع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ادائیگی کی تاریخ"
+          }
+        }
+      }
+    },
+    "Phone": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رقم الهاتف"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فون نمبر"
+          }
+        }
+      }
+    },
+    "Preferences": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التفضيلات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترجیحات"
+          }
+        }
+      }
+    },
+    "Price per gram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر الغرام"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فی گرام قیمت"
+          }
+        }
+      }
+    },
+    "Profile": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملف الشخصي"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پروفائل"
+          }
+        }
+      }
+    },
+    "Purchase Date": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تاريخ الشراء"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خریداری کی تاریخ"
+          }
+        }
+      }
+    },
+    "Purchase Price": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر الشراء"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خریداری کی قیمت"
+          }
+        }
+      }
+    },
+    "Pure gold equivalent": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما يعادل الذهب الخالص"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خالص سونے کے مساوی"
+          }
+        }
+      }
+    },
+    "Record Zakat Payment": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تسجيل دفع الزكاة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ کی ادائیگی درج کریں"
+          }
+        }
+      }
+    },
+    "Record a payment": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سجّل دفعة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ادائیگی درج کریں"
+          }
+        }
+      }
+    },
+    "Remove Photo": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة الصورة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصویر ہٹائیں"
+          }
+        }
+      }
+    },
+    "Restart": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة التشغيل"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دوبارہ شروع کریں"
+          }
+        }
+      }
+    },
+    "Restart Required": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة التشغيل مطلوبة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دوبارہ شروع کرنا ضروری ہے"
+          }
+        }
+      }
+    },
+    "Result": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النتيجة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نتیجہ"
+          }
+        }
+      }
+    },
+    "Salam!": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السلام عليكم!"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السلام علیکم!"
+          }
+        }
+      }
+    },
+    "Salam, %@!": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السلام عليكم، %@!"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السلام علیکم، %@!"
+          }
+        }
+      }
+    },
+    "Sale estimates are based on metal content at today's price; shops may pay less and manufacturing charges are not recovered.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تقديرات البيع مبنية على قيمة المعدن بسعر اليوم؛ قد تدفع المحلات أقل ولا تُسترد أجرة المصنعية."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فروخت کا اندازہ آج کی قیمت پر دھات کی مالیت پر مبنی ہے؛ دکانیں کم دے سکتی ہیں اور بنوائی واپس نہیں ملتی۔"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حفظ"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "محفوظ کریں"
+          }
+        }
+      }
+    },
+    "Schedule": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المواعيد"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شیڈول"
+          }
+        }
+      }
+    },
+    "Security": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأمان"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سیکیورٹی"
+          }
+        }
+      }
+    },
+    "Select items from your wallet to see the manufacturing loss versus their purchase price.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختر قطعًا من محفظتك لعرض خسارة المصنعية مقارنةً بسعر شرائها."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی کا نقصان خریداری قیمت کے مقابلے میں دیکھنے کے لیے اپنے بٹوے سے چیزیں منتخب کریں۔"
+          }
+        }
+      }
+    },
+    "Seller": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البائع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بیچنے والا"
+          }
+        }
+      }
+    },
+    "Selling": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بيع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فروخت"
+          }
+        }
+      }
+    },
+    "Set up your profile": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أنشئ ملفك الشخصي"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اپنا پروفائل بنائیں"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإعدادات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترتیبات"
+          }
+        }
+      }
+    },
+    "Shows dues until the end of next Hijri year.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعرض الاستحقاقات حتى نهاية السنة الهجرية القادمة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اگلے ہجری سال کے آخر تک واجبات دکھاتا ہے۔"
+          }
+        }
+      }
+    },
+    "Silver": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفضة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چاندی"
+          }
+        }
+      }
+    },
+    "Silver nisab (595g)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نصاب الفضة (٥٩٥ غ)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چاندی کا نصاب (595 گرام)"
+          }
+        }
+      }
+    },
+    "Silver price at purchase (per gram)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر الفضة عند الشراء (للغرام)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خریداری کے وقت چاندی کی قیمت (فی گرام)"
+          }
+        }
+      }
+    },
+    "Silver value": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيمة الفضة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چاندی کی مالیت"
+          }
+        }
+      }
+    },
+    "Silver zakat due (2.5%)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زكاة الفضة المستحقة (٢٫٥٪)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "چاندی کی واجب زکوٰۃ (2.5%)"
+          }
+        }
+      }
+    },
+    "System": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النظام"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سسٹم"
+          }
+        }
+      }
+    },
+    "Take Photo": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التقاط صورة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصویر لیں"
+          }
+        }
+      }
+    },
+    "Tap + to add your jewelry": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اضغط + لإضافة مجوهراتك"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اپنے زیورات شامل کرنے کے لیے + دبائیں"
+          }
+        }
+      }
+    },
+    "Tejoury": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجوري"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجوري"
+          }
+        }
+      }
+    },
+    "The app will close to apply the new language. Reopen it to continue.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيتم إغلاق التطبيق لتطبيق اللغة الجديدة. أعد فتحه للمتابعة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نئی زبان لاگو کرنے کے لیے ایپ بند ہو جائے گی۔ جاری رکھنے کے لیے دوبارہ کھولیں۔"
+          }
+        }
+      }
+    },
+    "Today's 24k price per gram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر غرام الذهب ٢٤ اليوم"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آج کی 24 کیرٹ فی گرام قیمت"
+          }
+        }
+      }
+    },
+    "Today's silver price per gram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر غرام الفضة اليوم"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آج کی چاندی کی فی گرام قیمت"
+          }
+        }
+      }
+    },
+    "Total price": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السعر الإجمالي"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل قیمت"
+          }
+        }
+      }
+    },
+    "Total purchase price": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إجمالي سعر الشراء"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل خریداری قیمت"
+          }
+        }
+      }
+    },
+    "Total silver": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إجمالي الفضة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل چاندی"
+          }
+        }
+      }
+    },
+    "Total weight": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إجمالي الوزن"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل وزن"
+          }
+        }
+      }
+    },
     "Total worth: %@": {
       "localizations": {
         "ar": {
@@ -2385,6 +2048,359 @@
           }
         }
       }
+    },
+    "Typical for 18K (modern jewelry and brands): 20–80+ SAR/g depending on design and brand.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعتاد لعيار ١٨ (مجوهرات حديثة وماركات): ٢٠–٨٠+ ريال/غ حسب التصميم والعلامة التجارية."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "18 کیرٹ (جدید زیورات اور برانڈز) کے لیے عام: ڈیزائن اور برانڈ کے مطابق 20–80+ ریال/گرام۔"
+          }
+        }
+      }
+    },
+    "Typical for 21K (most common in Saudi): 10–20 SAR/g; 30–60+ for luxury designs and brands.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعتاد لعيار ٢١ (الأكثر انتشارًا في السعودية): ١٠–٢٠ ريال/غ، و٣٠–٦٠+ للتصاميم الفاخرة والماركات."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "21 کیرٹ (سعودیہ میں سب سے عام) کے لیے عام: 10–20 ریال/گرام؛ لگژری ڈیزائن اور برانڈز کے لیے 30–60+۔"
+          }
+        }
+      }
+    },
+    "Typical for 22K (Gulf and traditional jewelry): 5–12 SAR/g.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعتاد لعيار ٢٢ (حلي خليجي وتقليدي): ٥–١٢ ريال/غ."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "22 کیرٹ (خلیجی اور روایتی زیورات) کے لیے عام: 5–12 ریال/گرام۔"
+          }
+        }
+      }
+    },
+    "Typical for 24K (bars, liras): 0–5 SAR/g, up to 10 for small bars.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعتاد لعيار ٢٤ (سبائك وليرات): ٠–٥ ريال/غ، وقد تصل ١٠ للسبائك الصغيرة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "24 کیرٹ (سبائک، لیرے) کے لیے عام: 0–5 ریال/گرام، چھوٹی سبائک کے لیے 10 تک۔"
+          }
+        }
+      }
+    },
+    "Unlock": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کھولیں"
+          }
+        }
+      }
+    },
+    "Unlock with Face ID": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفتح ببصمة الوجه"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فیس آئی ڈی سے کھولیں"
+          }
+        }
+      }
+    },
+    "Upcoming zakat dates": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مواعيد الزكاة القادمة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ کی آئندہ تاریخیں"
+          }
+        }
+      }
+    },
+    "Updated %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "محدَّث %@"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اپ ڈیٹ شدہ %@"
+          }
+        }
+      }
+    },
+    "Used to split selling losses into manufacturing and market change.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُستخدم لتقسيم خسارة البيع إلى مصنعية وتغيّر سعر."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فروخت کے نقصان کو بنوائی اور قیمت کی تبدیلی میں تقسیم کرنے کے لیے۔"
+          }
+        }
+      }
+    },
+    "Version": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإصدار"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ورژن"
+          }
+        }
+      }
+    },
+    "Weight (grams)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوزن (غرام)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وزن (گرام)"
+          }
+        }
+      }
+    },
+    "Welcome to Tejoury": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرحبًا بك في تجوري"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجوري میں خوش آمدید"
+          }
+        }
+      }
+    },
+    "Wrong password.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كلمة المرور غير صحيحة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "غلط پاس ورڈ۔"
+          }
+        }
+      }
+    },
+    "Your information stays on this device only.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبقى معلوماتك على هذا الجهاز فقط."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آپ کی معلومات صرف اسی ڈیوائس پر رہتی ہیں۔"
+          }
+        }
+      }
+    },
+    "Your jewelry items": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قطع مجوهراتك"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آپ کے زیورات"
+          }
+        }
+      }
+    },
+    "Zakat": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الزكاة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ"
+          }
+        }
+      }
+    },
+    "Zakat Calculator": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حاسبة الزكاة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ کیلکولیٹر"
+          }
+        }
+      }
+    },
+    "Zakat Payments": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدفوعات الزكاة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ کی ادائیگیاں"
+          }
+        }
+      }
+    },
+    "Zakat due (2.5%)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الزكاة المستحقة (٢٫٥٪)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "واجب زکوٰۃ (2.5%)"
+          }
+        }
+      }
+    },
+    "Zakat is due when your gold reaches its nisab (85g pure) or your silver reaches its nisab (595g), and has been held for one lunar year (hawl).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجب الزكاة إذا بلغ الذهب الخالص نصابه (٨٥ غ) أو الفضة نصابها (٥٩٥ غ) ومرّ عليه عام هجري كامل (الحول)."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ واجب ہوتی ہے جب خالص سونا اپنے نصاب (85 گرام) یا چاندی اپنے نصاب (595 گرام) تک پہنچے اور اس پر ایک قمری سال (حول) گزر جائے۔"
+          }
+        }
+      }
+    },
+    "Zakat paid until": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الزكاة مدفوعة حتى"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ ادا شدہ تک"
+          }
+        }
+      }
+    },
+    "Zakat paid until %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الزكاة مدفوعة حتى %@"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ %@ تک ادا شدہ"
+          }
+        }
+      }
     }
-  }
+  },
+  "version": "1.0"
 }

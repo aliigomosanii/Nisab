@@ -9,10 +9,9 @@ struct SettingsView: View {
     @AppStorage("profileName") private var profileName = ""
     @AppStorage("profileEmail") private var profileEmail = ""
     @AppStorage("profilePhone") private var profilePhone = ""
-    @State private var currentPassword = ""
-    @State private var newPassword = ""
-    @State private var passwordMessage: LocalizedStringKey?
-    @State private var passwordChangeSucceeded = false
+    @State private var showingChangePassword = false
+    /// Read by LockView; when off, unlocking is password-only.
+    @AppStorage("faceIDEnabled") private var faceIDEnabled = true
     // Shared with the gold price section so one currency drives the app.
     @AppStorage("goldPriceCurrency") private var currencyCode = "SAR"
     @AppStorage("defaultKarat") private var defaultKarat = 24
@@ -33,23 +32,6 @@ struct SettingsView: View {
         }
     }
 
-    private func changePassword() {
-        passwordChangeSucceeded = false
-        guard currentPassword == Keychain.password() else {
-            passwordMessage = "Current password is incorrect."
-            return
-        }
-        guard newPassword.count >= 4 else {
-            passwordMessage = "Password must be at least 4 characters."
-            return
-        }
-        Keychain.setPassword(newPassword)
-        passwordChangeSucceeded = true
-        passwordMessage = "Password updated."
-        currentPassword = ""
-        newPassword = ""
-    }
-
     var body: some View {
         NavigationStack {
             Form {
@@ -63,16 +45,9 @@ struct SettingsView: View {
                         .keyboardType(.phonePad)
                 }
 
-                Section("Change Password") {
-                    SecureField("Current Password", text: $currentPassword)
-                    SecureField("New Password", text: $newPassword)
-                    if let passwordMessage {
-                        Text(passwordMessage)
-                            .font(.caption)
-                            .foregroundStyle(passwordChangeSucceeded ? .green : .red)
-                    }
-                    Button("Change Password") { changePassword() }
-                        .disabled(currentPassword.isEmpty || newPassword.isEmpty)
+                Section("Security") {
+                    Button("Change Password") { showingChangePassword = true }
+                    Toggle("Unlock with Face ID", isOn: $faceIDEnabled)
                 }
 
                 Section("Preferences") {
@@ -116,7 +91,71 @@ struct SettingsView: View {
                     Button("Done") { dismiss() }
                 }
             }
+            .sheet(isPresented: $showingChangePassword) {
+                ChangePasswordView()
+            }
         }
+    }
+}
+
+/// Guided password change: verify the current password, then set a new one.
+private struct ChangePasswordView: View {
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var currentPassword = ""
+    @State private var newPassword = ""
+    @State private var confirmPassword = ""
+    @State private var message: LocalizedStringKey?
+
+    private var canSave: Bool {
+        !currentPassword.isEmpty && !newPassword.isEmpty && !confirmPassword.isEmpty
+    }
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    SecureField("Current Password", text: $currentPassword)
+                }
+                Section {
+                    SecureField("New Password", text: $newPassword)
+                    SecureField("Confirm Password", text: $confirmPassword)
+                    if let message {
+                        Text(message)
+                            .font(.caption)
+                            .foregroundStyle(.red)
+                    }
+                }
+            }
+            .navigationTitle("Change Password")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") { save() }
+                        .disabled(!canSave)
+                }
+            }
+        }
+    }
+
+    private func save() {
+        guard currentPassword == Keychain.password() else {
+            message = "Current password is incorrect."
+            return
+        }
+        guard newPassword.count >= 4 else {
+            message = "Password must be at least 4 characters."
+            return
+        }
+        guard newPassword == confirmPassword else {
+            message = "Passwords do not match."
+            return
+        }
+        Keychain.setPassword(newPassword)
+        dismiss()
     }
 }
 
