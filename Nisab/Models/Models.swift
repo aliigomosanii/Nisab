@@ -166,6 +166,34 @@ final class GoldItem {
     }
 }
 
+extension Array where Element == GoldItem {
+    /// The hawl runs from when cumulative holdings reached nisab, not from
+    /// each item's purchase: zakat falls due one Umm al-Qura year after the
+    /// crossing date. Items bought mid-hawl join the running hawl.
+    /// Nil when unpaid holdings are below nisab.
+    func goldZakatDueDate() -> Date? {
+        dueDate(threshold: Zakat.nisabGrams) { $0.pureGoldGrams }
+    }
+
+    func silverZakatDueDate() -> Date? {
+        dueDate(threshold: Zakat.silverNisabGrams) { $0.silverGrams }
+    }
+
+    private func dueDate(threshold: Decimal, grams: (GoldItem) -> Decimal) -> Date? {
+        let relevant = filter { !$0.isZakatExempt && grams($0) > 0 }
+            .sorted { $0.purchaseDate < $1.purchaseDate }
+        var total: Decimal = 0
+        for item in relevant {
+            total += grams(item)
+            if total >= threshold {
+                return Calendar(identifier: .islamicUmmAlQura)
+                    .date(byAdding: .year, value: 1, to: item.purchaseDate)
+            }
+        }
+        return nil
+    }
+}
+
 /// Zakat rules (standard fiqh values).
 enum Zakat {
     /// Gold nisab threshold: 85 grams of pure gold.

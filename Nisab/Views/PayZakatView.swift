@@ -78,21 +78,21 @@ struct PayZakatView: View {
         return calendar.date(from: comps) ?? .distantFuture
     }
 
-    /// Items with their next due date (nil = due now), soonest first,
-    /// limited to the end of next Hijri year.
+    /// Items with their next due date under the aggregate hawl
+    /// (nil = below nisab, no obligation), soonest first, limited to the
+    /// end of next Hijri year.
     private var upcomingDues: [(item: GoldItem, due: Date?)] {
-        allItems
-            .map { (item: $0, due: $0.nextZakatDue) }
+        let goldDue = allItems.goldZakatDueDate()
+        let silverDue = allItems.silverZakatDueDate()
+        return allItems
+            .map { item -> (item: GoldItem, due: Date?) in
+                if item.isZakatExempt {
+                    return (item, item.zakatExemptUntil)
+                }
+                return (item, item.material == .silver ? silverDue : goldDue)
+            }
             .filter { $0.due == nil || $0.due! < scheduleCutoff }
-            .sorted { ($0.due ?? .distantPast) < ($1.due ?? .distantPast) }
-    }
-
-    /// Zakat is only ever due once unpaid holdings reach a nisab.
-    private var nisabReached: Bool {
-        let eligibleItems = allItems.filter { !$0.isZakatExempt }
-        let goldPure = eligibleItems.reduce(Decimal(0)) { $0 + $1.pureGoldGrams }
-        let silver = eligibleItems.reduce(Decimal(0)) { $0 + $1.silverGrams }
-        return goldPure >= Zakat.nisabGrams || silver >= Zakat.silverNisabGrams
+            .sorted { ($0.due ?? .distantFuture) < ($1.due ?? .distantFuture) }
     }
 
     /// Every recorded payment across all items, newest first.
@@ -244,14 +244,16 @@ struct PayZakatView: View {
                         }
                         Spacer()
                         if let due = entry.due {
-                            Text(due.dualCalendarString)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                                .multilineTextAlignment(.trailing)
-                        } else if nisabReached {
-                            Text("Due now")
-                                .bold()
-                                .foregroundStyle(.orange)
+                            if due <= .now {
+                                Text("Due now")
+                                    .bold()
+                                    .foregroundStyle(.orange)
+                            } else {
+                                Text(due.dualCalendarString)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .multilineTextAlignment(.trailing)
+                            }
                         } else {
                             Text("Below nisab")
                                 .font(.caption)

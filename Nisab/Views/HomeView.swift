@@ -12,17 +12,19 @@ struct HomeView: View {
     private var eligible: [GoldItem] { items.filter { !$0.isZakatExempt } }
     private var totalWeight: Decimal { items.reduce(0) { $0 + $1.weightGrams } }
 
-    /// Zakat is only ever due once holdings reach a nisab.
-    private var nisabReached: Bool {
-        let goldPure = eligible.reduce(Decimal(0)) { $0 + $1.pureGoldGrams }
-        let silver = eligible.reduce(Decimal(0)) { $0 + $1.silverGrams }
-        return goldPure >= Zakat.nisabGrams || silver >= Zakat.silverNisabGrams
-    }
+    /// Aggregate hawl: due one Hijri year after holdings crossed nisab.
+    private var goldDue: Date? { items.goldZakatDueDate() }
+    private var silverDue: Date? { items.silverZakatDueDate() }
 
     private var anyDueNow: Bool {
-        nisabReached && items.contains { $0.nextZakatDue == nil }
+        [goldDue, silverDue].compactMap { $0 }.contains { $0 <= .now }
     }
-    private var nextDue: Date? { items.compactMap(\.nextZakatDue).min() }
+
+    private var nextDue: Date? {
+        var candidates = [goldDue, silverDue].compactMap { $0 }.filter { $0 > .now }
+        candidates += items.filter(\.isZakatExempt).compactMap(\.zakatExemptUntil)
+        return candidates.min()
+    }
 
     private var initials: String {
         profileName
