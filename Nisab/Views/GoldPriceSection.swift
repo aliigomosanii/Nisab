@@ -27,7 +27,7 @@ struct GoldPriceSection: View {
     var body: some View {
         Section("Price per gram") {
             if includeGold {
-                LabeledContent("24k gold") {
+                LabeledContent("Gold price") {
                     TextField("Price", text: $priceText)
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.trailing)
