@@ -24,6 +24,7 @@ struct AddGoldItemView: View {
     @State private var sellerName = ""
     @State private var purchaseDate = Date.now
     @State private var priceText = ""
+    @State private var manufacturingChargeText = ""
     @State private var purchaseMetalPriceText = ""
     @State private var currencyCode = "SAR"
     @State private var note = ""
@@ -78,6 +79,7 @@ struct AddGoldItemView: View {
                 Section("Purchase Price") {
                     TextField("Seller", text: $sellerName)
                     decimalField("Purchase Price", text: $priceText)
+                    decimalField("Manufacturing charge", text: $manufacturingChargeText)
                     decimalField(
                         material == .silver
                             ? "Silver price at purchase (per gram)"
@@ -117,6 +119,9 @@ struct AddGoldItemView: View {
                     material = item.material
                     name = item.name
                     sellerName = item.sellerName
+                    if let charge = item.manufacturingCharge {
+                        manufacturingChargeText = "\(charge)"
+                    }
                     weightText = "\(item.weightGrams)"
                     karat = item.karat
                     purchaseDate = item.purchaseDate
@@ -302,6 +307,7 @@ struct AddGoldItemView: View {
         if let item = editingItem {
             item.name = name.trimmingCharacters(in: .whitespaces)
             item.sellerName = sellerName.trimmingCharacters(in: .whitespaces)
+            item.manufacturingCharge = Decimal(string: manufacturingChargeText)
             item.material = material
             item.weightGrams = weight ?? 0
             item.karat = karat
@@ -319,6 +325,7 @@ struct AddGoldItemView: View {
                 weightGrams: weight ?? 0,
                 karat: karat,
                 sellerName: sellerName.trimmingCharacters(in: .whitespaces),
+                manufacturingCharge: Decimal(string: manufacturingChargeText),
                 purchaseDate: purchaseDate,
                 purchasePrice: price ?? 0,
                 purchaseMetalPricePerGram: Decimal(string: purchaseMetalPriceText),

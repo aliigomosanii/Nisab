@@ -5,6 +5,9 @@ import SwiftData
 /// All zakat computation lives in the Zakat Calculator.
 struct GoldWalletView: View {
     @Query(sort: \GoldItem.purchaseDate, order: .reverse) private var items: [GoldItem]
+    @AppStorage("goldPrice24kText") private var storedGoldPrice = ""
+    @AppStorage("silverPriceText") private var storedSilverPrice = ""
+    @AppStorage("goldPriceCurrency") private var priceCurrency = "SAR"
     @State private var showingAdd = false
     @State private var editingItem: GoldItem?
 
@@ -58,6 +61,13 @@ struct GoldWalletView: View {
         .sheet(item: $editingItem) { item in
             AddGoldItemView(editingItem: item)
         }
+        .task {
+            // Make sure a price exists so Total worth can show.
+            if Decimal(string: storedGoldPrice) == nil,
+               let price = await GoldPriceService.pricePerGram24k(currency: priceCurrency) {
+                storedGoldPrice = "\(price)"
+            }
+        }
     }
 
     /// Inventory totals (weights, not zakat) shown under the list.
@@ -67,13 +77,30 @@ struct GoldWalletView: View {
             .formatted(.number.precision(.fractionLength(0...2)))
         let silverGrams = items.filter { $0.material == .silver }
             .reduce(Decimal(0)) { $0 + $1.weightGrams }
-        return Group {
+        return VStack(alignment: .leading, spacing: 2) {
             if silverGrams > 0 {
                 Text("Gold: \(gold) g · Silver: \(silverGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
             } else {
                 Text("Gold: \(gold) g")
             }
+            if let worth = totalWorth {
+                Text("Total worth: \(worth.formatted(.currency(code: priceCurrency)))")
+                    .bold()
+                    .foregroundStyle(Color.accentColor)
+            }
         }
+    }
+
+    /// Sum of expected selling prices (metal value minus manufacturing)
+    /// across items whose needed price is available.
+    private var totalWorth: Decimal? {
+        let gold = Decimal(string: storedGoldPrice)
+        let silver = Decimal(string: storedSilverPrice)
+        let values = items.compactMap {
+            $0.expectedSellingPrice(goldPricePerGram24k: gold, silverPricePerGram: silver)
+        }
+        guard !values.isEmpty else { return nil }
+        return values.reduce(0, +)
     }
 }
 

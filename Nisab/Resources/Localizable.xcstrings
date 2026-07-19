@@ -2337,6 +2337,54 @@
           }
         }
       }
+    },
+    "Manufacturing charge": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أجرة المصنعية"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنوائی"
+          }
+        }
+      }
+    },
+    "Expected selling price": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر البيع المتوقع"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقع فروخت قیمت"
+          }
+        }
+      }
+    },
+    "Total worth: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إجمالي القيمة: %@"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل مالیت: %@"
+          }
+        }
+      }
     }
   }
 }

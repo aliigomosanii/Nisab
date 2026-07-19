@@ -37,6 +37,8 @@ final class GoldItem {
     var diamondCarat: Decimal?
     /// Where/from whom the item was bought.
     var sellerName: String = ""
+    /// Total making charge paid for this item (not recovered when selling).
+    var manufacturingCharge: Decimal?
     var purchaseDate: Date
     var purchasePrice: Decimal
     /// Pure-metal price per gram on the purchase day (24k for gold items,
@@ -71,6 +73,20 @@ final class GoldItem {
     /// Silver content in grams (silver items only).
     var silverGrams: Decimal {
         material == .silver ? weightGrams : 0
+    }
+
+    /// Metal value at today's price minus the manufacturing charge —
+    /// what a buyer would roughly pay. Nil when the needed price is missing.
+    func expectedSellingPrice(goldPricePerGram24k: Decimal?, silverPricePerGram: Decimal?) -> Decimal? {
+        let metalValue: Decimal?
+        switch material {
+        case .silver:
+            metalValue = silverPricePerGram.map { silverGrams * $0 }
+        default:
+            metalValue = goldPricePerGram24k.map { pureGoldGrams * $0 }
+        }
+        guard let metalValue else { return nil }
+        return metalValue - (manufacturingCharge ?? 0)
     }
 
     /// One-line physical description, e.g. "15 g · 21K" or "1.2 ct · 5 g 18K".
@@ -137,6 +153,7 @@ final class GoldItem {
         karat: Int,
         diamondCarat: Decimal? = nil,
         sellerName: String = "",
+        manufacturingCharge: Decimal? = nil,
         purchaseDate: Date,
         purchasePrice: Decimal,
         purchaseMetalPricePerGram: Decimal? = nil,
@@ -154,6 +171,7 @@ final class GoldItem {
         self.karat = karat
         self.diamondCarat = diamondCarat
         self.sellerName = sellerName
+        self.manufacturingCharge = manufacturingCharge
         self.purchaseDate = purchaseDate
         self.purchasePrice = purchasePrice
         self.purchaseMetalPricePerGram = purchaseMetalPricePerGram

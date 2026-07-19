@@ -6,6 +6,9 @@ struct GoldItemDetailView: View {
     @Environment(\.dismiss) private var dismiss
 
     let item: GoldItem
+    @AppStorage("goldPrice24kText") private var storedGoldPrice = ""
+    @AppStorage("silverPriceText") private var storedSilverPrice = ""
+    @AppStorage("goldPriceCurrency") private var priceCurrency = "SAR"
     @State private var confirmDelete = false
     @State private var showingEdit = false
     @State private var purchaseMetalPriceText = ""
@@ -64,6 +67,19 @@ struct GoldItemDetailView: View {
                 }
                 LabeledContent("Purchase Date", value: item.purchaseDate.dualCalendarString)
                 LabeledContent("Purchase Price", value: item.purchasePrice.formatted(.currency(code: item.currencyCode)))
+                if let charge = item.manufacturingCharge {
+                    LabeledContent("Manufacturing charge", value: charge.formatted(.currency(code: item.currencyCode)))
+                }
+                if let expected = item.expectedSellingPrice(
+                    goldPricePerGram24k: Decimal(string: storedGoldPrice),
+                    silverPricePerGram: Decimal(string: storedSilverPrice)
+                ) {
+                    LabeledContent("Expected selling price") {
+                        Text(expected.formatted(.currency(code: priceCurrency)))
+                            .bold()
+                            .foregroundStyle(Color.accentColor)
+                    }
+                }
                 if let note = item.note, !note.isEmpty {
                     LabeledContent("Note", value: note)
                 }
