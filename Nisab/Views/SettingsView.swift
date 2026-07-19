@@ -1,7 +1,9 @@
 import SwiftUI
+import SwiftData
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
 
     @AppStorage(L10n.storageKey) private var appLanguage = "system"
     @State private var pendingLanguage = ""
@@ -12,6 +14,11 @@ struct SettingsView: View {
     @State private var showingChangePassword = false
     /// Read by LockView; when off, unlocking is password-only.
     @AppStorage("faceIDEnabled") private var faceIDEnabled = true
+    // Read by NotificationService when scheduling reminders.
+    @AppStorage("zakatRemindersEnabled") private var remindersEnabled = true
+    @AppStorage("zakatWeekAheadEnabled") private var weekAheadEnabled = true
+    /// Reminder time as minutes since midnight (default 09:00).
+    @AppStorage("reminderMinutes") private var reminderMinutes = 540
     // Shared with the gold price section so one currency drives the app.
     @AppStorage("goldPriceCurrency") private var currencyCode = "SAR"
     @AppStorage("defaultKarat") private var defaultKarat = 24
@@ -20,6 +27,20 @@ struct SettingsView: View {
 
     private var version: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—"
+    }
+
+    private var reminderTime: Binding<Date> {
+        Binding {
+            Calendar.current.startOfDay(for: .now).addingTimeInterval(TimeInterval(reminderMinutes * 60))
+        } set: { newValue in
+            let comps = Calendar.current.dateComponents([.hour, .minute], from: newValue)
+            reminderMinutes = (comps.hour ?? 9) * 60 + (comps.minute ?? 0)
+        }
+    }
+
+    private func rescheduleReminders() {
+        let all = (try? context.fetch(FetchDescriptor<GoldItem>())) ?? []
+        Task { await NotificationService.reschedule(items: all) }
     }
 
     /// Saves the choice, then closes the app gracefully (suspend → exit)
@@ -49,6 +70,23 @@ struct SettingsView: View {
                     Button("Change Password") { showingChangePassword = true }
                     Toggle("Unlock with Face ID", isOn: $faceIDEnabled)
                 }
+
+                Section {
+                    Toggle("Zakat reminders", isOn: $remindersEnabled)
+                    if remindersEnabled {
+                        DatePicker("Reminder time", selection: reminderTime, displayedComponents: .hourAndMinute)
+                        Toggle("Remind 7 days before", isOn: $weekAheadEnabled)
+                    }
+                } header: {
+                    Text("Notifications")
+                } footer: {
+                    if remindersEnabled {
+                        Text("You are reminded when your gold or silver zakat falls due.")
+                    }
+                }
+                .onChange(of: remindersEnabled) { _, _ in rescheduleReminders() }
+                .onChange(of: weekAheadEnabled) { _, _ in rescheduleReminders() }
+                .onChange(of: reminderMinutes) { _, _ in rescheduleReminders() }
 
                 Section("Preferences") {
                     Picker("Default currency", selection: $currencyCode) {

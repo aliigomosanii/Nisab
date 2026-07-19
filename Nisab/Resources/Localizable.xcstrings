@@ -1409,6 +1409,22 @@
         }
       }
     },
+    "Notifications": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإشعارات"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اطلاعات"
+          }
+        }
+      }
+    },
     "OK": {
       "localizations": {
         "ar": {
@@ -1677,6 +1693,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "ادائیگی درج کریں"
+          }
+        }
+      }
+    },
+    "Remind 7 days before": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تذكير قبل 7 أيام"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 دن پہلے یاددہانی"
+          }
+        }
+      }
+    },
+    "Reminder time": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وقت التذكير"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یاددہانی کا وقت"
           }
         }
       }
@@ -2545,6 +2593,22 @@
         }
       }
     },
+    "You are reminded when your gold or silver zakat falls due.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتم تذكيرك عندما تصبح زكاة الذهب أو الفضة مستحقة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جب آپ کے سونے یا چاندی کی زکوٰۃ واجب ہو گی تو آپ کو یاد دلایا جائے گا۔"
+          }
+        }
+      }
+    },
     "Your gold zakat is due in 7 days.": {
       "localizations": {
         "ar": {
@@ -2765,6 +2829,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "زکوٰۃ %@ تک ادا شدہ"
+          }
+        }
+      }
+    },
+    "Zakat reminders": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تذكيرات الزكاة"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زکوٰۃ کی یاددہانیاں"
           }
         }
       }
