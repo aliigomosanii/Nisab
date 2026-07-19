@@ -116,10 +116,11 @@ private struct ChangePasswordView: View {
             Form {
                 Section {
                     SecureField("Current Password", text: $currentPassword)
+                        .textContentType(.password)
                 }
                 Section {
-                    SecureField("New Password", text: $newPassword)
-                    SecureField("Confirm Password", text: $confirmPassword)
+                    PasswordField(titleKey: "New Password", text: $newPassword, contentType: .newPassword)
+                    PasswordField(titleKey: "Confirm Password", text: $confirmPassword, contentType: .newPassword)
                     if let message {
                         Text(message)
                             .font(.caption)
@@ -146,8 +147,8 @@ private struct ChangePasswordView: View {
             message = "Current password is incorrect."
             return
         }
-        guard newPassword.count >= 4 else {
-            message = "Password must be at least 4 characters."
+        guard newPassword.count >= 6 else {
+            message = "Password must be at least 6 characters."
             return
         }
         guard newPassword == confirmPassword else {

@@ -67,6 +67,10 @@ struct GoldPriceSection: View {
                 Text("Couldn't fetch the gold price. Enter it manually.")
                     .font(.caption)
                     .foregroundStyle(.red)
+            } else if includeGold && !wasFetched && !priceText.isEmpty {
+                Text("Manual price — auto-update paused")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             } else if updatedAtTimestamp > 0 {
                 Text("Updated \(Date(timeIntervalSince1970: updatedAtTimestamp).formatted(date: .abbreviated, time: .shortened))")
                     .font(.caption)

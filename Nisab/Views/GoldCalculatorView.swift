@@ -162,8 +162,17 @@ struct GoldCalculatorView: View {
 
             if !exemptItems.isEmpty {
                 Section {
-                    LabeledContent("Excluded (zakat paid)") {
-                        Text("\(exemptItems.reduce(0) { $0 + $1.pureGoldGrams }.formatted(.number.precision(.fractionLength(0...2)))) g")
+                    let exemptGold = exemptItems.reduce(Decimal(0)) { $0 + $1.pureGoldGrams }
+                    let exemptSilver = exemptItems.reduce(Decimal(0)) { $0 + $1.silverGrams }
+                    if exemptGold > 0 {
+                        LabeledContent("Excluded (zakat paid)") {
+                            Text("\(exemptGold.formatted(.number.precision(.fractionLength(0...2)))) g")
+                        }
+                    }
+                    if exemptSilver > 0 {
+                        LabeledContent("Excluded silver (zakat paid)") {
+                            Text("\(exemptSilver.formatted(.number.precision(.fractionLength(0...2)))) g")
+                        }
                     }
                 }
             }

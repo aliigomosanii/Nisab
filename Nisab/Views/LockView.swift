@@ -7,6 +7,8 @@ struct LockView: View {
 
     @State private var passwordText = ""
     @State private var wrongPassword = false
+    @State private var showingReset = false
+    @State private var resetUnavailable = false
     /// Settings toggle; when off, unlocking is password-only.
     @AppStorage("faceIDEnabled") private var faceIDEnabled = true
 
@@ -20,6 +22,7 @@ struct LockView: View {
                 .font(.largeTitle.bold())
 
             SecureField("Enter password", text: $passwordText)
+                .textContentType(.password)
                 .textFieldStyle(.roundedBorder)
                 .frame(maxWidth: 280)
                 .onSubmit { tryPassword() }
@@ -47,6 +50,18 @@ struct LockView: View {
                     Label("Unlock with Face ID", systemImage: "faceid")
                 }
             }
+
+            Button {
+                startReset()
+            } label: {
+                Text("Forgot password? Reset with Face ID")
+                    .font(.caption)
+            }
+            if resetUnavailable {
+                Text("Face ID is not available.")
+                    .font(.caption)
+                    .foregroundStyle(.red)
+            }
             Spacer()
             Spacer()
         }
@@ -54,6 +69,9 @@ struct LockView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .onAppear { tryBiometrics() }
+        .sheet(isPresented: $showingReset) {
+            ResetPasswordView { onUnlock() }
+        }
     }
 
     private func tryPassword() {
@@ -78,6 +96,76 @@ struct LockView: View {
                 DispatchQueue.main.async { onUnlock() }
             }
         }
+    }
+
+    /// Recovery path: Face ID proves identity even when the password is
+    /// forgotten (works regardless of the unlock toggle), then a new
+    /// password can be set.
+    private func startReset() {
+        resetUnavailable = false
+        let context = LAContext()
+        var error: NSError?
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            resetUnavailable = true
+            return
+        }
+        let reason = String(localized: "Reset Password", bundle: L10n.bundle)
+        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, _ in
+            if success {
+                DispatchQueue.main.async { showingReset = true }
+            }
+        }
+    }
+}
+
+/// Sets a new password after a successful Face ID identity check.
+private struct ResetPasswordView: View {
+    @Environment(\.dismiss) private var dismiss
+    var onDone: () -> Void
+
+    @State private var newPassword = ""
+    @State private var confirmPassword = ""
+    @State private var message: LocalizedStringKey?
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    PasswordField(titleKey: "New Password", text: $newPassword, contentType: .newPassword)
+                    PasswordField(titleKey: "Confirm Password", text: $confirmPassword, contentType: .newPassword)
+                    if let message {
+                        Text(message)
+                            .font(.caption)
+                            .foregroundStyle(.red)
+                    }
+                }
+            }
+            .navigationTitle("Reset Password")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") { save() }
+                        .disabled(newPassword.isEmpty || confirmPassword.isEmpty)
+                }
+            }
+        }
+    }
+
+    private func save() {
+        guard newPassword.count >= 6 else {
+            message = "Password must be at least 6 characters."
+            return
+        }
+        guard newPassword == confirmPassword else {
+            message = "Passwords do not match."
+            return
+        }
+        Keychain.setPassword(newPassword)
+        dismiss()
+        onDone()
     }
 }
 

@@ -10,14 +10,18 @@ struct RegistrationView: View {
     @AppStorage("profilePhone") private var profilePhone = ""
     @AppStorage("profileRegistered") private var registered = false
 
+    // Draft state: nothing is persisted until Continue succeeds.
+    @State private var name = ""
+    @State private var email = ""
+    @State private var phone = ""
     @State private var password = ""
     @State private var confirmPassword = ""
     @State private var errorMessage: LocalizedStringKey?
 
     private var formFilled: Bool {
-        !profileName.trimmingCharacters(in: .whitespaces).isEmpty
-            && !profileEmail.trimmingCharacters(in: .whitespaces).isEmpty
-            && !profilePhone.trimmingCharacters(in: .whitespaces).isEmpty
+        !name.trimmingCharacters(in: .whitespaces).isEmpty
+            && !email.trimmingCharacters(in: .whitespaces).isEmpty
+            && !phone.trimmingCharacters(in: .whitespaces).isEmpty
             && !password.isEmpty
             && !confirmPassword.isEmpty
     }
@@ -42,18 +46,18 @@ struct RegistrationView: View {
             .listRowBackground(Color.clear)
 
             Section("Profile") {
-                TextField("Name", text: $profileName)
-                TextField("Email", text: $profileEmail)
+                TextField("Name", text: $name)
+                TextField("Email", text: $email)
                     .keyboardType(.emailAddress)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
-                TextField("Phone", text: $profilePhone)
+                TextField("Phone", text: $phone)
                     .keyboardType(.phonePad)
             }
 
             Section("Password") {
-                SecureField("Password", text: $password)
-                SecureField("Confirm Password", text: $confirmPassword)
+                PasswordField(titleKey: "Password", text: $password, contentType: .newPassword)
+                PasswordField(titleKey: "Confirm Password", text: $confirmPassword, contentType: .newPassword)
                 if let errorMessage {
                     Text(errorMessage)
                         .font(.caption)
@@ -75,18 +79,21 @@ struct RegistrationView: View {
     }
 
     private func submit() {
-        guard profileEmail.contains("@") else {
+        guard email.contains("@") else {
             errorMessage = "Enter a valid email."
             return
         }
-        guard password.count >= 4 else {
-            errorMessage = "Password must be at least 4 characters."
+        guard password.count >= 6 else {
+            errorMessage = "Password must be at least 6 characters."
             return
         }
         guard password == confirmPassword else {
             errorMessage = "Passwords do not match."
             return
         }
+        profileName = name.trimmingCharacters(in: .whitespaces)
+        profileEmail = email.trimmingCharacters(in: .whitespaces)
+        profilePhone = phone.trimmingCharacters(in: .whitespaces)
         Keychain.setPassword(password)
         registered = true
         onComplete()

@@ -6,6 +6,9 @@ import SwiftData
 struct HomeView: View {
     @Query(sort: \GoldItem.purchaseDate, order: .reverse) private var items: [GoldItem]
     @AppStorage("profileName") private var profileName = ""
+    @AppStorage("goldPrice24kText") private var storedGoldPrice = ""
+    @AppStorage("silverPriceText") private var storedSilverPrice = ""
+    @AppStorage("goldPriceCurrency") private var priceCurrency = "SAR"
     @State private var showingSettings = false
     @State private var showingPayZakat = false
 
@@ -24,6 +27,18 @@ struct HomeView: View {
         var candidates = [goldDue, silverDue].compactMap { $0 }.filter { $0 > .now }
         candidates += items.filter(\.isZakatExempt).compactMap(\.zakatExemptUntil)
         return candidates.min()
+    }
+
+    /// Same figure the wallet shows: expected selling prices summed across
+    /// items whose needed metal price is available.
+    private var totalWorth: Decimal? {
+        let gold = Decimal(string: storedGoldPrice)
+        let silver = Decimal(string: storedSilverPrice)
+        let values = items.compactMap {
+            $0.expectedSellingPrice(goldPricePerGram24k: gold, silverPricePerGram: silver)
+        }
+        guard !values.isEmpty else { return nil }
+        return values.reduce(0, +)
     }
 
     private var initials: String {
@@ -51,8 +66,14 @@ struct HomeView: View {
                         } label: {
                             card("Jewelry Wallet", caption: "Your jewelry items", icon: "circle.hexagongrid.fill") {
                                 if !items.isEmpty {
-                                    Text("\(items.count) items · \(totalWeight.formatted(.number.precision(.fractionLength(0...2)))) g")
-                                        .foregroundStyle(Color.accentColor)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("\(items.count) items · \(totalWeight.formatted(.number.precision(.fractionLength(0...2)))) g")
+                                            .foregroundStyle(Color.accentColor)
+                                        if let worth = totalWorth {
+                                            Text(worth.formatted(.currency(code: priceCurrency)))
+                                                .foregroundStyle(.secondary)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -63,11 +84,10 @@ struct HomeView: View {
                                 .navigationTitle("Zakat Calculator")
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
+                            // "Due now" lives on the actionable card
+                            // (Record Zakat Payment) only.
                             card("Zakat Calculator", caption: "Calculate what's due", icon: "moon.stars.fill") {
-                                if anyDueNow {
-                                    Text("Due now")
-                                        .foregroundStyle(.orange)
-                                }
+                                EmptyView()
                             }
                         }
                         .buttonStyle(.plain)
@@ -78,7 +98,10 @@ struct HomeView: View {
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
                             card("Buy & Sell Calculator", caption: "Estimate buying and selling prices", icon: "arrow.left.arrow.right.circle.fill") {
-                                EmptyView()
+                                if let gold = Decimal(string: storedGoldPrice) {
+                                    Text("Gold price: \(gold.formatted(.currency(code: priceCurrency)))")
+                                        .foregroundStyle(.secondary)
+                                }
                             }
                         }
                         .buttonStyle(.plain)

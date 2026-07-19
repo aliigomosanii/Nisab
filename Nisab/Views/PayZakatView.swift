@@ -132,8 +132,14 @@ struct PayZakatView: View {
             .navigationTitle("Record Zakat Payment")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                // "Cancel" only where there is something to abandon;
+                // Schedule/History are read-only dashboards.
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    if tab == .pay {
+                        Button("Cancel") { dismiss() }
+                    } else {
+                        Button("Done") { dismiss() }
+                    }
                 }
                 if tab == .pay {
                     ToolbarItem(placement: .confirmationAction) {
@@ -228,6 +234,11 @@ struct PayZakatView: View {
                         }
                     }
                 }
+                if !aboveNisab {
+                    Text("Selection is below nisab — no zakat is due.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
             }
         }
     }
@@ -305,6 +316,13 @@ struct PayZakatView: View {
                             deleteCandidate = entry.date
                         } label: {
                             Label("Delete", systemImage: "trash")
+                        }
+                    }
+                    .contextMenu {
+                        Button(role: .destructive) {
+                            deleteCandidate = entry.date
+                        } label: {
+                            Label("Remove Payment", systemImage: "trash")
                         }
                     }
                 }

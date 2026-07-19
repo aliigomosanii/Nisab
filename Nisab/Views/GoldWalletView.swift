@@ -22,6 +22,9 @@ struct GoldWalletView: View {
             } else {
                 List {
                     Section {
+                        summaryCard
+                    }
+                    Section {
                         ForEach(items) { item in
                             NavigationLink {
                                 GoldItemDetailView(item: item)
@@ -36,11 +39,16 @@ struct GoldWalletView: View {
                                 }
                                 .tint(.blue)
                             }
+                            .contextMenu {
+                                Button {
+                                    editingItem = item
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+                            }
                         }
                     } header: {
                         Text("Jewelry")
-                    } footer: {
-                        inventorySummary
                     }
                 }
             }
@@ -70,25 +78,33 @@ struct GoldWalletView: View {
         }
     }
 
-    /// Inventory totals (weights, not zakat) shown under the list.
-    private var inventorySummary: some View {
+    /// Hero summary: total worth first, weights beneath.
+    private var summaryCard: some View {
         let gold = items.filter { $0.material != .silver }
             .reduce(Decimal(0)) { $0 + $1.weightGrams }
             .formatted(.number.precision(.fractionLength(0...2)))
         let silverGrams = items.filter { $0.material == .silver }
             .reduce(Decimal(0)) { $0 + $1.weightGrams }
-        return VStack(alignment: .leading, spacing: 2) {
-            if silverGrams > 0 {
-                Text("Gold: \(gold) g · Silver: \(silverGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
-            } else {
-                Text("Gold: \(gold) g")
-            }
+        return VStack(alignment: .leading, spacing: 4) {
             if let worth = totalWorth {
-                Text("Total worth: \(worth.formatted(.currency(code: priceCurrency)))")
-                    .bold()
+                Text("Total worth")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Text(worth.formatted(.currency(code: priceCurrency)))
+                    .font(.title2.bold())
                     .foregroundStyle(Color.accentColor)
             }
+            Group {
+                if silverGrams > 0 {
+                    Text("Gold: \(gold) g · Silver: \(silverGrams.formatted(.number.precision(.fractionLength(0...2)))) g")
+                } else {
+                    Text("Gold: \(gold) g")
+                }
+            }
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
         }
+        .padding(.vertical, 2)
     }
 
     /// Sum of expected selling prices (metal value minus manufacturing)

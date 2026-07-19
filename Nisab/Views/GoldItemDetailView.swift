@@ -11,7 +11,6 @@ struct GoldItemDetailView: View {
     @AppStorage("goldPriceCurrency") private var priceCurrency = "SAR"
     @State private var confirmDelete = false
     @State private var showingEdit = false
-    @State private var purchaseMetalPriceText = ""
     // Decoded once (and again after edits) so typing doesn't re-decode photos.
     @State private var itemImage: UIImage?
     @State private var invoiceImage: UIImage?
@@ -70,6 +69,13 @@ struct GoldItemDetailView: View {
                 if let charge = item.manufacturingCharge {
                     LabeledContent("Manufacturing charge", value: charge.formatted(.currency(code: item.currencyCode)))
                 }
+                if let metalPrice = item.purchaseMetalPricePerGram {
+                    if item.material == .silver {
+                        LabeledContent("Silver price at purchase (per gram)", value: metalPrice.formatted(.currency(code: item.currencyCode)))
+                    } else {
+                        LabeledContent("Gold price at purchase (24k, per gram)", value: metalPrice.formatted(.currency(code: item.currencyCode)))
+                    }
+                }
                 if let expected = item.expectedSellingPrice(
                     goldPricePerGram24k: Decimal(string: storedGoldPrice),
                     silverPricePerGram: Decimal(string: storedSilverPrice)
@@ -86,30 +92,13 @@ struct GoldItemDetailView: View {
             }
 
 
-            // Editable so older items can be backfilled for selling estimates.
-            Section {
-                TextField(
-                    item.material == .silver
-                        ? "Silver price at purchase (per gram)"
-                        : "Gold price at purchase (24k, per gram)",
-                    text: $purchaseMetalPriceText
-                )
-                .keyboardType(.decimalPad)
-                .onChange(of: purchaseMetalPriceText) { _, new in
-                    let s = new.sanitizedDecimal
-                    if s != new {
-                        purchaseMetalPriceText = s
-                    } else {
-                        item.purchaseMetalPricePerGram = Decimal(string: s)
-                    }
-                }
-                Text("Used to split selling losses into manufacturing and market change.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-            .onAppear {
-                if let price = item.purchaseMetalPricePerGram {
-                    purchaseMetalPriceText = "\(price)"
+            // Older items can be backfilled through the Edit form.
+            if item.purchaseMetalPricePerGram == nil {
+                Section {
+                    Button("Add metal price at purchase") { showingEdit = true }
+                    Text("Used to split selling losses into manufacturing and market change.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
             }
 

@@ -129,6 +129,22 @@
         }
       }
     },
+    "Add metal price at purchase": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أضف سعر المعدن عند الشراء"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خریداری کے وقت دھات کی قیمت شامل کریں"
+          }
+        }
+      }
+    },
     "Add the metal price at purchase on each item to split this loss into manufacturing and market change.": {
       "localizations": {
         "ar": {
@@ -737,6 +753,22 @@
         }
       }
     },
+    "Excluded silver (zakat paid)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفضة المستثناة (زكاة مدفوعة)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستثنیٰ چاندی (زکوٰۃ ادا شدہ)"
+          }
+        }
+      }
+    },
     "Expected selling price": {
       "localizations": {
         "ar": {
@@ -753,6 +785,22 @@
         }
       }
     },
+    "Face ID is not available.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بصمة الوجه غير متاحة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فیس آئی ڈی دستیاب نہیں ہے۔"
+          }
+        }
+      }
+    },
     "Fetch today's price": {
       "localizations": {
         "ar": {
@@ -765,6 +813,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "آج کی قیمت حاصل کریں"
+          }
+        }
+      }
+    },
+    "Forgot password? Reset with Face ID": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسيت كلمة المرور؟ أعد التعيين ببصمة الوجه"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاس ورڈ بھول گئے؟ فیس آئی ڈی سے ری سیٹ کریں"
           }
         }
       }
@@ -833,6 +897,22 @@
         }
       }
     },
+    "Gold price: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر الذهب: %@"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سونے کی قیمت: %@"
+          }
+        }
+      }
+    },
     "Gold value": {
       "localizations": {
         "ar": {
@@ -877,6 +957,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "سونا: %@ گرام · چاندی: %@ گرام"
+          }
+        }
+      }
+    },
+    "Hide password": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إخفاء كلمة المرور"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاس ورڈ چھپائیں"
           }
         }
       }
@@ -1005,6 +1101,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "دھات کی مالیت کے مقابلے نقصان"
+          }
+        }
+      }
+    },
+    "Manual price — auto-update paused": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سعر يدوي — تم إيقاف التحديث التلقائي"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دستی قیمت — خودکار اپ ڈیٹ روک دی گئی"
           }
         }
       }
@@ -1297,18 +1409,18 @@
         }
       }
     },
-    "Password must be at least 4 characters.": {
+    "Password must be at least 6 characters.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يجب ألا تقل كلمة المرور عن ٤ أحرف."
+            "value": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل."
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "پاس ورڈ کم از کم 4 حروف کا ہونا چاہیے۔"
+            "value": "پاس ورڈ کم از کم 6 حروف کا ہونا چاہیے۔"
           }
         }
       }
@@ -1569,6 +1681,22 @@
         }
       }
     },
+    "Reset Password": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة تعيين كلمة المرور"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاس ورڈ ری سیٹ کریں"
+          }
+        }
+      }
+    },
     "Restart": {
       "localizations": {
         "ar": {
@@ -1729,6 +1857,22 @@
         }
       }
     },
+    "Selection is below nisab — no zakat is due.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المحدد أقل من النصاب — لا زكاة مستحقة."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "منتخب مقدار نصاب سے کم ہے — کوئی زکوٰۃ واجب نہیں۔"
+          }
+        }
+      }
+    },
     "Seller": {
       "localizations": {
         "ar": {
@@ -1789,6 +1933,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "ترتیبات"
+          }
+        }
+      }
+    },
+    "Show password": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إظهار كلمة المرور"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاس ورڈ دکھائیں"
           }
         }
       }
@@ -2093,6 +2253,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "کل وزن"
+          }
+        }
+      }
+    },
+    "Total worth": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "القيمة الإجمالية"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کل مالیت"
           }
         }
       }

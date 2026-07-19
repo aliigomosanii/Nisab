@@ -259,8 +259,16 @@ struct BuySellCalculatorView: View {
                                         .foregroundStyle(manufacturingComponent > 0 ? .red : .secondary)
                                 }
                                 LabeledContent("Market change") {
-                                    Text((-marketChange).formatted(.currency(code: currencyCode)))
-                                        .foregroundStyle(marketChange > 0 ? .red : (marketChange < 0 ? .green : .secondary))
+                                    // Shown from the seller's view: ▼ red =
+                                    // the metal price fell since purchase.
+                                    HStack(spacing: 4) {
+                                        if marketChange != 0 {
+                                            Image(systemName: marketChange > 0 ? "arrow.down" : "arrow.up")
+                                                .font(.caption2.bold())
+                                        }
+                                        Text((-marketChange).formatted(.currency(code: currencyCode)))
+                                    }
+                                    .foregroundStyle(marketChange > 0 ? .red : (marketChange < 0 ? .green : .secondary))
                                 }
                             }
                             if approximateLoss >= 0 {
